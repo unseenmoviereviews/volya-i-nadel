@@ -93,7 +93,7 @@ table.rights{border-collapse:collapse;min-width:680px;width:100%;background:var(
 /* община */
 .ctrls{display:flex;flex-wrap:wrap;gap:12px 22px;margin:6px 0 14px}
 .pk{display:grid;gap:6px}
-.pr{display:grid;grid-template-columns:140px minmax(0,1.5fr) minmax(0,1fr) 78px 70px;gap:10px;align-items:center;background:var(--paper);border:1px solid var(--rule);padding:8px 10px}
+.pr{display:grid;grid-template-columns:140px minmax(0,1.5fr) minmax(0,1fr) 92px 86px;gap:10px;align-items:center;background:var(--paper);border:1px solid var(--rule);padding:8px 10px}
 @media (max-width:760px){.pr{grid-template-columns:1fr auto;gap:5px 10px}.pr .pn{grid-column:1/-1}.pr .pp{grid-column:1/-1}.pr .pl{grid-column:1/-1}}
 .pn{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 6px}
 .pn i{width:12px;height:12px;display:inline-block;border:1px solid var(--ink)}
@@ -104,7 +104,9 @@ table.rights{border-collapse:collapse;min-width:680px;width:100%;background:var(
 .lb2{display:flex;align-items:center;height:24px;color:#fff;font-size:13px;font-weight:700;padding-left:6px;min-width:34px;transition:width .4s;border:1px solid #2b2116}
 .pv{text-align:right;line-height:1.05}.pv b{font-family:var(--hand);font-weight:400;font-size:26px}.pv span{display:block;font-size:11px;color:var(--ink2)}
 .pv.low b{color:var(--verm)}.pv.hi b{color:var(--grn)}
-.pm{font-size:14px;text-align:right;white-space:nowrap}
+.pm{font-size:15px;text-align:right;white-space:nowrap;font-weight:700}.pm .pmy{display:block;font-size:11px;font-weight:400;color:var(--ink2)}
+.pr.phd{background:var(--ink);color:var(--paper);border-color:var(--ink);padding:6px 10px;font-size:13px;font-style:italic}.pr.phd span:nth-child(n+4){text-align:right}
+@media (max-width:760px){.pr.phd{display:none}}
 .pkey{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--ink2);margin:8px 0 14px;align-items:center}
 .pkey span{display:flex;align-items:center;gap:4px}
 .lsw{display:inline-block;width:22px;height:10px;background:var(--och);border:1px solid var(--ink)}
@@ -237,13 +239,13 @@ footer{border-top:1px solid var(--rule);margin-top:20px;padding:14px 0 40px;font
 
 <section id="s-mir">
  <h2 class="sec">Земля внутри общины</h2>
- <p class="lead">Условное сельское общество: пять дворов, 72 десятины пашни. Надел не растёт, а людей становится больше. Переключайте год и способ раздела земли.</p>
+ <p class="lead">Условное сельское общество: пять дворов, 72 десятины пашни (десятина — около 1,1 гектара). Надел не растёт, а людей становится больше. Переключайте год и способ раздела земли.</p>
  <div class="ctrls">
   <div><span class="lb">Год</span><div class="seg" id="yrSeg"></div></div>
   <div><span class="lb">Делить землю</span><div class="seg" id="modeSeg"></div></div>
  </div>
  <div class="pk" id="pk"></div>
- <div class="pkey"><span><svg class="ic"><use href="#i-man"/></svg> работник</span><span><svg class="ic lt"><use href="#i-man"/></svg> едок (старик, женщина, ребёнок)</span><span><svg class="ic gh"><use href="#i-man"/></svg> «мёртвая душа»: ревизская душа 1858 г., которой нет в дворе</span><span><i class="lsw"></i> пашня двора</span></div>
+ <div class="pkey"><span><svg class="ic"><use href="#i-man"/></svg> работник</span><span><svg class="ic lt"><use href="#i-man"/></svg> едок (старик, женщина, ребёнок)</span><span><svg class="ic gh"><use href="#i-man"/></svg> «мёртвая душа»: ревизская душа 1858 г., которой нет в дворе</span><span><i class="lsw"></i> пашня двора, десятин</span><span><svg class="ic co"><use href="#i-coin"/></svg> подати и выкупные платежи двора: делятся по тому же правилу, что и земля</span></div>
  <div class="mirg">
   <div class="big2" id="big2"></div>
   <div class="box" id="mirNote"></div>
@@ -432,14 +434,14 @@ function mir(){
  const U=HH.map(units),SU=U.reduce((a,b)=>a+b,0),sh=U.map(u=>u/SU*LAND);
  const eat=HH.map(h=>h[3][yr][1]),SE=eat.reduce((a,b)=>a+b,0),avg=LAND/SE;
  const mx=Math.max(...sh,24);
- $('#pk').innerHTML=HH.map((h,k)=>{const[m,e,w]=h[3][yr];const ghost=md==='rev'?Math.max(0,h[2]-m):0;
+ $('#pk').innerHTML=`<div class="pr phd"><span>Двор</span><span>Люди в дворе</span><span>Пашня двора</span><span>На одного едока</span><span>Платит в год</span></div>`+HH.map((h,k)=>{const[m,e,w]=h[3][yr];const ghost=md==='rev'?Math.max(0,h[2]-m):0;
   let ic='';for(let i=0;i<e;i++)ic+=`<svg class="ic${i<w?'':' lt'}"><use href="#i-man"/></svg>`;for(let i=0;i<ghost;i++)ic+=`<svg class="ic gh"><use href="#i-man"/></svg>`;
   const pe=sh[k]/e,low=pe<avg*0.8,hi=pe>avg*1.25;
   return `<div class="pr"><div class="pn"><i style="background:${h[1]}"></i><b>${h[0]}</b><span>${h[4]}</span></div>
-   <div class="pp">${ic}<em>${e} ед.</em></div>
-   <div class="pl"><span class="lb2" style="width:${sh[k]/mx*100}%;background:${h[1]}">${fmt(sh[k],1)}</span></div>
-   <div class="pv ${low?'low':hi?'hi':''}"><b>${fmt(pe,2)}</b><span>дес. на едока</span></div>
-   <div class="pm"><svg class="ic co"><use href="#i-coin"/></svg>${fmt(PAY*U[k]/SU,0)} р.</div></div>`}).join('');
+   <div class="pp">${ic}<em>${e} чел.</em></div>
+   <div class="pl"><span class="lb2" style="width:${sh[k]/mx*100}%;background:${h[1]}">${fmt(sh[k],1)} дес.</span></div>
+   <div class="pv ${low?'low':hi?'hi':''}"><b>${fmt(pe,2)}</b><span>дес. на одного едока</span></div>
+   <div class="pm"><svg class="ic co"><use href="#i-coin"/></svg>${fmt(PAY*U[k]/SU,0)} р.<span class="pmy">в год</span></div></div>`}).join('');
  const s0=Math.sqrt(2.18),s1=Math.sqrt(avg),S=96/s0;
  $('#big2').innerHTML=`<div class="b2"><svg viewBox="0 0 230 130" width="100%"><rect x="10" y="${116-s0*S}" width="${s0*S}" height="${s0*S}" fill="#4f6b2f" opacity=".35" stroke="#2b2116"/><rect x="${130}" y="${116-s1*S}" width="${s1*S}" height="${s1*S}" fill="${avg<1.5?'#a5281b':'#4f6b2f'}" stroke="#2b2116"/><text x="58" y="${112-s0*S}" font-size="13" text-anchor="middle" fill="currentColor">1861: 2,18</text><text x="${130+s1*S/2}" y="${112-s1*S}" font-size="13" text-anchor="middle" fill="currentColor">${yr}: ${fmt(avg,2)}</text></svg><span>десятин пашни на едока</span></div>
   <div class="b2 n"><b>${SE}</b><span>едоков (в 1861 г. — 33)</span></div>
