@@ -315,7 +315,7 @@ footer{border-top:1px solid var(--rule);margin-top:20px;padding:14px 0 40px;font
 
 <script>
 /* === ссылка на веб-приложение Apps Script (оканчивается на /exec) === */
-const SCRIPT_URL='__SCRIPT_URL__';
+const SCRIPT_URL='https://script.google.com/macros/s/AKfycbyW9USQUb2pNVL0890snFgmj2lOR6IsdYcpadbqPVY3zQZzJomql-X7DMBh3AMJm_tR/exec';
 const $=s=>document.querySelector(s);
 const fmt=(v,d=1)=>v==null?'—':(+v).toLocaleString('ru-RU',{maximumFractionDigits:d,minimumFractionDigits:0});
 function hash(s){let h=2166136261;for(const c of s){h^=c.codePointAt(0);h=Math.imul(h,16777619)}return h>>>0}
