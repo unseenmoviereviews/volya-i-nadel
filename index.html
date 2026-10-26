@@ -105,32 +105,59 @@ table.rights{border-collapse:collapse;min-width:680px;width:100%;background:var(
 /* община */
 .ctrls{display:flex;flex-wrap:wrap;gap:12px 22px;margin:6px 0 14px}
 .pk{display:grid;gap:6px}
-.pr{display:grid;grid-template-columns:140px minmax(0,1.5fr) minmax(0,1fr) 92px 86px;gap:10px;align-items:center;background:var(--paper);border:1px solid var(--rule);padding:8px 10px}
-@media (max-width:760px){.pr{grid-template-columns:1fr auto;gap:5px 10px}.pr .pn{grid-column:1/-1}.pr .pp{grid-column:1/-1}.pr .pl{grid-column:1/-1}}
+.mstep{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:700;margin:18px 0 8px}
+.mstep i{font-style:normal;display:inline-flex;width:28px;height:28px;border-radius:50%;background:var(--verm);color:#fff;align-items:center;justify-content:center;font-family:var(--hand);font-size:20px;font-weight:400}
+.ycards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.yc{display:grid;grid-template-columns:1fr auto;grid-template-areas:"y q" "d q" "l q" "g g";gap:2px 10px;text-align:left;background:var(--paper);border:1px solid var(--rule);padding:10px 12px;cursor:pointer;color:var(--ink)}
+.yc[aria-pressed=true]{background:var(--medal);color:#2b2116;border:2px solid var(--verm);box-shadow:3px 3px 0 rgba(165,40,27,.25)}
+.yy{grid-area:y;font-family:var(--hand);font-size:30px;line-height:1;color:var(--verm)}
+.ydots{grid-area:d;display:flex;flex-wrap:wrap;gap:2px;align-content:flex-start;min-height:30px}.ydots i{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.75}
+.yl{grid-area:l;font-size:12.5px}
+.ysq{grid-area:q;display:flex;flex-direction:column;align-items:center;text-align:center;line-height:1}.ysq b{font-family:var(--hand);font-weight:400;font-size:24px;margin-top:2px}.ysq small{font-size:10.5px;opacity:.8}
+.yg{grid-area:g;font-size:12.5px;border-top:1px dotted var(--rule);padding-top:4px;margin-top:4px}
+@media (max-width:640px){.ycards{gap:5px}.yc{grid-template-columns:1fr;grid-template-areas:"y" "q" "l" "g";padding:8px 6px;text-align:center}.yy{font-size:26px}.ydots{display:none}.yl,.yg{font-size:11.5px;line-height:1.25}.ysq b{font-size:22px}}
+.mcards{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media (max-width:760px){.mcards{grid-template-columns:1fr 1fr}}
+.mc{display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;background:var(--paper);border:1px solid var(--rule);padding:9px 10px;cursor:pointer;color:var(--ink)}
+.mc b{font-size:15px;line-height:1.15}.mc small{font-size:12px;line-height:1.25;color:var(--ink2)}
+.mc[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}.mc[aria-pressed=true] small{color:var(--paper2)}
+.mci{width:26px;height:26px;fill:currentColor;color:currentColor}
+.landbar{margin-bottom:8px}
+.lbt{display:flex;flex-wrap:wrap;gap:2px 12px;align-items:baseline;font-size:14px;margin-bottom:4px}.lbt b{font-size:15.5px}.lbt span{color:var(--ink2)}
+.lbs{display:flex;height:44px;border:2px solid var(--ink);background:var(--paper2)}
+.lbs span{display:flex;flex-direction:column;justify-content:center;padding:0 6px;color:#fff;overflow:hidden;white-space:nowrap;border-right:2px solid #f4ead0;cursor:pointer;transition:width .4s}
+.lbs span:last-child{border-right:0}.lbs span.on{outline:3px solid var(--och);outline-offset:-3px}
+.lbs em{font-style:normal;font-size:12px;opacity:.9}.lbs b{font-size:15px}
+.pr{display:grid;grid-template-columns:130px minmax(0,1.4fr) minmax(0,1fr) 190px 104px;gap:10px;align-items:center;background:var(--paper);border:1px solid var(--rule);padding:8px 10px;cursor:pointer}
+.pr.sel{border:2px solid var(--och);background:var(--medal)}
+@media (max-width:760px){.pr{grid-template-columns:1fr auto;gap:6px 10px}.pr .pn{grid-column:1/-1}.pr .pp{grid-column:1/-1}.pr .pl{grid-column:1/-1}}
 .pn{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 6px}
 .pn i{width:12px;height:12px;display:inline-block;border:1px solid var(--ink)}
 .pn b{font-size:16px}.pn span{font-size:12.5px;color:var(--ink2);font-style:italic;width:100%}
 .pp{display:flex;flex-wrap:wrap;gap:1px;align-items:center}
 .pp em{font-size:12.5px;color:var(--ink2);margin-left:6px}
-.pl{background:var(--paper2);height:24px;position:relative}
-.lb2{display:flex;align-items:center;height:24px;color:#fff;font-size:13px;font-weight:700;padding-left:6px;min-width:34px;transition:width .4s;border:1px solid #2b2116}
-.pv{text-align:right;line-height:1.05}.pv b{font-family:var(--hand);font-weight:400;font-size:26px}.pv span{display:block;font-size:11px;color:var(--ink2)}
-.pv.low b{color:var(--verm)}.pv.hi b{color:var(--grn)}
-.pm{font-size:15px;text-align:right;white-space:nowrap;font-weight:700}.pm .pmy{display:block;font-size:11px;font-weight:400;color:var(--ink2)}
-.pr.phd{background:var(--ink);color:var(--paper);border-color:var(--ink);padding:6px 10px;font-size:13px;font-style:italic}.pr.phd span:nth-child(n+4){text-align:right}
+.pl{background:var(--paper2);height:26px;position:relative}
+.lb2{display:flex;align-items:center;height:26px;color:#fff;font-size:13.5px;font-weight:700;padding-left:6px;min-width:64px;transition:width .4s;border:1px solid #2b2116;white-space:nowrap}
+.pv{display:flex;align-items:flex-end;gap:8px;line-height:1.05}.psq{flex:0 0 auto;color:var(--ink)}
+.pvt b{font-family:var(--hand);font-weight:400;font-size:26px;display:block}.pvt span{display:block;font-size:11px;color:var(--ink2)}.pvt em{display:block;font-style:normal;font-size:11.5px;font-weight:700;margin-top:2px;color:var(--ink2)}
+.pv.low b,.pv.low em{color:var(--verm)}.pv.hi b,.pv.hi em{color:var(--grn)}
+.pm{font-size:15px;text-align:right;font-weight:700}.pm .pmy{display:block;font-size:11px;font-weight:400;color:var(--ink2)}
+.cns{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:1px;margin-top:3px}.cn{width:13px;height:13px;fill:var(--och)}
+.pr.phd{background:var(--ink);color:var(--paper);border-color:var(--ink);padding:6px 10px;font-size:13px;font-style:italic;cursor:default}.pr.phd span:nth-child(n+4){text-align:left}.pr.phd span:last-child{text-align:right}
 @media (max-width:760px){.pr.phd{display:none}}
 .pkey{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--ink2);margin:8px 0 14px;align-items:center}
 .pkey span{display:flex;align-items:center;gap:4px}
-.lsw{display:inline-block;width:22px;height:10px;background:var(--och);border:1px solid var(--ink)}
-.mirg{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;align-items:start;margin-bottom:14px}
-@media (max-width:860px){.mirg{grid-template-columns:1fr}}
-.big2{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:8px}
-@media (max-width:560px){.big2{grid-template-columns:1fr 1fr}.big2 .b2:first-child{grid-column:1/-1}}
-.b2{background:var(--medal);color:#2b2116;border:1px solid #2b2116;padding:8px 10px;display:flex;flex-direction:column;justify-content:flex-end}
-.b2 b{font-family:var(--hand);font-weight:400;font-size:36px;line-height:1;color:#a5281b}
-.b2 span{font-size:12.5px;line-height:1.25}
-.b2 svg text{fill:#2b2116}
-.field{width:100%;height:auto;background:var(--paper);border:1px solid var(--ink)}
+.sqk{display:inline-block;width:14px;height:14px;background:var(--och);border:1px solid var(--ink);outline:1px dashed var(--ink2);outline-offset:3px;margin:0 4px}
+.verdict{background:var(--paper);border:1px solid var(--ink);padding:12px 14px}
+.vh{display:flex;align-items:center;gap:8px;font-size:18px;margin-bottom:8px}
+.vg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.vg>div{padding:8px 10px;font-size:15px;line-height:1.5}.vg span{display:block;font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.vw{background:rgba(63,107,42,.12);border-left:5px solid #3f6b2a}.vw span{color:var(--grn)}
+.vl{background:rgba(165,40,27,.1);border-left:5px solid #a5281b}.vl span{color:var(--verm)}
+.verdict p{margin:0 0 6px;font-size:15px}.vp{display:flex;gap:4px;align-items:flex-start}
+.strip{cursor:pointer}
+.fnote{margin-top:8px}.fn2{background:var(--medal);color:#2b2116;border:1px solid #2b2116;padding:8px 12px;font-size:15px;margin:0}.fn2 i{display:inline-block;width:12px;height:12px;border:1px solid #2b2116;margin-right:6px}
+.field{display:block;min-width:600px;width:100%;height:auto;background:var(--paper)}
 .field text{font-family:var(--serif)}
 .swipe{display:none;font-size:13px;color:var(--ink2);font-style:italic;text-align:center;margin:4px 0 0}
 @media (max-width:780px){.swipe{display:block}}
@@ -208,6 +235,8 @@ footer{border-top:1px solid var(--rule);margin-top:20px;padding:14px 0 40px;font
  <symbol id="i-rod" viewBox="0 0 24 24"><path d="M5 22L19 3M8 22L20 6M3 20L17 1" stroke="currentColor" stroke-width="1.8" fill="none"/><rect x="4" y="16" width="6" height="3" transform="rotate(-53 7 17.5)"/></symbol>
  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M2 12L12 2h9v9L11 21z"/><circle cx="17" cy="6" r="1.8" fill="#f4ead0"/></symbol>
  <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 4l3 8h-6z"/><path d="M12 20l-3-8h6z" opacity=".4"/></symbol>
+ <symbol id="i-book" viewBox="0 0 24 24"><path d="M3 4h7a2 2 0 012 2v15a2 2 0 00-2-2H3z"/><path d="M21 4h-7a2 2 0 00-2 2v15a2 2 0 012-2h7z" opacity=".6"/><path d="M5 8h4M5 11h4M5 14h3" stroke="#f4ead0" stroke-width="1"/></symbol>
+ <symbol id="i-sickle" viewBox="0 0 24 24"><path d="M14 3a9 9 0 11-9 12" fill="none" stroke="currentColor" stroke-width="2.8"/><path d="M6 14l-4 7 3 1 4-6z"/></symbol>
  <symbol id="i-gavel" viewBox="0 0 24 24"><rect x="4" y="2" width="10" height="6" rx="1" transform="rotate(35 9 5)"/><path d="M10 9l10 10" stroke="currentColor" stroke-width="3"/><rect x="2" y="20" width="12" height="3"/></symbol>
 </defs></svg>
 
@@ -250,19 +279,25 @@ footer{border-top:1px solid var(--rule);margin-top:20px;padding:14px 0 40px;font
 
 <section id="s-mir">
  <h2 class="sec">Земля внутри общины</h2>
- <p class="lead">Условное сельское общество: пять дворов, 72 десятины пашни (десятина — около 1,1 гектара). Надел не растёт, а людей становится больше. Переключайте год и способ раздела земли.</p>
- <div class="ctrls">
-  <div><span class="lb">Год</span><div class="seg" id="yrSeg"></div></div>
-  <div><span class="lb">Делить землю</span><div class="seg" id="modeSeg"></div></div>
- </div>
+ <p class="lead">Условное сельское общество из пяти дворов. Надел общества — 72 десятины пашни (десятина — около 1,1 гектара), и он не растёт. Растёт число людей, а землю и платежи сход делит между дворами.</p>
+
+ <div class="mstep"><i>1</i>Выберите год — посмотрите, как растёт число едоков</div>
+ <div class="ycards" id="yrSeg"></div>
+
+ <div class="mstep"><i>2</i>Выберите, как сход делит землю</div>
+ <div class="mcards" id="modeSeg"></div>
+
+ <div class="mstep"><i>3</i>Смотрите, что досталось каждому двору</div>
+ <div class="landbar" id="landbar"></div>
  <div class="pk" id="pk"></div>
- <div class="pkey"><span><svg class="ic"><use href="#i-man"/></svg> работник</span><span><svg class="ic lt"><use href="#i-man"/></svg> едок (старик, женщина, ребёнок)</span><span><svg class="ic gh"><use href="#i-man"/></svg> «мёртвая душа»: ревизская душа 1858 г., которой нет в дворе</span><span><i class="lsw"></i> пашня двора, десятин</span><span><svg class="ic co"><use href="#i-coin"/></svg> подати и выкупные платежи двора: делятся по тому же правилу, что и земля</span></div>
- <div class="mirg">
-  <div class="big2" id="big2"></div>
-  <div class="box" id="mirNote"></div>
- </div>
- <svg class="field" id="field" viewBox="0 0 640 420" role="img" aria-label="Чересполосица: полосы дворов в трёх полях"></svg>
- <p class="src">Чересполосица: каждый двор получает полосу в каждом поле трёхполья и на каждом участке разного качества.</p>
+ <div class="pkey"><span><svg class="ic"><use href="#i-man"/></svg> работник</span><span><svg class="ic lt"><use href="#i-man"/></svg> едок: старик, женщина, ребёнок</span><span><svg class="ic gh"><use href="#i-man"/></svg> «мёртвая душа»: записан в 1858 г., но в дворе его уже нет</span><span><i class="sqk"></i> пашня на одного едока; пунктир — среднее по обществу</span><span><svg class="ic co"><use href="#i-coin"/></svg> одна монета — 10 руб. податей и выкупных платежей в год</span></div>
+ <div class="verdict" id="mirNote"></div>
+
+ <h3 class="sub2">Чересполосица: где лежат полосы двора</h3>
+ <p class="lead">Поле поделено на три клина трёхполья, каждый — на участки лучшей, средней и худшей земли. Двор получает полосу на каждом участке. Нажмите на двор в таблице выше или на полосу, чтобы увидеть все его полосы.</p>
+ <div class="pscroll"><svg class="field" id="field" viewBox="0 0 640 420" role="img" aria-label="Чересполосица: полосы дворов в трёх полях"></svg></div>
+ <p class="swipe">← схему можно прокручивать пальцем вбок →</p>
+ <div class="fnote" id="fnote"></div>
 
  <h3 class="sub2">Откуда взялось аграрное перенаселение</h3>
  <p class="lead">Стрелка ведёт от причины к следствию. Красная рамка — решения власти, тёмный блок — итог, светлые блоки внизу — последствия. Нажмите на звено, чтобы выделить его связи; повторное нажатие снимает выделение.</p>
@@ -444,49 +479,73 @@ $('#pchart').addEventListener('click',ev=>{const b=ev.target.closest('.evb');if(
 $('#pchart').addEventListener('keydown',ev=>{const b=ev.target.closest('.evb');if(b&&(ev.key==='Enter'||ev.key===' ')){ev.preventDefault();evOn=+b.dataset.j;path();$('#pchart').querySelector(`.evb[data-j="${evOn}"]`).focus()}});
 
 /* ---------- община ---------- */
-const HH=[['Ивановы','#7a3b1f',5,{1861:[5,10,3],1880:[7,15,4],1900:[9,19,5]},''],
+const HH=[['Ивановы','#7a3b1f',5,{1861:[5,10,3],1880:[7,15,4],1900:[9,19,5]},'большая семья'],
  ['Петровы','#b7862c',4,{1861:[4,8,2],1880:[5,11,3],1900:[7,15,4]},''],
  ['Сидоровы','#4f6b2f',3,{1861:[1,4,1],1880:[2,5,1],1900:[2,6,1]},'вдова с сыном'],
  ['Кузины','#3d5a80',2,{1861:[2,6,1],1880:[4,9,2],1900:[6,13,3]},'молодая семья'],
  ['Егоровы','#8c5e8a',3,{1861:[3,5,2],1880:[3,6,2],1900:[5,9,3]},'сын на заработках']];
 const LAND=72,PAY=153,YLD={1861:34,1880:34,1900:39};
-const MODES={rev:['по ревизским душам','ревизские души'],m:['по наличным душам','муж. души'],e:['по едокам','едоки'],w:['по работникам','работники']};
-let yr=1861,md='rev';
-function units(h){return md==='rev'?h[2]:h[3][yr][md==='m'?0:md==='e'?1:2]}
+const MODES={rev:['по ревизским душам','ревизские души','i-book','мужчины по переписи 1858 г. Так нарезал наделы закон 1861 г.'],
+ m:['по наличным душам','мужские души','i-man','мужчины, которые живут в дворе сейчас'],
+ e:['по едокам','едоки','i-fam','все рты: мужчины, женщины, дети, старики'],
+ w:['по работникам','работники','i-sickle','только взрослые работники-мужчины']};
+let yr=1861,md='rev',hsel=null;
+function units(h,y=yr,m=md){return m==='rev'?h[2]:h[3][y][m==='m'?0:m==='e'?1:2]}
+const eaters=y=>HH.reduce((a,h)=>a+h[3][y][1],0);
 function mir(){
- $('#yrSeg').innerHTML=[1861,1880,1900].map(y=>`<button data-y="${y}" aria-pressed="${y===yr}">${y}</button>`).join('');
- $('#modeSeg').innerHTML=Object.entries(MODES).map(([k,v])=>`<button data-m="${k}" aria-pressed="${k===md}">${v[1]}</button>`).join('');
- const U=HH.map(units),SU=U.reduce((a,b)=>a+b,0),sh=U.map(u=>u/SU*LAND);
- const eat=HH.map(h=>h[3][yr][1]),SE=eat.reduce((a,b)=>a+b,0),avg=LAND/SE;
- const mx=Math.max(...sh,24);
+ /* шаг 1: годы */
+ const maxE=eaters(1900);
+ $('#yrSeg').innerHTML=[1861,1880,1900].map(y=>{const SE=eaters(y),pe=LAND/SE,side=Math.sqrt(pe/2.18)*56,grain=LAND*2/3*YLD[y]/SE;
+  let dots='';for(let i=0;i<SE;i++)dots+=`<i></i>`;
+  return `<button class="yc" data-y="${y}" aria-pressed="${y===yr}"><span class="yy">${y}</span>
+   <span class="ydots" title="${SE} едоков">${dots}</span><span class="yl">${SE} едоков на 72 десятины</span>
+   <span class="ysq"><svg viewBox="0 0 60 60" width="60" height="60"><rect x="${60-56}" y="${60-56}" width="56" height="56" fill="none" stroke="currentColor" stroke-dasharray="3 3" opacity=".45"/><rect x="${60-side}" y="${60-side}" width="${side}" height="${side}" fill="${pe<1.5?'#a5281b':pe<2?'#b7862c':'#4f6b2f'}" stroke="#2b2116"/></svg><b>${fmt(pe,2)}</b><small>дес. пашни<br>на едока</small></span>
+   <span class="yg">≈ ${fmt(grain,0)} пудов зерна на едока в год</span></button>`}).join('');
+ /* шаг 2: способ */
+ $('#modeSeg').innerHTML=Object.entries(MODES).map(([k,v])=>`<button class="mc" data-m="${k}" aria-pressed="${k===md}"><svg class="mci"><use href="#${v[2]}"/></svg><b>${v[0]}</b><small>${v[3]}</small></button>`).join('');
+ /* расчёт */
+ const U=HH.map(h=>units(h)),SU=U.reduce((a,b)=>a+b,0),sh=U.map(u=>u/SU*LAND);
+ const eat=HH.map(h=>h[3][yr][1]),SE=eaters(yr),avg=LAND/SE;
+ /* шаг 3: общий надел */
+ $('#landbar').innerHTML=`<div class="lbt"><b>Надел общества — 72 десятины</b><span>делится ${MODES[md][0]}: всего ${SU} ${md==='rev'?'ревизских душ':md==='m'?'мужских душ':md==='e'?'едоков':'работников'}, по ${fmt(LAND/SU,2)} дес. на каждую</span></div><div class="lbs">${HH.map((h,k)=>`<span data-k="${k}" class="${hsel===k?'on':''}" style="width:${sh[k]/LAND*100}%;background:${h[1]}" title="${h[0]}: ${fmt(sh[k],1)} дес."><em>${sh[k]/LAND>0.12?h[0]:''}</em><b>${fmt(sh[k],1)}</b></span>`).join('')}</div>`;
+ const pmax=Math.max(...HH.map((h,k)=>sh[k]/eat[k]),avg)*1.05;
  $('#pk').innerHTML=`<div class="pr phd"><span>Двор</span><span>Люди в дворе</span><span>Пашня двора</span><span>На одного едока</span><span>Платит в год</span></div>`+HH.map((h,k)=>{const[m,e,w]=h[3][yr];const ghost=md==='rev'?Math.max(0,h[2]-m):0;
   let ic='';for(let i=0;i<e;i++)ic+=`<svg class="ic${i<w?'':' lt'}"><use href="#i-man"/></svg>`;for(let i=0;i<ghost;i++)ic+=`<svg class="ic gh"><use href="#i-man"/></svg>`;
-  const pe=sh[k]/e,low=pe<avg*0.8,hi=pe>avg*1.25;
-  return `<div class="pr"><div class="pn"><i style="background:${h[1]}"></i><b>${h[0]}</b><span>${h[4]}</span></div>
+  const pe=sh[k]/e,rel=pe/avg,cls=rel<0.9?'low':rel>1.1?'hi':'';
+  const S=46,s=Math.sqrt(pe/pmax)*S,sa=Math.sqrt(avg/pmax)*S;
+  const pay=PAY*U[k]/SU;let coins='';for(let i=0;i<Math.round(pay/10);i++)coins+=`<svg class="cn"><use href="#i-coin"/></svg>`;
+  const tag=cls==='low'?`▼ на ${fmt((1-rel)*100,0)}% меньше среднего`:cls==='hi'?`▲ на ${fmt((rel-1)*100,0)}% больше среднего`:'≈ как в среднем';
+  return `<div class="pr${hsel===k?' sel':''}" data-k="${k}" tabindex="0" role="button" aria-label="${h[0]}: показать полосы на поле"><div class="pn"><i style="background:${h[1]}"></i><b>${h[0]}</b><span>${h[4]}</span></div>
    <div class="pp">${ic}<em>${e} чел.</em></div>
-   <div class="pl"><span class="lb2" style="width:${sh[k]/mx*100}%;background:${h[1]}">${fmt(sh[k],1)} дес.</span></div>
-   <div class="pv ${low?'low':hi?'hi':''}"><b>${fmt(pe,2)}</b><span>дес. на одного едока</span></div>
-   <div class="pm"><svg class="ic co"><use href="#i-coin"/></svg>${fmt(PAY*U[k]/SU,0)} р.<span class="pmy">в год</span></div></div>`}).join('');
- const s0=Math.sqrt(2.18),s1=Math.sqrt(avg),S=96/s0;
- $('#big2').innerHTML=`<div class="b2"><svg viewBox="0 0 230 130" width="100%"><rect x="10" y="${116-s0*S}" width="${s0*S}" height="${s0*S}" fill="#4f6b2f" opacity=".35" stroke="#2b2116"/><rect x="${130}" y="${116-s1*S}" width="${s1*S}" height="${s1*S}" fill="${avg<1.5?'#a5281b':'#4f6b2f'}" stroke="#2b2116"/><text x="58" y="${112-s0*S}" font-size="13" text-anchor="middle" fill="currentColor">1861: 2,18</text><text x="${130+s1*S/2}" y="${112-s1*S}" font-size="13" text-anchor="middle" fill="currentColor">${yr}: ${fmt(avg,2)}</text></svg><span>десятин пашни на едока</span></div>
-  <div class="b2 n"><b>${SE}</b><span>едоков (в 1861 г. — 33)</span></div>
-  <div class="b2 n"><b>${fmt(LAND*2/3*YLD[yr]/SE,0)}</b><span>пудов зерна на едока в год</span></div>
-  <div class="b2 n"><b>${fmt(PAY/SE,1)}</b><span>руб. платежей на едока</span></div>`;
- $('#big2').style.color='var(--ink)';
- const notes={rev:'Надел и платежи — по ревизским душам 1858 г. Сидоровы платят за мужчин, которых давно нет в дворе (бледные фигурки), а растущие семьи сидят на старой норме.',
-  m:'Делят по мужчинам, живущим в дворе. Двор, где много женщин и детей, получает мало земли на каждый рот.',
-  e:'Делят по едокам — самый уравнительный способ. Многодетным выгодно, крепким дворам — нет: они теряют землю, которую удобряли.',
-  w:'Делят по работникам. Землю получают те, кто может её обработать и заплатить подати. Выгодно сильным дворам и казне.'};
- $('#mirNote').innerHTML=`<h3>${MODES[md][0]}, ${yr} г.</h3><p>${notes[md]}</p><p><svg class="ic co"><use href="#i-chain"/></svg> Круговая порука: если двор не заплатит, его долю платят соседи.${yr===1900?' Закон 1893 г.: общий передел не чаще раза в 12 лет.':''}</p>`;
+   <div class="pl"><span class="lb2" style="width:${sh[k]/LAND*100/0.4}%;max-width:100%;background:${h[1]}">${fmt(sh[k],1)} дес.</span></div>
+   <div class="pv ${cls}"><svg class="psq" viewBox="0 0 ${S} ${S}" width="${S}" height="${S}"><rect x="${S-sa}" y="${S-sa}" width="${sa}" height="${sa}" fill="none" stroke="currentColor" stroke-dasharray="3 2" opacity=".6"/><rect x="${S-s}" y="${S-s}" width="${s}" height="${s}" fill="${h[1]}" stroke="#2b2116"/></svg><span class="pvt"><b>${fmt(pe,2)}</b><span>дес. на одного едока</span><em>${tag}</em></span></div>
+   <div class="pm">${fmt(pay,0)} р.<span class="pmy">в год</span><span class="cns">${coins}</span></div></div>`}).join('');
+ /* итог */
+ const rel=HH.map((h,k)=>[h[0],sh[k]/eat[k]/avg]);
+ const win=rel.filter(x=>x[1]>1.1).sort((a,b)=>b[1]-a[1]),lose=rel.filter(x=>x[1]<0.9).sort((a,b)=>a[1]-b[1]);
+ const notes={rev:'Закон 1861 г. отвёл надел по ревизским душам — мужчинам, записанным в 1858 г. Платежи идут вслед за землёй. Двор, где мужчин стало меньше, платит за «мёртвые души», а растущие семьи живут на старой норме.',
+  m:'Делят по мужчинам, которые живут в дворе сейчас. Двор, где много женщин и детей, получает мало земли на каждый рот.',
+  e:'Делят по едокам — самый уравнительный способ: земли на каждый рот поровну. Но крепкие дворы теряют землю, которую удобряли, поэтому сопротивлялись таким переделам.',
+  w:'Делят по работникам: землю получает тот, кто может её обработать и заплатить подати. Выгодно сильным дворам и казне, тяжело многодетным.'};
+ $('#mirNote').innerHTML=`<div class="vh"><svg class="mci"><use href="#${MODES[md][2]}"/></svg><b>${yr} г., делят ${MODES[md][0]}</b></div>
+  <div class="vg"><div class="vw"><span>Выигрывают</span>${win.length?win.map(x=>`<b>${x[0]}</b> +${fmt((x[1]-1)*100,0)}%`).join('<br>'):'никто заметно'}</div><div class="vl"><span>Проигрывают</span>${lose.length?lose.map(x=>`<b>${x[0]}</b> −${fmt((1-x[1])*100,0)}%`).join('<br>'):'никто заметно'}</div></div>
+  <p>${notes[md]}</p><p class="vp"><svg class="tic"><use href="#i-chain"/></svg>Круговая порука: если один двор не заплатит свои ${fmt(PAY/HH.length,0)} руб., его долг раскладывают на соседей.${yr===1900?' По закону 1893 г. общий передел — не чаще раза в 12 лет.':''}</p>`;
  /* поле */
- const F=['Озимь','Яровое','Пар'],Q=['лучшая','средняя','худшая'];let g='';const X0=80,W=550,H=56,G=12;
- F.forEach((f,i)=>{const y=18+i*(H+G);g+=`<text x="8" y="${y+H/2+5}" font-size="16" fill="currentColor" font-style="italic">${f}</text>`;
+ const F=['Озимь','Яровое','Пар'],Q=['лучшая','средняя','худшая'];let g='';const X0=80,W=550,H=56,G=14;
+ F.forEach((f,i)=>{const y=24+i*(H+G);g+=`<text x="8" y="${y+H/2+5}" font-size="16" fill="currentColor" font-style="italic">${f}</text>`;
   Q.forEach((q,j)=>{const qx=X0+j*(W/3)+2,qw=W/3-4;let x=qx;const ord=HH.map((_,k)=>k);const r=rng(i*7+j*3+yr);for(let a=ord.length-1;a>0;a--){const b=Math.floor(r()*(a+1));[ord[a],ord[b]]=[ord[b],ord[a]]}
-   for(const k of ord){const w=qw*U[k]/SU;if(w<=0)continue;g+=`<rect x="${x}" y="${y}" width="${w}" height="${H}" fill="${HH[k][1]}" opacity="${i===2?.4:.85}" stroke="#f1e6ca" stroke-width="1.2"/>`;x+=w}
-   if(i===0)g+=`<text x="${qx+qw/2}" y="${y-5}" font-size="12" text-anchor="middle" fill="currentColor" opacity=".75">${q} земля</text>`})});
- $('#field').setAttribute('viewBox',`0 0 640 ${18+3*(H+G)}`);$('#field').innerHTML=g;$('#field').style.color='var(--ink)'}
+   for(const k of ord){const w=qw*U[k]/SU;if(w<=0)continue;const on=hsel===k,dim=hsel!=null&&!on;
+    g+=`<rect class="strip" data-k="${k}" x="${x}" y="${y}" width="${w}" height="${H}" fill="${HH[k][1]}" opacity="${dim?.15:i===2?.45:.88}" stroke="${on?'#2b2116':'#f1e6ca'}" stroke-width="${on?2.5:1.2}"/>`;x+=w}
+   if(i===0)g+=`<text x="${qx+qw/2}" y="${y-7}" font-size="12" text-anchor="middle" fill="currentColor" opacity=".75">${q} земля</text>`})});
+ $('#field').setAttribute('viewBox',`0 0 640 ${24+3*(H+G)}`);$('#field').innerHTML=g;$('#field').style.color='var(--ink)';
+ $('#fnote').innerHTML=hsel==null?'<p class="src">Ни один двор не выбран.</p>':`<p class="fn2"><i style="background:${HH[hsel][1]}"></i><b>${HH[hsel][0]}</b>: ${fmt(sh[hsel],1)} дес. разбиты на 9 узких полос в разных концах поля — в среднем по ${fmt(sh[hsel]/9,1)} дес. Чтобы обработать их, нужно ходить с плугом с одного конца надела на другой, а сеять приходится то же, что и соседи.</p>`}
+function pickHH(k){hsel=hsel===k?null:k;mir()}
 $('#yrSeg').onclick=e=>{const b=e.target.closest('button');if(b){yr=+b.dataset.y;mir()}};
 $('#modeSeg').onclick=e=>{const b=e.target.closest('button');if(b){md=b.dataset.m;mir()}};
+$('#pk').addEventListener('click',e=>{const r=e.target.closest('.pr[data-k]');if(r)pickHH(+r.dataset.k)});
+$('#pk').addEventListener('keydown',e=>{const r=e.target.closest('.pr[data-k]');if(r&&(e.key==='Enter'||e.key===' ')){e.preventDefault();pickHH(+r.dataset.k)}});
+$('#landbar').addEventListener('click',e=>{const s=e.target.closest('[data-k]');if(s)pickHH(+s.dataset.k)});
+$('#field').addEventListener('click',e=>{const s=e.target.closest('.strip');if(s)pickHH(+s.dataset.k)});
 
 /* ---------- причины ---------- */
 /* узел: [id, класс, значок, название, пояснение, ведёт к, x, y] */
