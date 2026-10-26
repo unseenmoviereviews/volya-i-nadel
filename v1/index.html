@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Воля и надел</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Marck+Script&display=swap" rel="stylesheet">
+<style>
+:root{--page:#d6c59c;--paper:#f1e6ca;--paper2:#e6d6ae;--ink:#2b2116;--ink2:#5b4a33;--rule:#a58c5e;--medal:#f4ead0;--verm:#a5281b;--grn:#3f6b2a;--och:#b7862c;--blu:#3d5a80;
+ --serif:"Old Standard TT","Times New Roman",Georgia,serif;--hand:"Marck Script","Segoe Script",cursive;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--page:#1f1a14;--paper:#2a231a;--paper2:#352c20;--ink:#efe3c8;--ink2:#c4b391;--rule:#6d5a3b}}
+:root[data-theme="dark"]{--page:#1f1a14;--paper:#2a231a;--paper2:#352c20;--ink:#efe3c8;--ink2:#c4b391;--rule:#6d5a3b}
+*,*:before,*:after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:52px}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--serif);font-size:17px;line-height:1.5;padding-bottom:env(safe-area-inset-bottom,0px)}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--verm);outline-offset:2px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+header.mast{border-bottom:3px double var(--ink);padding:20px 0 14px}
+.mast h1{margin:0;font-style:italic;font-weight:400;font-size:clamp(36px,8vw,62px);line-height:1}
+.mast .k{font-family:var(--hand);color:var(--verm);font-size:23px;margin:4px 0 8px}
+.mast p{margin:0;color:var(--ink2);max-width:62ch;font-size:16px}
+.hero{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}
+@media (max-width:760px){.hero{grid-template-columns:repeat(2,1fr)}.hero div:last-child{grid-column:1/-1}}
+.hero div{background:var(--medal);color:#2b2116;border:1px solid #2b2116;padding:9px 10px 8px;display:flex;flex-direction:column;gap:2px}
+.hero b{font-family:var(--hand);font-weight:400;color:#a5281b;font-size:34px;line-height:1}
+.hero span{font-size:13.5px;line-height:1.25}
+nav.tabs{position:sticky;top:0;z-index:30;background:var(--page);border-bottom:1px solid var(--ink);display:flex}
+nav.tabs a{flex:1;text-align:center;padding:11px 4px;color:var(--ink);text-decoration:none;font-style:italic;font-size:16px;border-right:1px solid var(--rule)}
+nav.tabs a:last-child{border-right:0}
+nav.tabs a.on{background:var(--ink);color:var(--paper)}
+section{padding:24px 0 8px}
+h2.sec{font-weight:400;font-style:italic;font-size:32px;margin:0 0 4px;line-height:1.1}
+h3.sub2{font-weight:400;font-style:italic;font-size:25px;margin:28px 0 4px}
+.lead{color:var(--ink2);max-width:68ch;margin:0 0 12px;font-size:16px}
+.src{font-size:13px;color:var(--ink2);margin:6px 0 0}
+.box{background:var(--paper);border:1px solid var(--rule);padding:14px 16px}
+.box h3{margin:0 0 6px;font-style:italic;font-weight:400;font-size:20px;border-bottom:1px solid var(--rule)}
+.box p{margin:0 0 8px;font-size:15.5px}
+.ic{width:15px;height:22px;fill:var(--ink);flex:0 0 auto}
+.ic.lt{fill:var(--ink);opacity:.35}
+.ic.gh{fill:none;stroke:var(--verm);stroke-width:1.6;stroke-dasharray:2 2}
+.ic.co{width:18px;height:18px;fill:var(--och);vertical-align:-3px;margin-right:3px}
+.seg{display:flex;flex-wrap:wrap;border:1px solid var(--ink);width:max-content;max-width:100%}
+.seg button{background:var(--paper);border:0;border-right:1px solid var(--rule);padding:8px 11px;cursor:pointer;font-size:15px;line-height:1.15}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+@media (max-width:420px){.seg{width:100%}.seg button{flex:1 1 auto;padding:8px 7px}}
+.seg button small{display:block;font-size:11.5px;opacity:.8}
+.lb{display:block;font-size:13.5px;color:var(--ink2);margin-bottom:3px}
+/* узы */
+.ties{display:grid;grid-template-columns:1.05fr 1fr;gap:18px;align-items:start;margin-top:12px}
+@media (max-width:860px){.ties{grid-template-columns:1fr}}
+.web{width:100%;height:auto;background:var(--paper);border:1px solid var(--ink)}
+.web text{font-family:var(--serif)}
+.web .nd2{cursor:pointer}
+.tie-d{display:grid;gap:8px}
+.td{background:var(--paper);border:1px solid var(--rule);border-left:6px solid var(--c);padding:9px 12px}
+.td .h{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.td .h b{font-size:16.5px}
+.td p{margin:4px 0 0;font-size:14.5px;line-height:1.4}
+.td.zero{opacity:.55}
+.st{display:flex;gap:3px}.st i{width:18px;height:8px;border:1px solid var(--ink)}.st i.f{background:var(--c)}
+.sum{background:var(--ink);color:var(--paper);padding:10px 14px;display:flex;align-items:center;gap:14px}
+.sum b{white-space:nowrap;font-family:var(--hand);font-weight:400;font-size:40px;line-height:1;color:#e9b19f}
+.sum span{font-size:14.5px;line-height:1.35}
+.pbar-w{margin:10px 0 4px;background:var(--paper);border:1px solid var(--rule)}
+.pbar{display:block;width:100%;height:auto}.pbar text{font-family:var(--serif)}.pbar .col{cursor:pointer}
+.rights td .ri{width:22px;height:22px;vertical-align:-6px;margin-right:8px;color:var(--ink);fill:var(--ink)}
+.rights tfoot td{background:var(--paper2);font-size:13px;padding:6px 4px}
+.rights tfoot .rb{display:flex;gap:2px;justify-content:center;margin-bottom:2px}.rights tfoot .rb i{width:6px;height:12px;border:1px solid var(--ink)}.rights tfoot .rb i.f{background:#3f6b2a}
+.web .badge text{font-family:var(--serif)}
+.evn{display:flex;align-items:center;gap:6px}.evi{width:20px;height:20px}
+.tic{width:20px;height:20px;vertical-align:-4px;margin-right:6px;fill:var(--ink);color:var(--ink);flex:0 0 auto}
+.lkey{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:14px;color:var(--ink2);margin:0 0 6px;align-items:center}.lkey span{display:flex;align-items:center}
+.wbtn{background:none;border:1px solid var(--paper2);color:var(--paper);padding:2px 8px;font-size:13px;cursor:pointer}
+.hint.saved{background:var(--medal);color:#2b2116;border-left:4px solid #3f6b2a;padding:6px 10px;font-size:14px}
+/* права */
+.rscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--ink);margin-top:10px}
+table.rights{border-collapse:collapse;min-width:680px;width:100%;background:var(--paper);font-size:14.5px}
+.rights th,.rights td{border-bottom:1px solid var(--rule);border-right:1px solid var(--rule);padding:6px 4px;text-align:center}
+.rights th{font-weight:400;font-style:italic;font-size:13.5px;background:var(--paper2);cursor:pointer}
+.rights th.on{background:var(--ink);color:var(--paper)}
+.rights td:first-child,.rights th:first-child{text-align:left;padding-left:10px;position:sticky;left:0;background:var(--paper2);z-index:1;font-style:normal;min-width:190px;cursor:default}
+.rights td.on{outline:2px solid var(--verm);outline-offset:-2px}
+.mk2{display:inline-flex;width:30px;height:30px;border-radius:50%;align-items:center;justify-content:center;font-weight:700;font-size:17px;border:1.5px solid #2b2116}
+.mk2.y{background:#3f6b2a;color:#fff}.mk2.p{background:#e0b04a;color:#2b2116}.mk2.n{background:#a5281b;color:#fff}
+.rkey{display:flex;flex-wrap:wrap;gap:14px;font-size:14px;color:var(--ink2);margin-top:8px;align-items:center}
+.rkey .mk2{width:22px;height:22px;font-size:13px;margin-right:4px}
+/* путь */
+.pscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--ink);background:var(--paper)}
+.pchart{display:block;min-width:720px;width:100%;height:auto}
+.pchart text{font-family:var(--serif)}
+.evb{cursor:pointer}
+.ev3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+@media (max-width:760px){.ev3{grid-template-columns:1fr}}
+.evh{grid-column:1/-1;background:var(--ink);color:var(--paper);padding:8px 12px;font-size:17px}
+.evh b{font-family:var(--hand);font-weight:400;font-size:26px;color:#e9b19f;margin-right:6px}
+.evh span{float:right;font-size:14px;opacity:.85;margin-top:6px}
+.evc{background:var(--paper);border:1px solid var(--rule);border-top:6px solid var(--c);padding:9px 12px}
+.evc.same{opacity:.6}
+.evc .evt{display:flex;justify-content:space-between;align-items:center;font-style:italic;font-size:17px}
+.mtr{display:flex;gap:2px}.mtr i{width:14px;height:8px;border:1px solid var(--ink)}.mtr i.f{background:var(--c)}
+.evd{font-size:13.5px;font-weight:700;margin-top:2px}.evd.dn{color:var(--grn)}.evd.up{color:var(--verm)}
+.evc p{margin:4px 0 0;font-size:14.5px;line-height:1.4}
+/* община */
+.ctrls{display:flex;flex-wrap:wrap;gap:12px 22px;margin:6px 0 14px}
+.pk{display:grid;gap:6px}
+.mstep{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:700;margin:18px 0 8px}
+.mstep i{font-style:normal;display:inline-flex;width:28px;height:28px;border-radius:50%;background:var(--verm);color:#fff;align-items:center;justify-content:center;font-family:var(--hand);font-size:20px;font-weight:400}
+.ycards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.yc{display:grid;grid-template-columns:1fr auto;grid-template-areas:"y q" "d q" "l q" "g g";gap:2px 10px;text-align:left;background:var(--paper);border:1px solid var(--rule);padding:10px 12px;cursor:pointer;color:var(--ink)}
+.yc[aria-pressed=true]{background:var(--medal);color:#2b2116;border:2px solid var(--verm);box-shadow:3px 3px 0 rgba(165,40,27,.25)}
+.yy{grid-area:y;font-family:var(--hand);font-size:30px;line-height:1;color:var(--verm)}
+.ydots{grid-area:d;display:flex;flex-wrap:wrap;gap:2px;align-content:flex-start;min-height:30px}.ydots i{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.75}
+.yl{grid-area:l;font-size:12.5px}
+.ysq{grid-area:q;display:flex;flex-direction:column;align-items:center;text-align:center;line-height:1}.ysq b{font-family:var(--hand);font-weight:400;font-size:24px;margin-top:2px}.ysq small{font-size:10.5px;opacity:.8}
+.yg{grid-area:g;font-size:12.5px;border-top:1px dotted var(--rule);padding-top:4px;margin-top:4px}
+@media (max-width:640px){.ycards{gap:5px}.yc{grid-template-columns:1fr;grid-template-areas:"y" "q" "l" "g";padding:8px 6px;text-align:center}.yy{font-size:26px}.ydots{display:none}.yl,.yg{font-size:11.5px;line-height:1.25}.ysq b{font-size:22px}}
+.mcards{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media (max-width:760px){.mcards{grid-template-columns:1fr 1fr}}
+.mc{display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;background:var(--paper);border:1px solid var(--rule);padding:9px 10px;cursor:pointer;color:var(--ink)}
+.mc b{font-size:15px;line-height:1.15}.mc small{font-size:12px;line-height:1.25;color:var(--ink2)}
+.mc[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}.mc[aria-pressed=true] small{color:var(--paper2)}
+.mci{width:26px;height:26px;fill:currentColor;color:currentColor}
+.landbar{margin-bottom:8px}
+.lbt{display:flex;flex-wrap:wrap;gap:2px 12px;align-items:baseline;font-size:14px;margin-bottom:4px}.lbt b{font-size:15.5px}.lbt span{color:var(--ink2)}
+.lbs{display:flex;height:44px;border:2px solid var(--ink);background:var(--paper2)}
+.lbs span{display:flex;flex-direction:column;justify-content:center;padding:0 6px;color:#fff;overflow:hidden;white-space:nowrap;border-right:2px solid #f4ead0;cursor:pointer;transition:width .4s}
+.lbs span:last-child{border-right:0}.lbs span.on{outline:3px solid var(--och);outline-offset:-3px}
+.lbs em{font-style:normal;font-size:12px;opacity:.9}.lbs b{font-size:15px}
+.pr{display:grid;grid-template-columns:130px minmax(0,1.4fr) minmax(0,1fr) 190px 104px;gap:10px;align-items:center;background:var(--paper);border:1px solid var(--rule);padding:8px 10px;cursor:pointer}
+.pr.sel{border:2px solid var(--och);background:var(--medal)}
+@media (max-width:760px){.pr{grid-template-columns:1fr auto;gap:6px 10px}.pr .pn{grid-column:1/-1}.pr .pp{grid-column:1/-1}.pr .pl{grid-column:1/-1}}
+.pn{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 6px}
+.pn i{width:12px;height:12px;display:inline-block;border:1px solid var(--ink)}
+.pn b{font-size:16px}.pn span{font-size:12.5px;color:var(--ink2);font-style:italic;width:100%}
+.pp{display:flex;flex-wrap:wrap;gap:1px;align-items:center}
+.pp em{font-size:12.5px;color:var(--ink2);margin-left:6px}
+.pl{background:var(--paper2);height:26px;position:relative}
+.lb2{display:flex;align-items:center;height:26px;color:#fff;font-size:13.5px;font-weight:700;padding-left:6px;min-width:64px;transition:width .4s;border:1px solid #2b2116;white-space:nowrap}
+.pv{display:flex;align-items:flex-end;gap:8px;line-height:1.05}.psq{flex:0 0 auto;color:var(--ink)}
+.pvt b{font-family:var(--hand);font-weight:400;font-size:26px;display:block}.pvt span{display:block;font-size:11px;color:var(--ink2)}.pvt em{display:block;font-style:normal;font-size:11.5px;font-weight:700;margin-top:2px;color:var(--ink2)}
+.pv.low b,.pv.low em{color:var(--verm)}.pv.hi b,.pv.hi em{color:var(--grn)}
+.pm{font-size:15px;text-align:right;font-weight:700}.pm .pmy{display:block;font-size:11px;font-weight:400;color:var(--ink2)}
+.cns{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:1px;margin-top:3px}.cn{width:13px;height:13px;fill:var(--och)}
+.pr.phd{background:var(--ink);color:var(--paper);border-color:var(--ink);padding:6px 10px;font-size:13px;font-style:italic;cursor:default}.pr.phd span:nth-child(n+4){text-align:left}.pr.phd span:last-child{text-align:right}
+@media (max-width:760px){.pr.phd{display:none}}
+.pkey{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--ink2);margin:8px 0 14px;align-items:center}
+.pkey span{display:flex;align-items:center;gap:4px}
+.sqk{display:inline-block;width:14px;height:14px;background:var(--och);border:1px solid var(--ink);outline:1px dashed var(--ink2);outline-offset:3px;margin:0 4px}
+.verdict{background:var(--paper);border:1px solid var(--ink);padding:12px 14px}
+.vh{display:flex;align-items:center;gap:8px;font-size:18px;margin-bottom:8px}
+.vg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.vg>div{padding:8px 10px;font-size:15px;line-height:1.5}.vg span{display:block;font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.vw{background:rgba(63,107,42,.12);border-left:5px solid #3f6b2a}.vw span{color:var(--grn)}
+.vl{background:rgba(165,40,27,.1);border-left:5px solid #a5281b}.vl span{color:var(--verm)}
+.verdict p{margin:0 0 6px;font-size:15px}.vp{display:flex;gap:4px;align-items:flex-start}
+.strip{cursor:pointer}
+.fnote{margin-top:8px}.fn2{background:var(--medal);color:#2b2116;border:1px solid #2b2116;padding:8px 12px;font-size:15px;margin:0}.fn2 i{display:inline-block;width:12px;height:12px;border:1px solid #2b2116;margin-right:6px}
+.field{display:block;min-width:600px;width:100%;height:auto;background:var(--paper)}
+.field text{font-family:var(--serif)}
+.swipe{display:none;font-size:13px;color:var(--ink2);font-style:italic;text-align:center;margin:4px 0 0}
+@media (max-width:780px){.swipe{display:block}}
+/* причины */
+.czsvg{display:block;min-width:760px;width:100%;height:auto}
+.czsvg text{font-family:var(--serif)}
+.czl{margin:2px 0 4px;padding-left:20px;font-size:15px}
+.czd{margin-top:10px;min-height:60px}
+.czc{display:flex;gap:12px;background:var(--medal);color:#2b2116;border:1px solid #2b2116;padding:10px 12px}
+.czc .ni{width:44px;height:44px;fill:#a5281b;flex:0 0 auto}
+.czc b{font-size:17px}.czc p{margin:3px 0 0;font-size:15px}.czc .cl span{font-style:italic;color:#5b4a33}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:16px}
+.facts svg text{font-family:var(--serif)}
+.pts{float:right;font-weight:400;font-style:italic;font-size:14px;color:var(--ink2)}
+.task a{color:var(--verm)}
+.g1{display:grid;grid-template-columns:minmax(110px,1fr) 1fr 1fr;gap:6px 10px;align-items:center}
+.g1>b{font-weight:400;font-style:italic;font-size:15px;text-align:center;line-height:1.15}.g1>b small{display:block;font-size:12px;color:var(--ink2)}
+.fn{display:flex;align-items:center;gap:6px;font-weight:700;font-size:15.5px}.fn i{width:12px;height:12px;border:1px solid var(--ink);display:inline-block}
+.sl{width:100%;background:var(--medal);color:#2b2116;border:1px solid var(--ink);padding:8px;font-size:16px;border-radius:0}
+.seg3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.seg3 .opt{margin:0}
+@media (max-width:560px){.seg3{grid-template-columns:1fr}}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}.two label{font-size:14px;color:var(--ink2);display:flex;flex-direction:column;gap:3px}
+@media (max-width:560px){.two{grid-template-columns:1fr}}
+.chk{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px}.chk .opt{align-items:center;margin:0}.chk .ni{width:24px;height:24px;fill:#2b2116;flex:0 0 auto}
+.scg{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px;margin:8px 0}.scg div{border:1px solid #a58c5e;padding:6px 8px;font-size:13.5px}.scg b{display:block;font-size:20px}
+/* задания */
+.task{background:var(--paper);border:1px solid var(--ink);padding:16px;margin-bottom:16px}
+.task h3{margin:0 0 4px;font-size:21px;font-weight:700}
+.task .hint{color:var(--ink2);font-size:14.5px;margin:0 0 10px}
+.fld{display:block;margin-bottom:10px}
+.fld span{display:block;font-size:14px;color:var(--ink2);margin-bottom:3px}
+.fld input,.fld textarea{width:100%;background:var(--medal);color:#2b2116;border:1px solid var(--ink);padding:10px;font-size:17px;border-radius:0}
+.fld textarea{min-height:150px;resize:vertical;line-height:1.45}
+.btn{background:var(--ink);color:var(--paper);border:1px solid var(--ink);padding:11px 18px;cursor:pointer;font-size:17px}
+.btn:disabled{opacity:.45;cursor:default}
+.q{border-top:1px dotted var(--rule);padding:12px 0}
+.q:first-of-type{border-top:0}
+.q p{margin:0 0 8px;font-size:16.5px}
+.q .n{font-family:var(--hand);color:var(--verm);font-size:22px;margin-right:4px}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--rule);margin-bottom:6px;cursor:pointer;background:var(--medal);color:#2b2116;font-size:15.5px;line-height:1.35}
+.opt input{margin-top:3px;accent-color:#a5281b;flex:0 0 auto;width:18px;height:18px}
+.opt:has(input:checked){border-color:#2b2116;outline:2px solid #a5281b;outline-offset:-2px}
+.calc{display:grid;grid-template-columns:1fr 140px;gap:6px 10px;align-items:center}
+.calc label{font-size:15.5px}
+.calc input{width:100%;background:var(--medal);color:#2b2116;border:1px solid var(--ink);padding:9px;font-size:17px}
+.var{background:var(--medal);color:#2b2116;border:1px solid #2b2116;padding:10px 12px;margin-bottom:12px;font-size:15.5px}
+.var b{color:#a5281b}
+.doc{background:var(--medal);color:#2b2116;border-left:4px solid #a5281b;padding:10px 14px;margin:0 0 10px;font-size:15.5px}
+.doc .h{font-variant:small-caps;letter-spacing:.04em;font-size:14px;color:#5b4a33;margin-bottom:4px}
+.who{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;background:var(--ink);color:var(--paper);padding:8px 12px;margin-bottom:14px;font-size:15px}
+.res{background:var(--medal);color:#2b2116;border:2px solid #2b2116;padding:14px 16px}
+.res h3{margin:0 0 4px;font-family:var(--hand);font-weight:400;font-size:30px;color:#a5281b}
+.warn{color:var(--verm);font-size:14.5px}
+.cnt{font-size:13px;color:var(--ink2);text-align:right}
+footer{border-top:1px solid var(--rule);margin-top:20px;padding:14px 0 40px;font-size:13px;color:var(--ink2)}
+[hidden]{display:none!important}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+ <symbol id="i-man" viewBox="0 0 16 24"><circle cx="8" cy="4.2" r="3.6"/><path d="M3 9.5h10l-1 8.5h-2l-.6 6H6.6L6 18H4z"/></symbol>
+ <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6.5" fill="none" stroke="#f4ead0" stroke-width="1.6"/><path d="M10 8h3.2a2.3 2.3 0 010 4.6H10V8zm0 4.6v4M8.6 14.6h4" fill="none" stroke="#f4ead0" stroke-width="1.6"/></symbol>
+ <symbol id="i-chain" viewBox="0 0 24 24"><path d="M9.5 14.5l5-5" stroke="currentColor" stroke-width="2.4" fill="none"/><rect x="1.5" y="10" width="11" height="7" rx="3.5" transform="rotate(-45 7 13.5)" fill="none" stroke="currentColor" stroke-width="2.4"/><rect x="11.5" y="7" width="11" height="7" rx="3.5" transform="rotate(-45 17 10.5)" fill="none" stroke="currentColor" stroke-width="2.4"/></symbol>
+ <symbol id="i-scis" viewBox="0 0 24 24"><circle cx="6" cy="18" r="3.2" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="18" cy="18" r="3.2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M8 15.5L19 2M16 15.5L5 2" stroke="currentColor" stroke-width="2.2"/></symbol>
+ <symbol id="i-fam" viewBox="0 0 30 24"><use href="#i-man" x="0" width="12" height="18" y="6"/><use href="#i-man" x="9" width="12" height="18" y="6"/><use href="#i-man" x="19" width="9" height="13" y="11"/><path d="M24 2v6M21 5h6" stroke="currentColor" stroke-width="2"/></symbol>
+ <symbol id="i-shr" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"/><rect x="2" y="12" width="10" height="10"/><path d="M14 10l6-6M14 4v6h6" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+ <symbol id="i-empty" viewBox="0 0 24 24"><path d="M5 9h14l-1.5 13h-11z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 9V6a4 4 0 018 0v3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 14l6 5M15 14l-6 5" stroke="currentColor" stroke-width="2"/></symbol>
+ <symbol id="i-strip" viewBox="0 0 24 24"><rect x="2" y="3" width="3" height="18"/><rect x="7" y="3" width="2" height="18" opacity=".5"/><rect x="11" y="3" width="4" height="18"/><rect x="17" y="3" width="1.5" height="18" opacity=".5"/><rect x="20" y="3" width="2.5" height="18"/></symbol>
+ <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18M6 21h12M4 7h16" stroke="currentColor" stroke-width="2" fill="none"/><path d="M4 7l-3 7h6zM20 7l-3 7h6z"/></symbol>
+ <symbol id="i-wheat" viewBox="0 0 24 24"><path d="M12 23V6" stroke="currentColor" stroke-width="2"/><ellipse cx="12" cy="4" rx="2" ry="3"/><ellipse cx="9" cy="9" rx="1.8" ry="3" transform="rotate(-35 9 9)"/><ellipse cx="15" cy="9" rx="1.8" ry="3" transform="rotate(35 15 9)"/><ellipse cx="9" cy="14" rx="1.8" ry="3" transform="rotate(-35 9 14)"/><ellipse cx="15" cy="14" rx="1.8" ry="3" transform="rotate(35 15 14)"/></symbol>
+ <symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 1c1 5 7 7 7 14a7 7 0 01-14 0c0-4 2-6 3-8 0 3 1 4 2 4 0-4 0-7 2-10z"/></symbol>
+ <symbol id="i-hand" viewBox="0 0 24 24"><path d="M3 13h5l4 3h6a2 2 0 010 4H9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M1 11h3v11H1z"/><rect x="10" y="3" width="10" height="7"/></symbol>
+ <symbol id="i-road" viewBox="0 0 24 24"><path d="M6 23L10 1M18 23L14 1" stroke="currentColor" stroke-width="2"/><path d="M12 3v3M12 10v4M12 18v4" stroke="currentColor" stroke-width="2"/></symbol>
+ <symbol id="i-house" viewBox="0 0 24 24"><path d="M1 11L12 3l11 8h-3v10H4V11z"/><rect x="9" y="14" width="6" height="7" fill="#f4ead0"/></symbol>
+ <symbol id="i-mir" viewBox="0 0 30 24"><path d="M0 12l6-6 6 6h-2v9H2v-9z"/><path d="M9 12l6-7 6 7h-2v9h-8v-9z"/><path d="M18 12l6-6 6 6h-2v9h-8v-9z"/></symbol>
+ <symbol id="i-ring" viewBox="0 0 24 24"><circle cx="12" cy="15" r="7" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M9 3h6l2 3-5 3-5-3z"/></symbol>
+ <symbol id="i-rod" viewBox="0 0 24 24"><path d="M5 22L19 3M8 22L20 6M3 20L17 1" stroke="currentColor" stroke-width="1.8" fill="none"/><rect x="4" y="16" width="6" height="3" transform="rotate(-53 7 17.5)"/></symbol>
+ <symbol id="i-tag" viewBox="0 0 24 24"><path d="M2 12L12 2h9v9L11 21z"/><circle cx="17" cy="6" r="1.8" fill="#f4ead0"/></symbol>
+ <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 4l3 8h-6z"/><path d="M12 20l-3-8h6z" opacity=".4"/></symbol>
+ <symbol id="i-book" viewBox="0 0 24 24"><path d="M3 4h7a2 2 0 012 2v15a2 2 0 00-2-2H3z"/><path d="M21 4h-7a2 2 0 00-2 2v15a2 2 0 012-2h7z" opacity=".6"/><path d="M5 8h4M5 11h4M5 14h3" stroke="#f4ead0" stroke-width="1"/></symbol>
+ <symbol id="i-sickle" viewBox="0 0 24 24"><path d="M14 3a9 9 0 11-9 12" fill="none" stroke="currentColor" stroke-width="2.8"/><path d="M6 14l-4 7 3 1 4-6z"/></symbol>
+ <symbol id="i-gavel" viewBox="0 0 24 24"><rect x="4" y="2" width="10" height="6" rx="1" transform="rotate(35 9 5)"/><path d="M10 9l10 10" stroke="currentColor" stroke-width="3"/><rect x="2" y="20" width="12" height="3"/></symbol>
+</defs></svg>
+
+<header class="mast wrap">
+ <h1>Воля и надел</h1>
+ <div class="k">что реформа 1861 года изменила в жизни одного крестьянина</div>
+ <p>Крестьянин получил личную свободу, но остался связан с помещиком, сельским обществом, казной и начальством. Здесь видно, как менялась каждая из этих связей с 1861 по 1907 г.</p>
+ <div class="hero">
+  <div><b>49 лет</b><span>рассрочка выкупа надела</span></div>
+  <div><b>6%</b><span>от казённой ссуды крестьянин платит ежегодно</span></div>
+  <div><b>4,8 → 2,6</b><span>десятины на душу за 40 лет в центральных губерниях</span></div>
+  <div><b>76%</b><span>крестьянских дворов в 1905 г. жили в общине</span></div>
+  <div><b>1,6 млрд р.</b><span>выкупных платежей внесли бывшие помещичьи крестьяне к 1906 г.</span></div>
+ </div>
+</header>
+<nav class="tabs" id="nav"><a href="#s-ties" class="on">Узы</a><a href="#s-path">Путь</a><a href="#s-mir">Община</a><a href="#s-task">Задания</a></nav>
+
+<main class="wrap">
+<section id="s-ties">
+ <h2 class="sec">Кто держит крестьянина</h2>
+ <p class="lead">Выберите период кнопкой или столбиком на графике. На схеме число звеньев цепи и цифра на ней — сила зависимости от каждой силы (0 — связи нет, 3 — самая сильная). Таблица ниже показывает, что крестьянину было можно и нельзя.</p>
+ <span class="lb">Период</span><div class="seg" id="perSeg"></div>
+ <div class="pbar-w"><svg class="pbar" id="pbar" viewBox="0 0 660 190" role="img" aria-label="Сила зависимости по периодам"></svg></div>
+ <div class="ties">
+  <svg class="web" id="web" viewBox="0 0 460 420" role="img" aria-label="Связи крестьянина с помещиком, общиной, казной и начальством"></svg>
+  <div class="tie-d" id="tieD"></div>
+ </div>
+ <h3 class="sub2">Можно или нельзя</h3>
+ <div class="rscroll"><table class="rights" id="rights"></table></div>
+ <div class="rkey"><span><i class="mk2 y">✓</i>можно</span><span><i class="mk2 p">~</i>с условиями или с разрешения</span><span><i class="mk2 n">✕</i>нельзя</span></div>
+</section>
+
+<section id="s-path">
+ <h2 class="sec">Путь крестьянина, 1861–1907</h2>
+ <p class="lead">Три ленты — статус, земля, община. Высота ленты — степень зависимости крестьянина (от 1 до 5). Нажмите на год, чтобы увидеть, что изменилось.</p>
+ <div class="pscroll"><svg class="pchart" id="pchart" viewBox="0 0 900 460" role="img" aria-label="Зависимость крестьянина по годам"></svg></div>
+ <p class="swipe">← схему можно прокручивать пальцем вбок →</p>
+ <div class="ev3" id="ev3"></div>
+</section>
+
+<section id="s-mir">
+ <h2 class="sec">Земля внутри общины</h2>
+ <p class="lead">Условное сельское общество из пяти дворов. Надел общества — 72 десятины пашни (десятина — около 1,1 гектара), и он не растёт. Растёт число людей, а землю и платежи сход делит между дворами.</p>
+
+ <div class="mstep"><i>1</i>Выберите год — посмотрите, как растёт число едоков</div>
+ <div class="ycards" id="yrSeg"></div>
+
+ <div class="mstep"><i>2</i>Выберите, как сход делит землю</div>
+ <div class="mcards" id="modeSeg"></div>
+
+ <div class="mstep"><i>3</i>Смотрите, что досталось каждому двору</div>
+ <div class="landbar" id="landbar"></div>
+ <div class="pk" id="pk"></div>
+ <div class="pkey"><span><svg class="ic"><use href="#i-man"/></svg> работник</span><span><svg class="ic lt"><use href="#i-man"/></svg> едок: старик, женщина, ребёнок</span><span><svg class="ic gh"><use href="#i-man"/></svg> «мёртвая душа»: записан в 1858 г., но в дворе его уже нет</span><span><i class="sqk"></i> пашня на одного едока; пунктир — среднее по обществу</span><span><svg class="ic co"><use href="#i-coin"/></svg> одна монета — 10 руб. податей и выкупных платежей в год</span></div>
+ <div class="verdict" id="mirNote"></div>
+
+ <h3 class="sub2">Чересполосица: где лежат полосы двора</h3>
+ <p class="lead">Поле поделено на три клина трёхполья, каждый — на участки лучшей, средней и худшей земли. Двор получает полосу на каждом участке. Нажмите на двор в таблице выше или на полосу, чтобы увидеть все его полосы.</p>
+ <div class="pscroll"><svg class="field" id="field" viewBox="0 0 640 420" role="img" aria-label="Чересполосица: полосы дворов в трёх полях"></svg></div>
+ <p class="swipe">← схему можно прокручивать пальцем вбок →</p>
+ <div class="fnote" id="fnote"></div>
+
+ <h3 class="sub2">Откуда взялось аграрное перенаселение</h3>
+ <p class="lead">Стрелка ведёт от причины к следствию. Красная рамка — решения власти, тёмный блок — итог, светлые блоки внизу — последствия. Нажмите на звено, чтобы выделить его связи; повторное нажатие снимает выделение.</p>
+ <div class="pscroll"><svg class="czsvg" id="cause" viewBox="0 0 900 560" role="img" aria-label="Схема причин аграрного перенаселения"></svg></div>
+ <p class="swipe">← схему можно прокручивать пальцем вбок →</p>
+ <div class="czd" id="czd"></div>
+ <div class="facts">
+  <div class="box"><h3>Надел на душу</h3><svg viewBox="0 0 300 160" width="100%" role="img" aria-label="Надел 4,8 и 2,6 десятины" id="nad"></svg>
+   <p class="src">Центральные земледельческие и малороссийские губернии. По: Корелин А. П.</p></div>
+  <div class="box"><h3>Урожай, пудов с десятины</h3><svg viewBox="0 0 300 150" width="100%" role="img" aria-label="Урожайность крестьянских и помещичьих земель" id="yield"></svg>
+   <p class="src">Средние за десятилетия. По: Корелин А. П.</p></div>
+  <div class="box"><h3>Дворы в общине, 1905</h3><svg viewBox="0 0 300 160" width="100%" role="img" aria-label="Доля дворов с общинным владением" id="share"></svg>
+   <p class="src">46 губерний Европейской России. По: Корелин А. П.</p></div>
+ </div>
+</section>
+
+
+
+<section id="s-task">
+ <h2 class="sec">Практическая работа</h2>
+ <p class="lead">Все ответы — на этой странице, выше. Каждое задание опирается на одну схему: возвращайтесь к ней по ссылке в задании. У каждого студента свой вариант. Автоматически проверяется 25 баллов, вывод оценивает преподаватель.</p>
+ <div class="task" id="start">
+  <h3>Кто выполняет работу</h3>
+  <p class="hint">Вариант зависит от фамилии и группы, поэтому вводите их так же, как в журнале.</p>
+  <label class="fld"><span>Фамилия, имя, отчество</span><input id="fio" autocomplete="name" placeholder="Иванов Иван Иванович"></label>
+  <label class="fld"><span>Группа</span><input id="grp" placeholder="например, ЛЗ-101" autocapitalize="characters"></label>
+  <button class="btn" id="go">Начать работу</button> <span class="warn" id="gowarn"></span>
+ </div>
+ <div id="work" hidden>
+  <div class="who"><span id="whoName"></span><span id="whoVar"></span><button type="button" class="wbtn" id="reset">Сменить ФИО или группу</button></div>
+  <p class="hint saved">Ответы сохраняются на этом телефоне автоматически: если страница обновится или закроется, откройте её снова — работа продолжится с того же места.</p>
+
+  <div class="task"><h3>Задание 1. Сила зависимости <span class="pts">8 баллов</span></h3>
+   <p class="hint">Схема <a href="#s-ties">«Кто держит крестьянина»</a>. Выберите на ней нужный период и определите силу каждой связи: это цифра на цепи на схеме или число закрашенных делений в карточке рядом: 0 — связи нет, 3 — самая сильная.</p>
+   <div id="t1"></div></div>
+
+  <div class="task"><h3>Задание 2. Можно или нельзя <span class="pts">6 баллов</span></h3>
+   <p class="hint">Таблица <a href="#s-ties">«Можно или нельзя»</a>. Мог ли крестьянин сделать это в указанный период?</p>
+   <div id="t2"></div></div>
+
+  <div class="task"><h3>Задание 3. Что изменил закон <span class="pts">5 баллов</span></h3>
+   <p class="hint">Схема <a href="#s-path">«Путь крестьянина»</a>. Нажимайте на кружки с годами. Для каждого события укажите, какая лента изменилась и в какую сторону. Балл ставится, если верны оба ответа.</p>
+   <div id="t3"></div></div>
+
+  <div class="task"><h3>Задание 4. Раздел земли в общине <span class="pts">3 балла</span></h3>
+   <p class="hint">Модель <a href="#s-mir">«Земля внутри общины»</a>. Выставьте на ней год и способ раздела из вашего варианта и найдите нужный двор. Вводите числа так, как они показаны на странице.</p>
+   <div class="var" id="t4v"></div><div class="calc" id="t4"></div></div>
+
+  <div class="task"><h3>Задание 5. Цепочка причин <span class="pts">3 балла</span></h3>
+   <p class="hint">Схема <a href="#s-mir">«Откуда взялось аграрное перенаселение»</a>. Нажмите на звено «Аграрное перенаселение»: пояснение покажет его причины. Отметьте звенья, которые ведут к нему <b>напрямую</b>. За каждое лишнее звено снимается балл.</p>
+   <div id="t5"></div></div>
+
+  <div class="task"><h3>Задание 6. Вывод</h3>
+   <p class="hint">4–6 предложений. Был ли крестьянин после 1861 г. свободным человеком? Сравните два периода из задания 1: от кого крестьянин зависел сильнее всего и почему? Приведите не меньше двух фактов со схем страницы (закон, право из таблицы, цифру из модели общины). Объясните, кому была выгодна круговая порука.</p>
+   <label class="fld"><span>Ваш вывод</span><textarea id="concl" placeholder="Начните с главной мысли…"></textarea></label>
+   <div class="cnt" id="cnt">0 слов</div></div>
+
+  <div class="task"><h3>Отправка</h3><p class="hint">Проверьте ответы. После отправки изменить их нельзя.</p>
+   <button class="btn" id="send">Отправить преподавателю</button> <span class="warn" id="sendwarn"></span>
+   <div id="result" style="margin-top:14px" hidden></div></div>
+ </div>
+</section>
+</main>
+<footer class="wrap">Источники: Положения 19 февраля 1861 г.; Зайончковский П. А. Отмена крепостного права в России. М., 1968; Корелин А. П. Сельское хозяйство России на рубеже XIX — начала XX в. Оценки степени зависимости на схемах — условные, составлены для учебной работы. Колесников Михаил Алексеевич, курс «История России», тема 6.3.</footer>
+
+<script>
+/* === ссылка на веб-приложение Apps Script (оканчивается на /exec) === */
+const SCRIPT_URL='https://script.google.com/macros/s/AKfycbyW9USQUb2pNVL0890snFgmj2lOR6IsdYcpadbqPVY3zQZzJomql-X7DMBh3AMJm_tR/exec';
+const $=s=>document.querySelector(s);
+const fmt=(v,d=1)=>v==null?'—':(+v).toLocaleString('ru-RU',{maximumFractionDigits:d,minimumFractionDigits:0});
+function hash(s){let h=2166136261;for(const c of s){h^=c.codePointAt(0);h=Math.imul(h,16777619)}return h>>>0}
+function rng(seed){let a=seed;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+
+/* ---------- узы ---------- */
+const PER=['до 1861','1861–1882','1883–1888','1889–1902','1903–1906','с 1907'];
+const PSUB=['крепостной','временнообязанный','выкупщик','под надзором','послабления','указы 1906'];
+const FORCE=[
+ ['Помещик','#a5281b','i-house',[3,2,1,1,1,1],[
+  'Полная власть: суд, наказание, брак, переселение, барщина или оброк.',
+  'Лично свободен, но до выкупа несёт барщину или оброк. Надел пока помещичий.',
+  'С 1883 г. выкуп обязателен, повинности прекращены. Остаётся аренда отрезков и отработки.',
+  'Юридической власти нет. Зависимость хозяйственная: аренда земли, луга, выгоны.',
+  'Зависимость хозяйственная: аренда и отработки.',
+  'Зависимость хозяйственная: аренда помещичьей земли.']],
+ ['Община','#3d5a80','i-mir',[1,3,3,3,2,1],[
+  'Переделяет землю и раскладывает повинности под контролем помещика.',
+  'Сход распределяет землю и подати, отвечает круговой порукой, решает, дать ли паспорт.',
+  'Круговая порука. Выйти можно только по ст. 165, внеся весь выкуп.',
+  'Закон 1893 г.: выход и досрочный выкуп только с согласия схода. Надел нельзя продать.',
+  '1903 г.: круговая порука отменена. Земля остаётся общинной.',
+  'Указ 9 ноября 1906 г.: можно выйти с наделом в личную собственность.']],
+ ['Казна','#b7862c','i-coin',[1,2,3,2,2,0],[
+  'Подушная подать, рекрутская повинность.',
+  'Подушная подать; после перехода на выкуп — выкупные платежи.',
+  'Выкупные платежи 6% от ссуды на 49 лет и подушная подать.',
+  'Подушная подать отменена (1882–1887), выкупные платежи остаются.',
+  'Выкупные платежи и недоимки по ним.',
+  'С 1 января 1907 г. выкупные платежи отменены.']],
+ ['Начальство','#4a4a4a','i-gavel',[0,1,1,3,2,2],[
+  'Суд и расправа в руках помещика.',
+  'Волостной суд и старшина; телесные наказания по приговору суда.',
+  'Волостной суд; телесные наказания сохраняются.',
+  '1889 г.: земский начальник из дворян отменяет решения схода и налагает взыскания без суда.',
+  '1904 г.: телесные наказания отменены. Земский начальник остаётся.',
+  'Земский начальник остаётся, но в выборе жительства и службы крестьянин свободен.']]];
+const RIGHTS=[
+ ['Жениться без разрешения помещика',[0,2,2,2,2,2]],
+ ['Владеть имуществом, заключать сделки',[0,2,2,2,2,2]],
+ ['Не подвергаться розге по приговору',[0,0,0,0,2,2]],
+ ['Уйти на заработки в город',[1,1,1,1,1,2]],
+ ['Выйти из общины с землёй',[0,1,1,0,0,2]],
+ ['Продать свой надел',[0,0,0,0,0,1]],
+ ['Не платить за неисправного соседа',[1,0,0,0,2,2]],
+ ['Выбрать занятие и место жительства',[0,1,1,1,1,2]]];
+let per=1,fsel=null;
+function ties(){
+ $('#perSeg').innerHTML=PER.map((p,i)=>`<button data-p="${i}" aria-pressed="${i===per}">${p}<small>${PSUB[i]}</small></button>`).join('');
+ const cx=230,cy=212,R=150,pos=[[cx,cy-R],[cx+R+20,cy],[cx,cy+R],[cx-R-20,cy]];let g='';
+ FORCE.forEach((f,i)=>{const s=f[3][per],[x,y]=pos[i];
+  if(s>0){g+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="${f[1]}" stroke-width="${s*8}" stroke-linecap="round" opacity="${fsel==null||fsel===i?.85:.25}"/>`;
+   for(let k=1;k<=s;k++){const t=.26+k*.08;g+=`<use href="#i-chain" x="${cx+(x-cx)*t-11}" y="${cy+(y-cy)*t-11}" width="22" height="22" color="#f4ead0"/>`}
+   const bx=cx+(x-cx)*.66,by=cy+(y-cy)*.66;g+=`<g class="badge"><circle cx="${bx}" cy="${by}" r="13" fill="#f4ead0" stroke="${f[1]}" stroke-width="3"/><text x="${bx}" y="${by+5}" font-size="15" font-weight="700" text-anchor="middle" fill="#2b2116">${s}</text></g>`}
+  else{g+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 5" opacity=".35"/>`;const bx=cx+(x-cx)*.66,by=cy+(y-cy)*.66;g+=`<g class="badge"><circle cx="${bx}" cy="${by}" r="13" fill="#f4ead0" stroke="#a58c5e" stroke-width="1.5"/><text x="${bx}" y="${by+5}" font-size="15" text-anchor="middle" fill="#a58c5e">0</text></g>`}});
+ g+=`<circle cx="${cx}" cy="${cy}" r="46" fill="#f4ead0" stroke="#2b2116" stroke-width="2"/><use href="#i-man" x="${cx-17}" y="${cy-30}" width="34" height="50" fill="#2b2116"/><text x="${cx}" y="${cy+66}" font-size="15" text-anchor="middle" fill="currentColor" font-style="italic">крестьянин</text>`;
+ FORCE.forEach((f,i)=>{const[x,y]=pos[i];const s=f[3][per];
+  g+=`<g class="nd2" data-f="${i}" tabindex="0" role="button" aria-label="${f[0]}"><circle cx="${x}" cy="${y}" r="38" fill="${s?f[1]:'#f4ead0'}" stroke="#2b2116" stroke-width="${fsel===i?4:1.5}"/><use href="#${f[2]}" x="${x-17}" y="${y-22}" width="34" height="${f[2]==='i-mir'?27:34}" fill="${s?(f[2]==='i-coin'?'#2b2116':'#f4ead0'):'#a58c5e'}" color="${s?'#f4ead0':'#a58c5e'}"/><text x="${x}" y="${y+(i===2?56:i===0?-46:56)}" font-size="16" text-anchor="middle" fill="currentColor" font-weight="700">${f[0]}</text></g>`});
+ const w=$('#web');w.innerHTML=g;w.style.color='var(--ink)';
+ const tot=FORCE.reduce((a,f)=>a+f[3][per],0);
+ $('#tieD').innerHTML=`<div class="sum"><b>${tot} / 12</b><span>общая сила зависимости в период «${PER[per]}» (${PSUB[per]})</span></div>`+FORCE.map((f,i)=>`<div class="td${f[3][per]?'':' zero'}" style="--c:${f[1]}"><div class="h"><b>${f[0]}</b><span class="st">${[1,2,3].map(k=>`<i class="${k<=f[3][per]?'f':''}"></i>`).join('')}</span></div><p>${f[4][per]}</p></div>`).join('');
+ pbar();const M=['n','p','y'],T=['✕','~','✓'];const RI=['i-ring','i-house','i-rod','i-road','i-mir','i-tag','i-chain','i-compass'];
+ $('#rights').innerHTML=`<thead><tr><th>Может ли крестьянин…</th>${PER.map((p,i)=>`<th data-p="${i}" class="${i===per?'on':''}">${p}</th>`).join('')}</tr></thead><tbody>${RIGHTS.map((r,ri)=>`<tr><td><svg class="ri"><use href="#${RI[ri]}"/></svg>${r[0]}</td>${r[1].map((v,i)=>`<td class="${i===per?'on':''}"><i class="mk2 ${M[v]}">${T[v]}</i></td>`).join('')}</tr>`).join('')}</tbody><tfoot><tr><td>Полностью свободен в правах</td>${PER.map((p,i)=>{const n=RIGHTS.filter(r=>r[1][i]===2).length;return `<td class="${i===per?'on':''}"><div class="rb">${RIGHTS.map((_,k)=>`<i class="${k<n?'f':''}"></i>`).join('')}</div>${n} из ${RIGHTS.length}</td>`}).join('')}</tr></tfoot>`}
+function pbar(){const W=Math.max(320,Math.min(1000,Math.round($('#pbar').parentNode.clientWidth||660))),nar=W<560,X0=32,cw=(W-X0-6)/6,u=12,LH=nar?40:24;let g='';
+ for(let k=0;k<=12;k+=3)g+=`<line x1="${X0}" x2="${W-6}" y1="${LH+150-k*u}" y2="${LH+150-k*u}" stroke="currentColor" opacity=".12"/><text x="${X0-6}" y="${LH+154-k*u}" font-size="11" text-anchor="end" fill="currentColor" opacity=".6">${k}</text>`;
+ PER.forEach((p,i)=>{const x=X0+i*cw+cw*.15,w=cw*.7;let y=LH+150;const on=i===per;
+  g+=`<g class="col" data-p="${i}" role="button" tabindex="0" aria-label="${p}"><rect x="${X0+i*cw}" y="${LH}" width="${cw}" height="190" fill="${on?'#b7862c':'transparent'}" opacity=".15"/>`;
+  FORCE.forEach(f=>{const s=f[3][i];if(!s)return;y-=s*u;g+=`<rect x="${x}" y="${y}" width="${w}" height="${s*u}" fill="${f[1]}" stroke="#f4ead0" stroke-width="1.5"/>`});
+  const tot=FORCE.reduce((a,f)=>a+f[3][i],0);
+  g+=`<text x="${x+w/2}" y="${y-6}" font-size="15" font-weight="700" text-anchor="middle" fill="currentColor">${tot}</text><text x="${x+w/2}" y="${LH+168}" font-size="${nar?11:12.5}" text-anchor="middle" fill="currentColor" font-weight="${on?700:400}">${p}</text></g>`});
+ g+=FORCE.map((f,i)=>{const lx=nar?8+(i%2)*150:X0+i*120,ly=nar?6+Math.floor(i/2)*16:6;return `<rect x="${lx}" y="${ly}" width="11" height="11" fill="${f[1]}"/><text x="${lx+15}" y="${ly+10}" font-size="12" fill="currentColor">${f[0]}</text>`}).join('');
+ const s=$('#pbar');s.setAttribute('viewBox',`0 0 ${W} ${LH+178}`);s.innerHTML=g;s.style.color='var(--ink)'}
+$('#perSeg').onclick=e=>{const b=e.target.closest('button');if(b){per=+b.dataset.p;ties()}};
+$('#pbar').addEventListener('click',e=>{const c=e.target.closest('.col');if(c){per=+c.dataset.p;ties()}});
+$('#pbar').addEventListener('keydown',e=>{const c=e.target.closest('.col');if(c&&(e.key==='Enter'||e.key===' ')){e.preventDefault();per=+c.dataset.p;ties()}});
+$('#rights').addEventListener('click',e=>{const t=e.target.closest('th[data-p]');if(t){per=+t.dataset.p;ties()}});
+$('#web').addEventListener('click',e=>{const n=e.target.closest('.nd2');fsel=n&&fsel!==+n.dataset.f?+n.dataset.f:null;ties()});
+$('#web').addEventListener('keydown',e=>{const n=e.target.closest('.nd2');if(n&&(e.key==='Enter'||e.key===' ')){e.preventDefault();n.dispatchEvent(new MouseEvent('click',{bubbles:true}))}});
+
+/* ---------- путь крестьянина ---------- */
+const LN=[['Статус','#a5281b','i-man'],['Земля','#b7862c','i-shr'],['Община','#3d5a80','i-mir']];
+const EV=[
+ {y:1855,t:'до 1861',n:'Крепостное право',v:[5,5,4],d:['Крепостной: суд, наказание, брак и переселение зависят от помещика','Пользуется помещичьей землёй, платит барщиной или оброком','Община распределяет повинности, но её решения утверждает помещик']},
+ {y:1861.15,t:'1861',n:'Манифест 19 февраля',v:[4,4,4],d:['Временнообязанный: лично свободен, но до выкупа несёт барщину или оброк','Надел по уставной грамоте; в черноземье и степи — отрезки в пользу помещика','Сельское общество, сход, староста; круговая порука; выход по ст. 165 — только при уплате всей суммы']},
+ {y:1883,t:'1883',n:'Обязательный выкуп',v:[3,3,4],d:['Временнообязанное состояние прекращено: повинности помещику отменены','Надел — собственность общества; казённая ссуда возвращается 49 лет',null]},
+ {y:1889,t:'1889',n:'Земские начальники',v:[4,3,4],d:['Над крестьянином — земский начальник из дворян: отменяет решения схода, налагает взыскания без суда',null,null]},
+ {y:1893.95,t:'1893',n:'Закон 14 декабря',v:[4,4,5],d:[null,'Надел нельзя продать или заложить лицам других сословий','Выкуп и выдел участка — только с согласия схода; переделы — не чаще раза в 12 лет']},
+ {y:1903.2,t:'1903',n:'Отмена круговой поруки',v:[4,4,4],d:[null,null,'Каждый двор отвечает за свои платежи сам']},
+ {y:1904.6,t:'1904',n:'Отмена телесных наказаний',v:[3,4,4],d:['Отменены телесные наказания по приговорам волостных судов',null,null]},
+ {y:1906.8,t:'1906–07',n:'Указы 1906 г., конец выкупа',v:[2,1,2],d:['Указ 5 октября: место жительства и службу можно выбирать без согласия общества','С 1907 г. выкупные платежи отменены; указ 9 ноября: надел можно укрепить в личную собственность','Указ 9 ноября: домохозяин может выйти из общины с наделом']}];
+let evOn=1;
+function path(){
+ const X=y=>130+(y-1855)*13.9,XE=X(1910),top=96,lh=100,gap=16;let g='';
+ for(let yy=1860;yy<=1900;yy+=10)g+=`<text x="${X(yy)}" y="${top+3*(lh+gap)+14}" font-size="13" text-anchor="middle" fill="currentColor" opacity=".7">${yy}</text><line x1="${X(yy)}" x2="${X(yy)}" y1="${top}" y2="${top+3*(lh+gap)-gap}" stroke="currentColor" opacity=".12"/>`;
+ LN.forEach((l,i)=>{const y0=top+i*(lh+gap),yb=y0+lh;
+  g+=`<rect x="${X(1855)}" y="${y0}" width="${XE-X(1855)}" height="${lh}" fill="currentColor" opacity=".05"/>`;
+  for(let k=1;k<=5;k++)g+=`<line x1="${X(1855)}" x2="${XE}" y1="${yb-k*lh/5}" y2="${yb-k*lh/5}" stroke="currentColor" opacity=".08"/>`;
+  let d=`M${X(1855)} ${yb}`;EV.forEach((e,j)=>{const h=yb-e.v[i]*lh/5;const x=X(e.y);d+=(j?` L${x} ${yb-EV[j-1].v[i]*lh/5}`:'')+` L${x} ${h}`});d+=` L${XE} ${yb-EV[EV.length-1].v[i]*lh/5} L${XE} ${yb} Z`;
+  g+=`<path d="${d}" fill="${l[1]}" opacity=".82"/>`;
+  g+=`<use href="#${l[2]}" x="10" y="${y0+lh/2-40}" width="${l[2]==='i-mir'?30:24}" height="24" fill="${l[1]}" color="${l[1]}"/><text x="10" y="${y0+lh/2+6}" font-size="19" fill="currentColor" font-style="italic">${l[0]}</text><text x="10" y="${y0+lh/2+22}" font-size="11.5" fill="currentColor" opacity=".65">↑ тяжелее</text><text x="10" y="${y0+lh/2+36}" font-size="11.5" fill="currentColor" opacity=".65">↓ свободнее</text>`;
+  g+=`<text x="${X(1855)-6}" y="${y0+8}" font-size="10" text-anchor="end" fill="currentColor" opacity=".6">5</text><text x="${X(1855)-6}" y="${yb}" font-size="10" text-anchor="end" fill="currentColor" opacity=".6">0</text>`});
+ EV.forEach((e,j)=>{const x=X(e.y),on=j===evOn;
+  g+=`<line x1="${x}" x2="${x}" y1="${top-12}" y2="${top+3*(lh+gap)-gap}" stroke="${on?'#a5281b':'currentColor'}" stroke-width="${on?2.5:1}" stroke-dasharray="${on?'':'3 4'}" opacity="${on?1:.45}"/>
+  <g class="evb" data-j="${j}" tabindex="0" role="button" aria-label="${e.t}: ${e.n}"><line x1="${x}" x2="${x}" y1="${top-(j%2?62:24)}" y2="${top-12}" stroke="currentColor" opacity=".5"/><circle cx="${x}" cy="${top-(j%2?62:24)}" r="19" fill="${on?'#a5281b':'#f4ead0'}" stroke="#2b2116" stroke-width="1.5"/><text x="${x}" y="${top-(j%2?62:24)+4}" font-size="${e.t.length>5?9.5:12}" text-anchor="middle" fill="${on?'#f4ead0':'#2b2116'}" font-weight="700">${j?e.t:'до'}</text></g>`});
+ const sv=$('#pchart');sv.innerHTML=g;sv.style.color='var(--ink)';
+ const e=EV[evOn],pv=evOn?EV[evOn-1]:null;
+ $('#ev3').innerHTML=`<div class="evh"><b>${e.t}</b> ${e.n} <span>суммарная зависимость ${e.v.reduce((a,b)=>a+b)} из 15</span></div>`+LN.map((l,i)=>{const ch=pv?e.v[i]-pv.v[i]:0;const arr=ch<0?'▼ легче':ch>0?'▲ жёстче':'без изменений';
+  return `<div class="evc${e.d[i]?'':' same'}" style="--c:${l[1]}"><div class="evt"><span class="evn"><svg class="evi" style="fill:${l[1]};color:${l[1]}"><use href="#${l[2]}"/></svg>${l[0]}</span><span class="mtr">${[1,2,3,4,5].map(k=>`<i class="${k<=e.v[i]?'f':''}"></i>`).join('')}</span></div>${evOn?`<div class="evd ${ch<0?'dn':ch>0?'up':''}">${arr}</div>`:''}<p>${e.d[i]||'Без перемен.'}</p></div>`}).join('');
+}
+$('#pchart').addEventListener('click',ev=>{const b=ev.target.closest('.evb');if(b){evOn=+b.dataset.j;path()}});
+$('#pchart').addEventListener('keydown',ev=>{const b=ev.target.closest('.evb');if(b&&(ev.key==='Enter'||ev.key===' ')){ev.preventDefault();evOn=+b.dataset.j;path();$('#pchart').querySelector(`.evb[data-j="${evOn}"]`).focus()}});
+
+/* ---------- община ---------- */
+const HH=[['Ивановы','#7a3b1f',5,{1861:[5,10,3],1880:[7,15,4],1900:[9,19,5]},'большая семья'],
+ ['Петровы','#b7862c',4,{1861:[4,8,2],1880:[5,11,3],1900:[7,15,4]},''],
+ ['Сидоровы','#4f6b2f',3,{1861:[1,4,1],1880:[2,5,1],1900:[2,6,1]},'вдова с сыном'],
+ ['Кузины','#3d5a80',2,{1861:[2,6,1],1880:[4,9,2],1900:[6,13,3]},'молодая семья'],
+ ['Егоровы','#8c5e8a',3,{1861:[3,5,2],1880:[3,6,2],1900:[5,9,3]},'сын на заработках']];
+const LAND=72,PAY=153,YLD={1861:34,1880:34,1900:39};
+const MODES={rev:['по ревизским душам','ревизские души','i-book','мужчины по переписи 1858 г. Так нарезал наделы закон 1861 г.'],
+ m:['по наличным душам','мужские души','i-man','мужчины, которые живут в дворе сейчас'],
+ e:['по едокам','едоки','i-fam','все рты: мужчины, женщины, дети, старики'],
+ w:['по работникам','работники','i-sickle','только взрослые работники-мужчины']};
+let yr=1861,md='rev',hsel=null;
+function units(h,y=yr,m=md){return m==='rev'?h[2]:h[3][y][m==='m'?0:m==='e'?1:2]}
+const eaters=y=>HH.reduce((a,h)=>a+h[3][y][1],0);
+function mir(){
+ /* шаг 1: годы */
+ const maxE=eaters(1900);
+ $('#yrSeg').innerHTML=[1861,1880,1900].map(y=>{const SE=eaters(y),pe=LAND/SE,side=Math.sqrt(pe/2.18)*56,grain=LAND*2/3*YLD[y]/SE;
+  let dots='';for(let i=0;i<SE;i++)dots+=`<i></i>`;
+  return `<button class="yc" data-y="${y}" aria-pressed="${y===yr}"><span class="yy">${y}</span>
+   <span class="ydots" title="${SE} едоков">${dots}</span><span class="yl">${SE} едоков на 72 десятины</span>
+   <span class="ysq"><svg viewBox="0 0 60 60" width="60" height="60"><rect x="${60-56}" y="${60-56}" width="56" height="56" fill="none" stroke="currentColor" stroke-dasharray="3 3" opacity=".45"/><rect x="${60-side}" y="${60-side}" width="${side}" height="${side}" fill="${pe<1.5?'#a5281b':pe<2?'#b7862c':'#4f6b2f'}" stroke="#2b2116"/></svg><b>${fmt(pe,2)}</b><small>дес. пашни<br>на едока</small></span>
+   <span class="yg">≈ ${fmt(grain,0)} пудов зерна на едока в год</span></button>`}).join('');
+ /* шаг 2: способ */
+ $('#modeSeg').innerHTML=Object.entries(MODES).map(([k,v])=>`<button class="mc" data-m="${k}" aria-pressed="${k===md}"><svg class="mci"><use href="#${v[2]}"/></svg><b>${v[0]}</b><small>${v[3]}</small></button>`).join('');
+ /* расчёт */
+ const U=HH.map(h=>units(h)),SU=U.reduce((a,b)=>a+b,0),sh=U.map(u=>u/SU*LAND);
+ const eat=HH.map(h=>h[3][yr][1]),SE=eaters(yr),avg=LAND/SE;
+ /* шаг 3: общий надел */
+ $('#landbar').innerHTML=`<div class="lbt"><b>Надел общества — 72 десятины</b><span>делится ${MODES[md][0]}: всего ${SU} ${md==='rev'?'ревизских душ':md==='m'?'мужских душ':md==='e'?'едоков':'работников'}, по ${fmt(LAND/SU,2)} дес. на каждую</span></div><div class="lbs">${HH.map((h,k)=>`<span data-k="${k}" class="${hsel===k?'on':''}" style="width:${sh[k]/LAND*100}%;background:${h[1]}" title="${h[0]}: ${fmt(sh[k],1)} дес."><em>${sh[k]/LAND>0.12?h[0]:''}</em><b>${fmt(sh[k],1)}</b></span>`).join('')}</div>`;
+ const pmax=Math.max(...HH.map((h,k)=>sh[k]/eat[k]),avg)*1.05;
+ $('#pk').innerHTML=`<div class="pr phd"><span>Двор</span><span>Люди в дворе</span><span>Пашня двора</span><span>На одного едока</span><span>Платит в год</span></div>`+HH.map((h,k)=>{const[m,e,w]=h[3][yr];const ghost=md==='rev'?Math.max(0,h[2]-m):0;
+  let ic='';for(let i=0;i<e;i++)ic+=`<svg class="ic${i<w?'':' lt'}"><use href="#i-man"/></svg>`;for(let i=0;i<ghost;i++)ic+=`<svg class="ic gh"><use href="#i-man"/></svg>`;
+  const pe=sh[k]/e,rel=pe/avg,cls=rel<0.9?'low':rel>1.1?'hi':'';
+  const S=46,s=Math.sqrt(pe/pmax)*S,sa=Math.sqrt(avg/pmax)*S;
+  const pay=PAY*U[k]/SU;let coins='';for(let i=0;i<Math.round(pay/10);i++)coins+=`<svg class="cn"><use href="#i-coin"/></svg>`;
+  const tag=cls==='low'?`▼ на ${fmt((1-rel)*100,0)}% меньше среднего`:cls==='hi'?`▲ на ${fmt((rel-1)*100,0)}% больше среднего`:'≈ как в среднем';
+  return `<div class="pr${hsel===k?' sel':''}" data-k="${k}" tabindex="0" role="button" aria-label="${h[0]}: показать полосы на поле"><div class="pn"><i style="background:${h[1]}"></i><b>${h[0]}</b><span>${h[4]}</span></div>
+   <div class="pp">${ic}<em>${e} чел.</em></div>
+   <div class="pl"><span class="lb2" style="width:${sh[k]/LAND*100/0.4}%;max-width:100%;background:${h[1]}">${fmt(sh[k],1)} дес.</span></div>
+   <div class="pv ${cls}"><svg class="psq" viewBox="0 0 ${S} ${S}" width="${S}" height="${S}"><rect x="${S-sa}" y="${S-sa}" width="${sa}" height="${sa}" fill="none" stroke="currentColor" stroke-dasharray="3 2" opacity=".6"/><rect x="${S-s}" y="${S-s}" width="${s}" height="${s}" fill="${h[1]}" stroke="#2b2116"/></svg><span class="pvt"><b>${fmt(pe,2)}</b><span>дес. на одного едока</span><em>${tag}</em></span></div>
+   <div class="pm">${fmt(pay,0)} р.<span class="pmy">в год</span><span class="cns">${coins}</span></div></div>`}).join('');
+ /* итог */
+ const rel=HH.map((h,k)=>[h[0],sh[k]/eat[k]/avg]);
+ const win=rel.filter(x=>x[1]>1.1).sort((a,b)=>b[1]-a[1]),lose=rel.filter(x=>x[1]<0.9).sort((a,b)=>a[1]-b[1]);
+ const notes={rev:'Закон 1861 г. отвёл надел по ревизским душам — мужчинам, записанным в 1858 г. Платежи идут вслед за землёй. Двор, где мужчин стало меньше, платит за «мёртвые души», а растущие семьи живут на старой норме.',
+  m:'Делят по мужчинам, которые живут в дворе сейчас. Двор, где много женщин и детей, получает мало земли на каждый рот.',
+  e:'Делят по едокам — самый уравнительный способ: земли на каждый рот поровну. Но крепкие дворы теряют землю, которую удобряли, поэтому сопротивлялись таким переделам.',
+  w:'Делят по работникам: землю получает тот, кто может её обработать и заплатить подати. Выгодно сильным дворам и казне, тяжело многодетным.'};
+ $('#mirNote').innerHTML=`<div class="vh"><svg class="mci"><use href="#${MODES[md][2]}"/></svg><b>${yr} г., делят ${MODES[md][0]}</b></div>
+  <div class="vg"><div class="vw"><span>Выигрывают</span>${win.length?win.map(x=>`<b>${x[0]}</b> +${fmt((x[1]-1)*100,0)}%`).join('<br>'):'никто заметно'}</div><div class="vl"><span>Проигрывают</span>${lose.length?lose.map(x=>`<b>${x[0]}</b> −${fmt((1-x[1])*100,0)}%`).join('<br>'):'никто заметно'}</div></div>
+  <p>${notes[md]}</p><p class="vp"><svg class="tic"><use href="#i-chain"/></svg>Круговая порука: если один двор не заплатит свои ${fmt(PAY/HH.length,0)} руб., его долг раскладывают на соседей.${yr===1900?' По закону 1893 г. общий передел — не чаще раза в 12 лет.':''}</p>`;
+ /* поле */
+ const F=['Озимь','Яровое','Пар'],Q=['лучшая','средняя','худшая'];let g='';const X0=80,W=550,H=56,G=14;
+ F.forEach((f,i)=>{const y=24+i*(H+G);g+=`<text x="8" y="${y+H/2+5}" font-size="16" fill="currentColor" font-style="italic">${f}</text>`;
+  Q.forEach((q,j)=>{const qx=X0+j*(W/3)+2,qw=W/3-4;let x=qx;const ord=HH.map((_,k)=>k);const r=rng(i*7+j*3+yr);for(let a=ord.length-1;a>0;a--){const b=Math.floor(r()*(a+1));[ord[a],ord[b]]=[ord[b],ord[a]]}
+   for(const k of ord){const w=qw*U[k]/SU;if(w<=0)continue;const on=hsel===k,dim=hsel!=null&&!on;
+    g+=`<rect class="strip" data-k="${k}" x="${x}" y="${y}" width="${w}" height="${H}" fill="${HH[k][1]}" opacity="${dim?.15:i===2?.45:.88}" stroke="${on?'#2b2116':'#f1e6ca'}" stroke-width="${on?2.5:1.2}"/>`;x+=w}
+   if(i===0)g+=`<text x="${qx+qw/2}" y="${y-7}" font-size="12" text-anchor="middle" fill="currentColor" opacity=".75">${q} земля</text>`})});
+ $('#field').setAttribute('viewBox',`0 0 640 ${24+3*(H+G)}`);$('#field').innerHTML=g;$('#field').style.color='var(--ink)';
+ $('#fnote').innerHTML=hsel==null?'<p class="src">Ни один двор не выбран.</p>':`<p class="fn2"><i style="background:${HH[hsel][1]}"></i><b>${HH[hsel][0]}</b>: ${fmt(sh[hsel],1)} дес. разбиты на 9 узких полос в разных концах поля — в среднем по ${fmt(sh[hsel]/9,1)} дес. Чтобы обработать их, нужно ходить с плугом с одного конца надела на другой, а сеять приходится то же, что и соседи.</p>`}
+function pickHH(k){hsel=hsel===k?null:k;mir()}
+$('#yrSeg').onclick=e=>{const b=e.target.closest('button');if(b){yr=+b.dataset.y;mir()}};
+$('#modeSeg').onclick=e=>{const b=e.target.closest('button');if(b){md=b.dataset.m;mir()}};
+$('#pk').addEventListener('click',e=>{const r=e.target.closest('.pr[data-k]');if(r)pickHH(+r.dataset.k)});
+$('#pk').addEventListener('keydown',e=>{const r=e.target.closest('.pr[data-k]');if(r&&(e.key==='Enter'||e.key===' ')){e.preventDefault();pickHH(+r.dataset.k)}});
+$('#landbar').addEventListener('click',e=>{const s=e.target.closest('[data-k]');if(s)pickHH(+s.dataset.k)});
+$('#field').addEventListener('click',e=>{const s=e.target.closest('.strip');if(s)pickHH(+s.dataset.k)});
+
+/* ---------- причины ---------- */
+/* узел: [id, класс, значок, название, пояснение, ведёт к, x, y] */
+const CZ=[
+ ['Решения власти и демография',[
+  ['g3','gov','i-chain','Закрепление в общине','Круговая порука, паспорт с согласия схода; с 1893 г. надел нельзя продать, а выйти из общины можно только с согласия схода.',['p4'],120,53],
+  ['g1','gov','i-scis','Отрезки 1861 г.','Помещик оставил себе часть надела, нередко луга, выгоны и водопои. Без них хозяйство не обходилось, их приходилось арендовать.',['p2'],340,53],
+  ['p1','','i-fam','Рост населения','Рождаемость высокая, смертность понемногу снижается: с 1861 по 1900 г. сельское население выросло примерно в полтора раза.',['p2'],560,53],
+  ['g2','gov','i-coin','Выкуп на 49 лет','Выкупная оценка выше рыночной цены земли; ежегодные платежи съедают доход двора.',['p3'],790,53]]],
+ ['Процессы в деревне',[
+  ['p4','','i-man','Лишние руки','Уйти из деревни насовсем трудно, и работников в хозяйстве больше, чем нужно.',['r'],120,173],
+  ['p2','','i-shr','Малоземелье','Людей больше, а надел тот же: душевой надел в центре упал с 4,8 до 2,6 десятины за 40 лет.',['p5','r'],450,173],
+  ['p3','','i-empty','Нет денег на хозяйство','Средства уходят на платежи; на скот, инвентарь и удобрения их не остаётся.',['p6'],790,173],
+  ['p5','','i-strip','Переделы и чересполосица','Община переделяет землю по едокам: надел дробится на узкие полосы в разных концах поля. Удобрять полосу, которая при следующем переделе уйдёт соседу, невыгодно.',['p6'],290,293],
+  ['p6','','i-wheat','Трёхполье и бедная почва','Все сеют одно и то же в одно время, треть земли под паром, почва истощается, урожай низкий.',['r'],640,293]]],
+ ['Итог',[
+  ['r','res','i-mir','Аграрное перенаселение','Земли мало, урожай низкий (34–43 пуда с десятины против 42–54 у помещиков), рабочих рук больше, чем нужно хозяйству.',['c1','c2','c3','c4'],450,410]]],
+ ['Последствия',[
+  ['c1','con','i-hand','Аренда и отработки','Крестьяне арендуют отрезки и помещичью пашню, часто расплачиваясь работой.',[],120,530],
+  ['c2','con','i-road','Отход и переселение','Заработки в городах, переселение в Сибирь.',[],340,530],
+  ['c3','con','i-coin','Недоимки и голод','Рост недоимок по платежам, голод 1891–1892 гг.',[],560,530],
+  ['c4','con','i-fire','Волнения','Восстание 1902 г. в Полтавской и Харьковской губерниях, выступления 1905–1907 гг.',[],790,530]]]];
+const CN={};CZ.forEach(t=>t[1].forEach(n=>CN[n[0]]=n));
+const NW=170,NH=48,RW=300,RH=56;
+const box=n=>{const w=n[0]==='r'?RW:NW,h=n[0]==='r'?RH:NH;return{x:n[6]-w/2,y:n[7]-h/2,w,h,cx:n[6],cy:n[7]}};
+function edgePath(a,b){const A=box(CN[a]),B=box(CN[b]);
+ if(Math.abs(A.cy-B.cy)<5){const l=A.cx<B.cx;return `M${l?A.x+A.w:A.x} ${A.cy} L${l?B.x-4:B.x+B.w+4} ${B.cy}`}
+ if(a==='p4'&&b==='r')return `M${A.cx} ${A.y+A.h} C${A.cx} ${B.cy} ${A.cx+60} ${B.cy} ${B.x-4} ${B.cy}`;
+ const sx=A.cx+(B.cx-A.cx)*0.12,ex=B.cx+(A.cx-B.cx)*(b==='r'?0.12:0.25);
+ return `M${sx} ${A.y+A.h} C${sx} ${(A.y+A.h+B.y)/2} ${ex} ${(A.y+A.h+B.y)/2} ${ex} ${B.y-4}`}
+let czSel=null;
+function cz(){
+ const E=[];CZ.forEach(t=>t[1].forEach(n=>n[5].forEach(b=>E.push([n[0],b]))));
+ let g=`<defs><marker id="czar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>`;
+ g+=[['Решения власти и рост населения',20],['Процессы в деревне',143],['Итог',378],['Последствия',500]].map(([t,y])=>`<text x="8" y="${y}" font-size="12" font-style="italic" fill="currentColor" opacity=".6">${t}</text>`).join('');
+ const on=czSel?new Set([czSel,...CN[czSel][5],...E.filter(e=>e[1]===czSel).map(e=>e[0])]):null;
+ E.forEach(([a,b])=>{const hi=on&&(a===czSel||b===czSel);g+=`<path d="${edgePath(a,b)}" fill="none" stroke="${hi?'#a5281b':'#5b4a33'}" stroke-width="${hi?3.2:1.6}" opacity="${on&&!hi?.15:.9}" marker-end="url(#czar)"/>`});
+ CZ.forEach(t=>t[1].forEach(n=>{const B=box(n),cls=n[1],dim=on&&!on.has(n[0]),sel=czSel===n[0];
+  const fill=cls==='res'?'#2b2116':cls==='con'?'#efe0bd':'#f4ead0',ink=cls==='res'?'#f4ead0':'#2b2116',stroke=sel?'#b7862c':cls==='gov'?'#a5281b':'#2b2116';
+  const words=n[3].split(' ');let l1=n[3],l2='';if(n[3].length>16&&words.length>1){let k=1;while(k<words.length&&words.slice(0,k+1).join(' ').length<=15)k++;l1=words.slice(0,k).join(' ');l2=words.slice(k).join(' ')}
+  const tx=B.x+(n[0]==='r'?62:42),fs=n[0]==='r'?19:14;
+  g+=`<g class="czn" data-id="${n[0]}" tabindex="0" role="button" aria-label="${n[3]}" opacity="${dim?.3:1}" style="cursor:pointer">
+   <rect x="${B.x}" y="${B.y}" width="${B.w}" height="${B.h}" rx="3" fill="${fill}" stroke="${stroke}" stroke-width="${sel?4:cls==='gov'?2.4:1.3}"/>
+   <use href="#${n[2]}" x="${B.x+8}" y="${B.cy-(n[0]==='r'?18:13)}" width="${n[0]==='r'?44:28}" height="${n[0]==='r'?36:26}" fill="${cls==='gov'?'#a5281b':cls==='res'?'#e9b19f':'#2b2116'}" color="${cls==='gov'?'#a5281b':'#2b2116'}"/>
+   ${l2?`<text x="${tx}" y="${B.cy-3}" font-size="${fs}" font-weight="700" fill="${ink}">${l1}</text><text x="${tx}" y="${B.cy+14}" font-size="${fs}" font-weight="700" fill="${ink}">${l2}</text>`:`<text x="${tx}" y="${B.cy+5}" font-size="${fs}" font-weight="700" fill="${ink}">${l1}</text>`}</g>`}));
+ const s=$('#cause');s.innerHTML=g;s.style.color='var(--ink)';
+ if(!czSel){$('#czd').innerHTML='<p class="src">Нажмите на любое звено схемы: появится пояснение, его причины и последствия.</p>';return}
+ const n=CN[czSel],from=E.filter(e=>e[1]===czSel).map(e=>CN[e[0]][3]),to=n[5].map(x=>CN[x][3]);
+ $('#czd').innerHTML=`<div class="czc"><svg class="ni" color="#a5281b"><use href="#${n[2]}"/></svg><div><b>${n[3]}</b><p>${n[4]}</p>${from.length?`<p class="cl"><span>Причины:</span></p><ul class="czl">${from.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}${to.length?`<p class="cl"><span>Ведёт к:</span></p><ul class="czl">${to.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}</div></div>`}
+function czHi(id){czSel=czSel===id?null:id;cz()}
+$('#cause').addEventListener('click',e=>{const n=e.target.closest('.czn');if(n)czHi(n.dataset.id)});
+$('#cause').addEventListener('keydown',e=>{const n=e.target.closest('.czn');if(n&&(e.key==='Enter'||e.key===' ')){e.preventDefault();czHi(n.dataset.id);const k=$('#cause').querySelector(`.czn[data-id="${n.dataset.id}"]`);k&&k.focus()}});
+
+/* малые графики */
+(function(){
+ $('#nad').innerHTML=(()=>{let h='';const cell=(x,y,f)=>`<rect x="${x}" y="${y}" width="11" height="11" fill="${f}" stroke="#2b2116" stroke-width=".6"/>`;
+  for(let i=0;i<48;i++)h+=cell(8+(i%8)*13,30+Math.floor(i/8)*13,'#4f6b2f');for(let i=0;i<26;i++)h+=cell(168+(i%8)*13,30+Math.floor(i/8)*13,'#4f6b2f');for(let i=26;i<48;i++)h+=cell(168+(i%8)*13,30+Math.floor(i/8)*13,'none');
+  return h+`<text x="60" y="20" font-size="15" text-anchor="middle" fill="currentColor" font-weight="700">4,8 дес.</text><text x="220" y="20" font-size="15" text-anchor="middle" fill="#a5281b" font-weight="700">2,6 дес.</text><text x="60" y="130" font-size="12" text-anchor="middle" fill="currentColor">после реформы</text><text x="220" y="130" font-size="12" text-anchor="middle" fill="currentColor">через 40 лет</text><text x="150" y="152" font-size="11" text-anchor="middle" fill="currentColor" opacity=".7">клетка = 0,1 десятины</text>`})();
+ const Y=[['1881–1890',34,42],['1891–1900',39,47],['1901–1910',43,54]];let h='';const sc=v=>v*1.7;
+ Y.forEach((y,i)=>{const x=30+i*92;h+=`<rect x="${x}" y="${125-sc(y[1])}" width="30" height="${sc(y[1])}" fill="#a5281b" stroke="#2b2116"/><rect x="${x+32}" y="${125-sc(y[2])}" width="30" height="${sc(y[2])}" fill="#b7862c" stroke="#2b2116"/><text x="${x+15}" y="${120-sc(y[1])}" font-size="12" text-anchor="middle" fill="currentColor">${y[1]}</text><text x="${x+47}" y="${120-sc(y[2])}" font-size="12" text-anchor="middle" fill="currentColor">${y[2]}</text><text x="${x+31}" y="142" font-size="12" text-anchor="middle" fill="currentColor">${y[0]}</text>`});
+ h+=`<rect x="30" y="2" width="10" height="10" fill="#a5281b"/><text x="44" y="11" font-size="11.5" fill="currentColor">крестьяне</text><rect x="130" y="2" width="10" height="10" fill="#b7862c"/><text x="144" y="11" font-size="11.5" fill="currentColor">помещики</text>`;
+ $('#yield').innerHTML=h;
+ let s='';for(let i=0;i<100;i++){const x=10+(i%20)*14,y=12+Math.floor(i/20)*22;s+=`<use href="#i-man" x="${x}" y="${y}" width="12" height="18" fill="${i<76?'#a5281b':'#3f6b2a'}"/>`}
+ s+=`<text x="10" y="135" font-size="13" fill="#a5281b" font-weight="700">76% — общинное владение</text><text x="10" y="153" font-size="13" fill="#3f6b2a" font-weight="700">24% — подворное</text>`;
+ $('#share').innerHTML=s;['#nad','#yield','#share'].forEach(q=>$(q).style.color='var(--ink)')})();
+
+
+
+/* навигация */
+const secs=['s-ties','s-path','s-mir','s-task'];
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){$('#nav').querySelectorAll('a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}})},{rootMargin:'-45% 0px -50% 0px'});
+secs.forEach(s=>io.observe(document.getElementById(s)));
+
+/* ---------- задания ---------- */
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+let who=null,V=null;
+function pick(r,arr,n){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a.slice(0,n)}
+const LANE3=['Статус','Земля','Община','несколько лент'],DIR=['жёстче','легче','по-разному'];
+function evAns(j){const a=EV[j].v,b=EV[j-1].v;const ch=[0,1,2].filter(i=>a[i]!==b[i]);
+ const lane=ch.length===1?ch[0]:3;const s=ch.map(i=>Math.sign(a[i]-b[i]));const dir=s.every(x=>x>0)?0:s.every(x=>x<0)?1:2;return[lane,dir]}
+function mirCalc(y,m,k){const u=h=>m==='rev'?h[2]:h[3][y][m==='m'?0:m==='e'?1:2];const U=HH.map(u),SU=U.reduce((a,b)=>a+b,0);const land=U[k]/SU*LAND;return[land,land/HH[k][3][y][1],PAY*U[k]/SU]}
+const RTXT=['да','с условиями или с разрешения','нет'],RVAL=[2,1,0];
+function mkVar(){const r=rng(hash(who.fio.toLowerCase()+'|'+who.grp.toLowerCase()));
+ const pp=pick(r,[0,1,2,3,4,5],2).sort((a,b)=>a-b);
+ const cells=[];RIGHTS.forEach((x,i)=>PER.forEach((_,p)=>cells.push([i,p])));
+ const rr=pick(r,cells,6);
+ const ee=pick(r,[1,2,3,4,5,6,7],5).sort((a,b)=>a-b);
+ const y=r()<.5?1880:1900,m=['e','w','m'][Math.floor(r()*3)],k=Math.floor(r()*HH.length);
+ const opt5=pick(r,Object.keys(CN).filter(x=>x!=='r'),Object.keys(CN).length-1);
+ V={pp,rr,ee,y,m,k,opt5,ans4:mirCalc(y,m,k)}}
+function sel(id,opts){return `<select id="${id}" class="sl"><option value="">—</option>${opts.map((o,i)=>`<option value="${i}">${o}</option>`).join('')}</select>`}
+function startWork(){
+ mkVar();
+ $('#start').hidden=true;$('#work').hidden=false;$('#whoName').textContent=`${who.fio}, ${who.grp}`;$('#whoVar').textContent=`Вариант ${hash(who.fio+who.grp)%900+100}`;
+ $('#t1').innerHTML=`<div class="g1"><span></span>${V.pp.map(p=>`<b>${PER[p]}<small>${PSUB[p]}</small></b>`).join('')}${FORCE.map((f,i)=>`<span class="fn"><svg class="tic" style="fill:${f[1]};color:${f[1]}"><use href="#${f[2]}"/></svg>${f[0]}</span>${V.pp.map((p,j)=>sel(`a1_${i}_${j}`,['0','1','2','3'])).join('')}`).join('')}</div>`;
+ $('#t2').innerHTML=V.rr.map(([i,p],n)=>`<div class="q"><p><span class="n">${n+1}.</span><svg class="tic"><use href="#${['i-ring','i-house','i-rod','i-road','i-mir','i-tag','i-chain','i-compass'][i]}"/></svg>${PER[p]} (${PSUB[p]}): <b>${RIGHTS[i][0].toLowerCase()}</b></p><div class="seg3">${RTXT.map((t,o)=>`<label class="opt"><input type="radio" name="a2_${n}" value="${RVAL[o]}"><span>${t}</span></label>`).join('')}</div></div>`).join('');
+ $('#t3').innerHTML=`<div class="lkey">${LN.map(l=>`<span><svg class="tic" style="fill:${l[1]};color:${l[1]}"><use href="#${l[2]}"/></svg>${l[0]}</span>`).join('')}<span>▲ жёстче</span><span>▼ легче</span></div>`+V.ee.map((j,n)=>`<div class="q q3"><p><span class="n">${n+1}.</span><b>${EV[j].t}</b> — ${EV[j].n}</p><div class="two"><label>Что изменилось ${sel(`a3l_${n}`,LANE3)}</label><label>Зависимость стала ${sel(`a3d_${n}`,DIR)}</label></div></div>`).join('');
+ $('#t4v').innerHTML=`Год <b>${V.y}</b>, делить землю <b>${MODES[V.m][0]}</b>, двор <b>${HH[V.k][0]}</b>.`;
+ $('#t4').innerHTML=['Сколько десятин пашни получает двор','Сколько десятин приходится на одного едока','Сколько рублей платежей вносит двор'].map((t,i)=>`<label for="a4_${i}">${i+1}) ${t}</label><input id="a4_${i}" inputmode="decimal" autocomplete="off">`).join('');
+ $('#t5').innerHTML=`<div class="chk">${V.opt5.map(id=>`<label class="opt"><input type="checkbox" id="a5_${id}" value="${id}"><svg class="ni"><use href="#${CN[id][2]}"/></svg><span>${CN[id][3]}</span></label>`).join('')}</div>`;
+ restore()}
+function save(){const s={};document.querySelectorAll('#work input,#work textarea,#work select').forEach(e=>{if(e.type==='radio'){if(e.checked)s[e.name]=e.value}else if(e.type==='checkbox')s[e.id]=e.checked?'1':'';else s[e.id]=e.value});store.set('v61c-'+hash(who.fio+who.grp),JSON.stringify(s))}
+function restore(){let s;try{s=JSON.parse(store.get('v61c-'+hash(who.fio+who.grp))||'{}')}catch(e){s={}}
+ for(const[k,v]of Object.entries(s)){const r=document.querySelector(`#work input[type=radio][name="${k}"][value="${v}"]`);if(r){r.checked=true;continue}const e=document.getElementById(k);if(!e)continue;if(e.type==='checkbox')e.checked=v==='1';else e.value=v}cnt()}
+function cnt(){const n=($('#concl').value.trim().match(/\S+/g)||[]).length;$('#cnt').textContent=n+' слов'}
+$('#work').addEventListener('input',e=>{save();if(e.target.id==='concl')cnt()});
+$('#work').addEventListener('change',save);
+$('#go').onclick=()=>{const fio=$('#fio').value.trim().replace(/\s+/g,' '),grp=$('#grp').value.trim().toUpperCase().replace(/\s+/g,'');
+ if(fio.split(' ').length<2){$('#gowarn').textContent='Введите фамилию и имя полностью.';return}
+ if(grp.length<2){$('#gowarn').textContent='Введите группу.';return}
+ who={fio,grp};store.set('v61-who',JSON.stringify(who));startWork()};
+function lockSent(html){$('#result').hidden=false;$('#result').innerHTML=html;const b=$('#send');b.disabled=true;b.textContent='Отправлено';document.querySelectorAll('#work input,#work textarea,#work select').forEach(e=>e.disabled=true)}
+try{const w=JSON.parse(store.get('v61-who')||'null');if(w&&w.fio&&w.grp){$('#fio').value=w.fio;$('#grp').value=w.grp;who=w;startWork();const sent=store.get('v61c-sent-'+hash(w.fio+w.grp));if(sent)lockSent(sent)}}catch(e){}
+$('#reset').onclick=()=>{store.set('v61-who','');location.reload()};
+const num=s=>parseFloat(String(s).replace(/\s/g,'').replace(',','.'));
+function grade(){
+ const miss=[],wrong=[],det=[];const sc=[0,0,0,0,0];
+ FORCE.forEach((f,i)=>V.pp.forEach((p,j)=>{const v=$(`#a1_${i}_${j}`).value;if(v==='')miss.push('1');else if(+v===f[3][p])sc[0]++;else wrong.push(`1:${f[0]} ${PER[p]}`)}));
+ det.push('З1: '+V.pp.map((p,j)=>PER[p]+' — '+FORCE.map((f,i)=>f[0]+' '+($(`#a1_${i}_${j}`).value||'?')).join(', ')).join('; '));
+ V.rr.forEach(([i,p],n)=>{const r=document.querySelector(`input[name="a2_${n}"]:checked`);if(!r)miss.push('2');else if(+r.value===RIGHTS[i][1][p])sc[1]++;else wrong.push(`2.${n+1}`)});
+ V.ee.forEach((j,n)=>{const l=$(`#a3l_${n}`).value,d=$(`#a3d_${n}`).value;if(l===''||d==='')miss.push('3');const[al,ad]=evAns(j);if(+l===al&&+d===ad&&l!==''&&d!=='')sc[2]++;else wrong.push(`3.${n+1}`)});
+ const tol=[0.06,0.006,0.6];const a4=[0,1,2].map(i=>$(`#a4_${i}`).value.trim());
+ a4.forEach((v,i)=>{const x=num(v);if(isNaN(x))miss.push('4');else if(Math.abs(x-V.ans4[i])<=tol[i]+1e-9)sc[3]++;else wrong.push(`4.${i+1}`)});
+ det.push('З4 ('+V.y+', '+MODES[V.m][0]+', '+HH[V.k][0]+'; верно '+V.ans4.map((v,i)=>fmt(v,[1,2,0][i])).join('/')+'): '+a4.join('/'));
+ const ch=V.opt5.filter(id=>$('#a5_'+id).checked),good=CN.r?CZ.flatMap(t=>t[1]).filter(n=>n[5].includes('r')).map(n=>n[0]):[];
+ if(!ch.length)miss.push('5');sc[4]=Math.max(0,ch.filter(x=>good.includes(x)).length-ch.filter(x=>!good.includes(x)).length);if(sc[4]<3)wrong.push('5');
+ det.push('З5: '+ch.map(x=>CN[x][3]).join(', '));
+ return{miss:[...new Set(miss)],wrong,sc,det}}
+$('#send').onclick=async()=>{
+ const g=grade();const concl=$('#concl').value.trim();
+ if(concl.split(/\s+/).length<25)g.miss.push('6 (не меньше 25 слов)');
+ if(g.miss.length){$('#sendwarn').textContent='Не заполнены задания: '+g.miss.join(', ');return}
+ $('#sendwarn').textContent='';const tot=g.sc.reduce((a,b)=>a+b,0);
+ const data={fio:who.fio,grp:who.grp,variant:$('#whoVar').textContent,total:tot,s1:g.sc[0],s2:g.sc[1],s3:g.sc[2],s4:g.sc[3],s5:g.sc[4],concl,wrong:g.wrong.join('; '),detail:g.det.join(' | ')};
+ const b=$('#send');b.disabled=true;b.textContent='Отправляю…';let ok=false;
+ if(SCRIPT_URL&&!SCRIPT_URL.startsWith('__')){try{await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)});ok=true}catch(e){ok=false}}
+ $('#result').hidden=false;
+ $('#result').innerHTML=`<div class="res"><h3>${ok?'Работа отправлена':'Не удалось отправить'}</h3><p><b>${who.fio}</b>, ${who.grp}. Автоматически проверено: <b>${tot} из 25</b>.</p><div class="scg">${['Сила зависимости',8,'Можно или нельзя',6,'Что изменил закон',5,'Раздел земли',3,'Цепочка причин',3].reduce((a,x,i,arr)=>i%2?a:a+`<div><span>${x}</span><b>${g.sc[i/2]} / ${arr[i+1]}</b></div>`,'')}</div><p>Вывод оценит преподаватель.</p><p>Код проверки: <b>${hash(who.fio+who.grp+tot)%9000+1000}</b>. ${ok?'':'Покажите этот экран преподавателю или нажмите «Отправить» ещё раз.'}</p></div>`;
+ if(ok){store.set('v61c-sent-'+hash(who.fio+who.grp),$('#result').innerHTML);lockSent($('#result').innerHTML)}else{b.disabled=false;b.textContent='Отправить ещё раз'}};
+
+ties();path();mir();cz();
+let rzT;window.addEventListener('resize',()=>{clearTimeout(rzT);rzT=setTimeout(pbar,150)});
+</script>
+</body></html>
