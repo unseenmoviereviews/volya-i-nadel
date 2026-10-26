@@ -63,6 +63,17 @@ h3.sub2{font-weight:400;font-style:italic;font-size:25px;margin:28px 0 4px}
 .sum{background:var(--ink);color:var(--paper);padding:10px 14px;display:flex;align-items:center;gap:14px}
 .sum b{white-space:nowrap;font-family:var(--hand);font-weight:400;font-size:40px;line-height:1;color:#e9b19f}
 .sum span{font-size:14.5px;line-height:1.35}
+.pbar-w{margin:10px 0 4px;background:var(--paper);border:1px solid var(--rule)}
+.pbar{display:block;width:100%;height:auto}.pbar text{font-family:var(--serif)}.pbar .col{cursor:pointer}
+.rights td .ri{width:22px;height:22px;vertical-align:-6px;margin-right:8px;color:var(--ink);fill:var(--ink)}
+.rights tfoot td{background:var(--paper2);font-size:13px;padding:6px 4px}
+.rights tfoot .rb{display:flex;gap:2px;justify-content:center;margin-bottom:2px}.rights tfoot .rb i{width:6px;height:12px;border:1px solid var(--ink)}.rights tfoot .rb i.f{background:#3f6b2a}
+.web .badge text{font-family:var(--serif)}
+.evn{display:flex;align-items:center;gap:6px}.evi{width:20px;height:20px}
+.tic{width:20px;height:20px;vertical-align:-4px;margin-right:6px;fill:var(--ink);color:var(--ink);flex:0 0 auto}
+.lkey{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:14px;color:var(--ink2);margin:0 0 6px;align-items:center}.lkey span{display:flex;align-items:center}
+.wbtn{background:none;border:1px solid var(--paper2);color:var(--paper);padding:2px 8px;font-size:13px;cursor:pointer}
+.hint.saved{background:var(--medal);color:#2b2116;border-left:4px solid #3f6b2a;padding:6px 10px;font-size:14px}
 /* права */
 .rscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--ink);margin-top:10px}
 table.rights{border-collapse:collapse;min-width:680px;width:100%;background:var(--paper);font-size:14.5px}
@@ -193,6 +204,10 @@ footer{border-top:1px solid var(--rule);margin-top:20px;padding:14px 0 40px;font
  <symbol id="i-road" viewBox="0 0 24 24"><path d="M6 23L10 1M18 23L14 1" stroke="currentColor" stroke-width="2"/><path d="M12 3v3M12 10v4M12 18v4" stroke="currentColor" stroke-width="2"/></symbol>
  <symbol id="i-house" viewBox="0 0 24 24"><path d="M1 11L12 3l11 8h-3v10H4V11z"/><rect x="9" y="14" width="6" height="7" fill="#f4ead0"/></symbol>
  <symbol id="i-mir" viewBox="0 0 30 24"><path d="M0 12l6-6 6 6h-2v9H2v-9z"/><path d="M9 12l6-7 6 7h-2v9h-8v-9z"/><path d="M18 12l6-6 6 6h-2v9h-8v-9z"/></symbol>
+ <symbol id="i-ring" viewBox="0 0 24 24"><circle cx="12" cy="15" r="7" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M9 3h6l2 3-5 3-5-3z"/></symbol>
+ <symbol id="i-rod" viewBox="0 0 24 24"><path d="M5 22L19 3M8 22L20 6M3 20L17 1" stroke="currentColor" stroke-width="1.8" fill="none"/><rect x="4" y="16" width="6" height="3" transform="rotate(-53 7 17.5)"/></symbol>
+ <symbol id="i-tag" viewBox="0 0 24 24"><path d="M2 12L12 2h9v9L11 21z"/><circle cx="17" cy="6" r="1.8" fill="#f4ead0"/></symbol>
+ <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 4l3 8h-6z"/><path d="M12 20l-3-8h6z" opacity=".4"/></symbol>
  <symbol id="i-gavel" viewBox="0 0 24 24"><rect x="4" y="2" width="10" height="6" rx="1" transform="rotate(35 9 5)"/><path d="M10 9l10 10" stroke="currentColor" stroke-width="3"/><rect x="2" y="20" width="12" height="3"/></symbol>
 </defs></svg>
 
@@ -213,8 +228,9 @@ footer{border-top:1px solid var(--rule);margin-top:20px;padding:14px 0 40px;font
 <main class="wrap">
 <section id="s-ties">
  <h2 class="sec">Кто держит крестьянина</h2>
- <p class="lead">Выберите период. Толщина линии — насколько сильно крестьянин зависит от каждой силы. Таблица ниже показывает, что ему было можно и нельзя.</p>
+ <p class="lead">Выберите период кнопкой или столбиком на графике. На схеме число звеньев цепи и цифра на ней — сила зависимости от каждой силы (0 — связи нет, 3 — самая сильная). Таблица ниже показывает, что крестьянину было можно и нельзя.</p>
  <span class="lb">Период</span><div class="seg" id="perSeg"></div>
+ <div class="pbar-w"><svg class="pbar" id="pbar" viewBox="0 0 660 190" role="img" aria-label="Сила зависимости по периодам"></svg></div>
  <div class="ties">
   <svg class="web" id="web" viewBox="0 0 460 420" role="img" aria-label="Связи крестьянина с помещиком, общиной, казной и начальством"></svg>
   <div class="tie-d" id="tieD"></div>
@@ -276,10 +292,11 @@ footer{border-top:1px solid var(--rule);margin-top:20px;padding:14px 0 40px;font
   <button class="btn" id="go">Начать работу</button> <span class="warn" id="gowarn"></span>
  </div>
  <div id="work" hidden>
-  <div class="who"><span id="whoName"></span><span id="whoVar"></span></div>
+  <div class="who"><span id="whoName"></span><span id="whoVar"></span><button type="button" class="wbtn" id="reset">Сменить ФИО или группу</button></div>
+  <p class="hint saved">Ответы сохраняются на этом телефоне автоматически: если страница обновится или закроется, откройте её снова — работа продолжится с того же места.</p>
 
   <div class="task"><h3>Задание 1. Сила зависимости <span class="pts">8 баллов</span></h3>
-   <p class="hint">Схема <a href="#s-ties">«Кто держит крестьянина»</a>. Выберите на ней нужный период и определите силу каждой связи по толщине цепи (или по шкале в карточке справа): 0 — связи нет, 3 — самая сильная.</p>
+   <p class="hint">Схема <a href="#s-ties">«Кто держит крестьянина»</a>. Выберите на ней нужный период и определите силу каждой связи: это цифра на цепи на схеме или число закрашенных делений в карточке рядом: 0 — связи нет, 3 — самая сильная.</p>
    <div id="t1"></div></div>
 
   <div class="task"><h3>Задание 2. Можно или нельзя <span class="pts">6 баллов</span></h3>
@@ -366,23 +383,35 @@ function ties(){
  const cx=230,cy=212,R=150,pos=[[cx,cy-R],[cx+R+20,cy],[cx,cy+R],[cx-R-20,cy]];let g='';
  FORCE.forEach((f,i)=>{const s=f[3][per],[x,y]=pos[i];
   if(s>0){g+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="${f[1]}" stroke-width="${s*8}" stroke-linecap="round" opacity="${fsel==null||fsel===i?.85:.25}"/>`;
-   for(let k=1;k<=s;k++){const t=.32+k*.13;g+=`<use href="#i-chain" x="${cx+(x-cx)*t-11}" y="${cy+(y-cy)*t-11}" width="22" height="22" color="#f4ead0"/>`}}
-  else g+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 5" opacity=".35"/>`});
+   for(let k=1;k<=s;k++){const t=.26+k*.08;g+=`<use href="#i-chain" x="${cx+(x-cx)*t-11}" y="${cy+(y-cy)*t-11}" width="22" height="22" color="#f4ead0"/>`}
+   const bx=cx+(x-cx)*.66,by=cy+(y-cy)*.66;g+=`<g class="badge"><circle cx="${bx}" cy="${by}" r="13" fill="#f4ead0" stroke="${f[1]}" stroke-width="3"/><text x="${bx}" y="${by+5}" font-size="15" font-weight="700" text-anchor="middle" fill="#2b2116">${s}</text></g>`}
+  else{g+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 5" opacity=".35"/>`;const bx=cx+(x-cx)*.66,by=cy+(y-cy)*.66;g+=`<g class="badge"><circle cx="${bx}" cy="${by}" r="13" fill="#f4ead0" stroke="#a58c5e" stroke-width="1.5"/><text x="${bx}" y="${by+5}" font-size="15" text-anchor="middle" fill="#a58c5e">0</text></g>`}});
  g+=`<circle cx="${cx}" cy="${cy}" r="46" fill="#f4ead0" stroke="#2b2116" stroke-width="2"/><use href="#i-man" x="${cx-17}" y="${cy-30}" width="34" height="50" fill="#2b2116"/><text x="${cx}" y="${cy+66}" font-size="15" text-anchor="middle" fill="currentColor" font-style="italic">крестьянин</text>`;
  FORCE.forEach((f,i)=>{const[x,y]=pos[i];const s=f[3][per];
   g+=`<g class="nd2" data-f="${i}" tabindex="0" role="button" aria-label="${f[0]}"><circle cx="${x}" cy="${y}" r="38" fill="${s?f[1]:'#f4ead0'}" stroke="#2b2116" stroke-width="${fsel===i?4:1.5}"/><use href="#${f[2]}" x="${x-17}" y="${y-22}" width="34" height="${f[2]==='i-mir'?27:34}" fill="${s?(f[2]==='i-coin'?'#2b2116':'#f4ead0'):'#a58c5e'}" color="${s?'#f4ead0':'#a58c5e'}"/><text x="${x}" y="${y+(i===2?56:i===0?-46:56)}" font-size="16" text-anchor="middle" fill="currentColor" font-weight="700">${f[0]}</text></g>`});
  const w=$('#web');w.innerHTML=g;w.style.color='var(--ink)';
  const tot=FORCE.reduce((a,f)=>a+f[3][per],0);
  $('#tieD').innerHTML=`<div class="sum"><b>${tot} / 12</b><span>общая сила зависимости в период «${PER[per]}» (${PSUB[per]})</span></div>`+FORCE.map((f,i)=>`<div class="td${f[3][per]?'':' zero'}" style="--c:${f[1]}"><div class="h"><b>${f[0]}</b><span class="st">${[1,2,3].map(k=>`<i class="${k<=f[3][per]?'f':''}"></i>`).join('')}</span></div><p>${f[4][per]}</p></div>`).join('');
- const M=['n','p','y'],T=['✕','~','✓'];
- $('#rights').innerHTML=`<thead><tr><th>Может ли крестьянин…</th>${PER.map((p,i)=>`<th data-p="${i}" class="${i===per?'on':''}">${p}</th>`).join('')}</tr></thead><tbody>${RIGHTS.map(r=>`<tr><td>${r[0]}</td>${r[1].map((v,i)=>`<td class="${i===per?'on':''}"><i class="mk2 ${M[v]}">${T[v]}</i></td>`).join('')}</tr>`).join('')}</tbody>`}
+ pbar();const M=['n','p','y'],T=['✕','~','✓'];const RI=['i-ring','i-house','i-rod','i-road','i-mir','i-tag','i-chain','i-compass'];
+ $('#rights').innerHTML=`<thead><tr><th>Может ли крестьянин…</th>${PER.map((p,i)=>`<th data-p="${i}" class="${i===per?'on':''}">${p}</th>`).join('')}</tr></thead><tbody>${RIGHTS.map((r,ri)=>`<tr><td><svg class="ri"><use href="#${RI[ri]}"/></svg>${r[0]}</td>${r[1].map((v,i)=>`<td class="${i===per?'on':''}"><i class="mk2 ${M[v]}">${T[v]}</i></td>`).join('')}</tr>`).join('')}</tbody><tfoot><tr><td>Полностью свободен в правах</td>${PER.map((p,i)=>{const n=RIGHTS.filter(r=>r[1][i]===2).length;return `<td class="${i===per?'on':''}"><div class="rb">${RIGHTS.map((_,k)=>`<i class="${k<n?'f':''}"></i>`).join('')}</div>${n} из ${RIGHTS.length}</td>`}).join('')}</tr></tfoot>`}
+function pbar(){const W=Math.max(320,Math.min(1000,Math.round($('#pbar').parentNode.clientWidth||660))),nar=W<560,X0=32,cw=(W-X0-6)/6,u=12,LH=nar?40:24;let g='';
+ for(let k=0;k<=12;k+=3)g+=`<line x1="${X0}" x2="${W-6}" y1="${LH+150-k*u}" y2="${LH+150-k*u}" stroke="currentColor" opacity=".12"/><text x="${X0-6}" y="${LH+154-k*u}" font-size="11" text-anchor="end" fill="currentColor" opacity=".6">${k}</text>`;
+ PER.forEach((p,i)=>{const x=X0+i*cw+cw*.15,w=cw*.7;let y=LH+150;const on=i===per;
+  g+=`<g class="col" data-p="${i}" role="button" tabindex="0" aria-label="${p}"><rect x="${X0+i*cw}" y="${LH}" width="${cw}" height="190" fill="${on?'#b7862c':'transparent'}" opacity=".15"/>`;
+  FORCE.forEach(f=>{const s=f[3][i];if(!s)return;y-=s*u;g+=`<rect x="${x}" y="${y}" width="${w}" height="${s*u}" fill="${f[1]}" stroke="#f4ead0" stroke-width="1.5"/>`});
+  const tot=FORCE.reduce((a,f)=>a+f[3][i],0);
+  g+=`<text x="${x+w/2}" y="${y-6}" font-size="15" font-weight="700" text-anchor="middle" fill="currentColor">${tot}</text><text x="${x+w/2}" y="${LH+168}" font-size="${nar?11:12.5}" text-anchor="middle" fill="currentColor" font-weight="${on?700:400}">${p}</text></g>`});
+ g+=FORCE.map((f,i)=>{const lx=nar?8+(i%2)*150:X0+i*120,ly=nar?6+Math.floor(i/2)*16:6;return `<rect x="${lx}" y="${ly}" width="11" height="11" fill="${f[1]}"/><text x="${lx+15}" y="${ly+10}" font-size="12" fill="currentColor">${f[0]}</text>`}).join('');
+ const s=$('#pbar');s.setAttribute('viewBox',`0 0 ${W} ${LH+178}`);s.innerHTML=g;s.style.color='var(--ink)'}
 $('#perSeg').onclick=e=>{const b=e.target.closest('button');if(b){per=+b.dataset.p;ties()}};
+$('#pbar').addEventListener('click',e=>{const c=e.target.closest('.col');if(c){per=+c.dataset.p;ties()}});
+$('#pbar').addEventListener('keydown',e=>{const c=e.target.closest('.col');if(c&&(e.key==='Enter'||e.key===' ')){e.preventDefault();per=+c.dataset.p;ties()}});
 $('#rights').addEventListener('click',e=>{const t=e.target.closest('th[data-p]');if(t){per=+t.dataset.p;ties()}});
 $('#web').addEventListener('click',e=>{const n=e.target.closest('.nd2');fsel=n&&fsel!==+n.dataset.f?+n.dataset.f:null;ties()});
 $('#web').addEventListener('keydown',e=>{const n=e.target.closest('.nd2');if(n&&(e.key==='Enter'||e.key===' ')){e.preventDefault();n.dispatchEvent(new MouseEvent('click',{bubbles:true}))}});
 
 /* ---------- путь крестьянина ---------- */
-const LN=[['Статус','#a5281b'],['Земля','#b7862c'],['Община','#3d5a80']];
+const LN=[['Статус','#a5281b','i-man'],['Земля','#b7862c','i-shr'],['Община','#3d5a80','i-mir']];
 const EV=[
  {y:1855,t:'до 1861',n:'Крепостное право',v:[5,5,4],d:['Крепостной: суд, наказание, брак и переселение зависят от помещика','Пользуется помещичьей землёй, платит барщиной или оброком','Община распределяет повинности, но её решения утверждает помещик']},
  {y:1861.15,t:'1861',n:'Манифест 19 февраля',v:[4,4,4],d:['Временнообязанный: лично свободен, но до выкупа несёт барщину или оброк','Надел по уставной грамоте; в черноземье и степи — отрезки в пользу помещика','Сельское общество, сход, староста; круговая порука; выход по ст. 165 — только при уплате всей суммы']},
@@ -401,7 +430,7 @@ function path(){
   for(let k=1;k<=5;k++)g+=`<line x1="${X(1855)}" x2="${XE}" y1="${yb-k*lh/5}" y2="${yb-k*lh/5}" stroke="currentColor" opacity=".08"/>`;
   let d=`M${X(1855)} ${yb}`;EV.forEach((e,j)=>{const h=yb-e.v[i]*lh/5;const x=X(e.y);d+=(j?` L${x} ${yb-EV[j-1].v[i]*lh/5}`:'')+` L${x} ${h}`});d+=` L${XE} ${yb-EV[EV.length-1].v[i]*lh/5} L${XE} ${yb} Z`;
   g+=`<path d="${d}" fill="${l[1]}" opacity=".82"/>`;
-  g+=`<text x="10" y="${y0+lh/2+2}" font-size="19" fill="currentColor" font-style="italic">${l[0]}</text><text x="10" y="${y0+lh/2+20}" font-size="11.5" fill="currentColor" opacity=".65">зависимость</text>`;
+  g+=`<use href="#${l[2]}" x="10" y="${y0+lh/2-40}" width="${l[2]==='i-mir'?30:24}" height="24" fill="${l[1]}" color="${l[1]}"/><text x="10" y="${y0+lh/2+6}" font-size="19" fill="currentColor" font-style="italic">${l[0]}</text><text x="10" y="${y0+lh/2+22}" font-size="11.5" fill="currentColor" opacity=".65">↑ тяжелее</text><text x="10" y="${y0+lh/2+36}" font-size="11.5" fill="currentColor" opacity=".65">↓ свободнее</text>`;
   g+=`<text x="${X(1855)-6}" y="${y0+8}" font-size="10" text-anchor="end" fill="currentColor" opacity=".6">5</text><text x="${X(1855)-6}" y="${yb}" font-size="10" text-anchor="end" fill="currentColor" opacity=".6">0</text>`});
  EV.forEach((e,j)=>{const x=X(e.y),on=j===evOn;
   g+=`<line x1="${x}" x2="${x}" y1="${top-12}" y2="${top+3*(lh+gap)-gap}" stroke="${on?'#a5281b':'currentColor'}" stroke-width="${on?2.5:1}" stroke-dasharray="${on?'':'3 4'}" opacity="${on?1:.45}"/>
@@ -409,7 +438,7 @@ function path(){
  const sv=$('#pchart');sv.innerHTML=g;sv.style.color='var(--ink)';
  const e=EV[evOn],pv=evOn?EV[evOn-1]:null;
  $('#ev3').innerHTML=`<div class="evh"><b>${e.t}</b> ${e.n} <span>суммарная зависимость ${e.v.reduce((a,b)=>a+b)} из 15</span></div>`+LN.map((l,i)=>{const ch=pv?e.v[i]-pv.v[i]:0;const arr=ch<0?'▼ легче':ch>0?'▲ жёстче':'без изменений';
-  return `<div class="evc${e.d[i]?'':' same'}" style="--c:${l[1]}"><div class="evt">${l[0]}<span class="mtr">${[1,2,3,4,5].map(k=>`<i class="${k<=e.v[i]?'f':''}"></i>`).join('')}</span></div>${evOn?`<div class="evd ${ch<0?'dn':ch>0?'up':''}">${arr}</div>`:''}<p>${e.d[i]||'Без перемен.'}</p></div>`}).join('');
+  return `<div class="evc${e.d[i]?'':' same'}" style="--c:${l[1]}"><div class="evt"><span class="evn"><svg class="evi" style="fill:${l[1]};color:${l[1]}"><use href="#${l[2]}"/></svg>${l[0]}</span><span class="mtr">${[1,2,3,4,5].map(k=>`<i class="${k<=e.v[i]?'f':''}"></i>`).join('')}</span></div>${evOn?`<div class="evd ${ch<0?'dn':ch>0?'up':''}">${arr}</div>`:''}<p>${e.d[i]||'Без перемен.'}</p></div>`}).join('');
 }
 $('#pchart').addEventListener('click',ev=>{const b=ev.target.closest('.evb');if(b){evOn=+b.dataset.j;path()}});
 $('#pchart').addEventListener('keydown',ev=>{const b=ev.target.closest('.evb');if(b&&(ev.key==='Enter'||ev.key===' ')){ev.preventDefault();evOn=+b.dataset.j;path();$('#pchart').querySelector(`.evb[data-j="${evOn}"]`).focus()}});
@@ -552,9 +581,9 @@ function sel(id,opts){return `<select id="${id}" class="sl"><option value="">—
 function startWork(){
  mkVar();
  $('#start').hidden=true;$('#work').hidden=false;$('#whoName').textContent=`${who.fio}, ${who.grp}`;$('#whoVar').textContent=`Вариант ${hash(who.fio+who.grp)%900+100}`;
- $('#t1').innerHTML=`<div class="g1"><span></span>${V.pp.map(p=>`<b>${PER[p]}<small>${PSUB[p]}</small></b>`).join('')}${FORCE.map((f,i)=>`<span class="fn"><i style="background:${f[1]}"></i>${f[0]}</span>${V.pp.map((p,j)=>sel(`a1_${i}_${j}`,['0','1','2','3'])).join('')}`).join('')}</div>`;
- $('#t2').innerHTML=V.rr.map(([i,p],n)=>`<div class="q"><p><span class="n">${n+1}.</span>${PER[p]} (${PSUB[p]}): <b>${RIGHTS[i][0].toLowerCase()}</b></p><div class="seg3">${RTXT.map((t,o)=>`<label class="opt"><input type="radio" name="a2_${n}" value="${RVAL[o]}"><span>${t}</span></label>`).join('')}</div></div>`).join('');
- $('#t3').innerHTML=V.ee.map((j,n)=>`<div class="q q3"><p><span class="n">${n+1}.</span><b>${EV[j].t}</b> — ${EV[j].n}</p><div class="two"><label>Что изменилось ${sel(`a3l_${n}`,LANE3)}</label><label>Зависимость стала ${sel(`a3d_${n}`,DIR)}</label></div></div>`).join('');
+ $('#t1').innerHTML=`<div class="g1"><span></span>${V.pp.map(p=>`<b>${PER[p]}<small>${PSUB[p]}</small></b>`).join('')}${FORCE.map((f,i)=>`<span class="fn"><svg class="tic" style="fill:${f[1]};color:${f[1]}"><use href="#${f[2]}"/></svg>${f[0]}</span>${V.pp.map((p,j)=>sel(`a1_${i}_${j}`,['0','1','2','3'])).join('')}`).join('')}</div>`;
+ $('#t2').innerHTML=V.rr.map(([i,p],n)=>`<div class="q"><p><span class="n">${n+1}.</span><svg class="tic"><use href="#${['i-ring','i-house','i-rod','i-road','i-mir','i-tag','i-chain','i-compass'][i]}"/></svg>${PER[p]} (${PSUB[p]}): <b>${RIGHTS[i][0].toLowerCase()}</b></p><div class="seg3">${RTXT.map((t,o)=>`<label class="opt"><input type="radio" name="a2_${n}" value="${RVAL[o]}"><span>${t}</span></label>`).join('')}</div></div>`).join('');
+ $('#t3').innerHTML=`<div class="lkey">${LN.map(l=>`<span><svg class="tic" style="fill:${l[1]};color:${l[1]}"><use href="#${l[2]}"/></svg>${l[0]}</span>`).join('')}<span>▲ жёстче</span><span>▼ легче</span></div>`+V.ee.map((j,n)=>`<div class="q q3"><p><span class="n">${n+1}.</span><b>${EV[j].t}</b> — ${EV[j].n}</p><div class="two"><label>Что изменилось ${sel(`a3l_${n}`,LANE3)}</label><label>Зависимость стала ${sel(`a3d_${n}`,DIR)}</label></div></div>`).join('');
  $('#t4v').innerHTML=`Год <b>${V.y}</b>, делить землю <b>${MODES[V.m][0]}</b>, двор <b>${HH[V.k][0]}</b>.`;
  $('#t4').innerHTML=['Сколько десятин пашни получает двор','Сколько десятин приходится на одного едока','Сколько рублей платежей вносит двор'].map((t,i)=>`<label for="a4_${i}">${i+1}) ${t}</label><input id="a4_${i}" inputmode="decimal" autocomplete="off">`).join('');
  $('#t5').innerHTML=`<div class="chk">${V.opt5.map(id=>`<label class="opt"><input type="checkbox" id="a5_${id}" value="${id}"><svg class="ni"><use href="#${CN[id][2]}"/></svg><span>${CN[id][3]}</span></label>`).join('')}</div>`;
@@ -569,7 +598,9 @@ $('#go').onclick=()=>{const fio=$('#fio').value.trim().replace(/\s+/g,' '),grp=$
  if(fio.split(' ').length<2){$('#gowarn').textContent='Введите фамилию и имя полностью.';return}
  if(grp.length<2){$('#gowarn').textContent='Введите группу.';return}
  who={fio,grp};store.set('v61-who',JSON.stringify(who));startWork()};
-try{const w=JSON.parse(store.get('v61-who')||'null');if(w){$('#fio').value=w.fio;$('#grp').value=w.grp}}catch(e){}
+function lockSent(html){$('#result').hidden=false;$('#result').innerHTML=html;const b=$('#send');b.disabled=true;b.textContent='Отправлено';document.querySelectorAll('#work input,#work textarea,#work select').forEach(e=>e.disabled=true)}
+try{const w=JSON.parse(store.get('v61-who')||'null');if(w&&w.fio&&w.grp){$('#fio').value=w.fio;$('#grp').value=w.grp;who=w;startWork();const sent=store.get('v61c-sent-'+hash(w.fio+w.grp));if(sent)lockSent(sent)}}catch(e){}
+$('#reset').onclick=()=>{store.set('v61-who','');location.reload()};
 const num=s=>parseFloat(String(s).replace(/\s/g,'').replace(',','.'));
 function grade(){
  const miss=[],wrong=[],det=[];const sc=[0,0,0,0,0];
@@ -594,8 +625,9 @@ $('#send').onclick=async()=>{
  if(SCRIPT_URL&&!SCRIPT_URL.startsWith('__')){try{await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)});ok=true}catch(e){ok=false}}
  $('#result').hidden=false;
  $('#result').innerHTML=`<div class="res"><h3>${ok?'Работа отправлена':'Не удалось отправить'}</h3><p><b>${who.fio}</b>, ${who.grp}. Автоматически проверено: <b>${tot} из 25</b>.</p><div class="scg">${['Сила зависимости',8,'Можно или нельзя',6,'Что изменил закон',5,'Раздел земли',3,'Цепочка причин',3].reduce((a,x,i,arr)=>i%2?a:a+`<div><span>${x}</span><b>${g.sc[i/2]} / ${arr[i+1]}</b></div>`,'')}</div><p>Вывод оценит преподаватель.</p><p>Код проверки: <b>${hash(who.fio+who.grp+tot)%9000+1000}</b>. ${ok?'':'Покажите этот экран преподавателю или нажмите «Отправить» ещё раз.'}</p></div>`;
- if(ok){b.textContent='Отправлено';document.querySelectorAll('#work input,#work textarea,#work select').forEach(e=>e.disabled=true)}else{b.disabled=false;b.textContent='Отправить ещё раз'}};
+ if(ok){store.set('v61c-sent-'+hash(who.fio+who.grp),$('#result').innerHTML);lockSent($('#result').innerHTML)}else{b.disabled=false;b.textContent='Отправить ещё раз'}};
 
 ties();path();mir();cz();
+let rzT;window.addEventListener('resize',()=>{clearTimeout(rzT);rzT=setTimeout(pbar,150)});
 </script>
 </body></html>
