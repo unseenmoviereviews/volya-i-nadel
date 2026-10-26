@@ -44,6 +44,7 @@ h3.sub2{font-weight:400;font-style:italic;font-size:25px;margin:28px 0 4px}
 .seg button{background:var(--paper);border:0;border-right:1px solid var(--rule);padding:8px 11px;cursor:pointer;font-size:15px;line-height:1.15}
 .seg button:last-child{border-right:0}
 .seg button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+@media (max-width:420px){.seg{width:100%}.seg button{flex:1 1 auto;padding:8px 7px}}
 .seg button small{display:block;font-size:11.5px;opacity:.8}
 .lb{display:block;font-size:13.5px;color:var(--ink2);margin-bottom:3px}
 /* узы */
@@ -120,19 +121,12 @@ table.rights{border-collapse:collapse;min-width:680px;width:100%;background:var(
 .b2 svg text{fill:#2b2116}
 .field{width:100%;height:auto;background:var(--paper);border:1px solid var(--ink)}
 .field text{font-family:var(--serif)}
+.swipe{display:none;font-size:13px;color:var(--ink2);font-style:italic;text-align:center;margin:4px 0 0}
+@media (max-width:780px){.swipe{display:block}}
 /* причины */
-.cz{display:grid;gap:6px}
-.cz .tier{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px}
-.cz .tl{font-style:italic;color:var(--ink2);font-size:14px;border-bottom:1px solid var(--rule);margin-top:4px}
-.cz .nd{background:var(--paper);border:1px solid var(--ink);padding:10px 6px 8px;text-align:center;cursor:pointer;transition:opacity .15s,transform .15s;display:flex;flex-direction:column;align-items:center;gap:4px}
-.cz .nd b{font-size:14.5px;line-height:1.2;font-weight:700}
-.cz .nd .ni{width:36px;height:36px;fill:var(--ink)}
-.cz .nd.gov{border:2px solid var(--verm)}.cz .nd.gov .ni{fill:var(--verm)}
-.cz .nd.res{background:var(--ink);color:var(--paper)}.cz .nd.res .ni{fill:#e9b19f;width:46px;height:46px}.cz .nd.res b{font-size:18px}
-.cz.act .nd{opacity:.28}.cz.act .nd.hi,.cz.act .nd.src0{opacity:1}
-.cz .nd.src0{outline:3px solid var(--och);outline-offset:1px;transform:scale(1.04)}
-.cz .nd.in{box-shadow:inset 0 -5px 0 var(--och)}
-.cz .arr{text-align:center;color:var(--verm);line-height:0}
+.czsvg{display:block;min-width:760px;width:100%;height:auto}
+.czsvg text{font-family:var(--serif)}
+.czl{margin:2px 0 4px;padding-left:20px;font-size:15px}
 .czd{margin-top:10px;min-height:60px}
 .czc{display:flex;gap:12px;background:var(--medal);color:#2b2116;border:1px solid #2b2116;padding:10px 12px}
 .czc .ni{width:44px;height:44px;fill:#a5281b;flex:0 0 auto}
@@ -234,6 +228,7 @@ footer{border-top:1px solid var(--rule);margin-top:20px;padding:14px 0 40px;font
  <h2 class="sec">Путь крестьянина, 1861–1907</h2>
  <p class="lead">Три ленты — статус, земля, община. Высота ленты — степень зависимости крестьянина (от 1 до 5). Нажмите на год, чтобы увидеть, что изменилось.</p>
  <div class="pscroll"><svg class="pchart" id="pchart" viewBox="0 0 900 460" role="img" aria-label="Зависимость крестьянина по годам"></svg></div>
+ <p class="swipe">← схему можно прокручивать пальцем вбок →</p>
  <div class="ev3" id="ev3"></div>
 </section>
 
@@ -254,8 +249,9 @@ footer{border-top:1px solid var(--rule);margin-top:20px;padding:14px 0 40px;font
  <p class="src">Чересполосица: каждый двор получает полосу в каждом поле трёхполья и на каждом участке разного качества.</p>
 
  <h3 class="sub2">Откуда взялось аграрное перенаселение</h3>
- <p class="lead">Нажмите на звено цепочки: подсветятся его причины и следствия, ниже появится пояснение.</p>
- <div class="cz" id="cause"></div>
+ <p class="lead">Стрелка ведёт от причины к следствию. Красная рамка — решения власти, тёмный блок — итог, светлые блоки внизу — последствия. Нажмите на звено, чтобы выделить его связи; повторное нажатие снимает выделение.</p>
+ <div class="pscroll"><svg class="czsvg" id="cause" viewBox="0 0 900 560" role="img" aria-label="Схема причин аграрного перенаселения"></svg></div>
+ <p class="swipe">← схему можно прокручивать пальцем вбок →</p>
  <div class="czd" id="czd"></div>
  <div class="facts">
   <div class="box"><h3>Надел на душу</h3><svg viewBox="0 0 300 160" width="100%" role="img" aria-label="Надел 4,8 и 2,6 десятины" id="nad"></svg>
@@ -464,36 +460,56 @@ $('#yrSeg').onclick=e=>{const b=e.target.closest('button');if(b){yr=+b.dataset.y
 $('#modeSeg').onclick=e=>{const b=e.target.closest('button');if(b){md=b.dataset.m;mir()}};
 
 /* ---------- причины ---------- */
+/* узел: [id, класс, значок, название, пояснение, ведёт к, x, y] */
 const CZ=[
- ['Решения власти',[
-  ['g1','gov','i-scis','Отрезки 1861 г.','Помещик оставил себе часть надела, нередко луга, выгоны и водопои. Крестьянам пришлось их арендовать.',['p2','c1']],
-  ['g2','gov','i-coin','Выкуп на 49 лет','Выкупная оценка выше рыночной цены земли; платежи съедают доход двора.',['p3']],
-  ['g3','gov','i-chain','Закрепление в общине','Круговая порука, паспорт с согласия схода, закон 1893 г.: надел нельзя продать, выход — с согласия общества.',['p4']]]],
+ ['Решения власти и демография',[
+  ['g3','gov','i-chain','Закрепление в общине','Круговая порука, паспорт с согласия схода; с 1893 г. надел нельзя продать, а выйти из общины можно только с согласия схода.',['p4'],120,53],
+  ['g1','gov','i-scis','Отрезки 1861 г.','Помещик оставил себе часть надела, нередко луга, выгоны и водопои. Без них хозяйство не обходилось, их приходилось арендовать.',['p2'],340,53],
+  ['p1','','i-fam','Рост населения','Рождаемость высокая, смертность понемногу снижается: с 1861 по 1900 г. сельское население выросло примерно в полтора раза.',['p2'],560,53],
+  ['g2','gov','i-coin','Выкуп на 49 лет','Выкупная оценка выше рыночной цены земли; ежегодные платежи съедают доход двора.',['p3'],790,53]]],
  ['Процессы в деревне',[
-  ['p1','','i-fam','Рост населения','Высокая рождаемость при снижении смертности: едоков становится больше.',['p2']],
-  ['p2','','i-shr','Надел тот же','Душевой надел в центре падает с 4,8 до 2,6 дес. за 40 лет.',['p5','r']],
-  ['p3','','i-empty','Нет денег','Средства уходят на платежи; на скот, инвентарь, удобрения их не остаётся.',['p6']],
-  ['p4','','i-man','Лишние руки','Уйти насовсем трудно, избыток работников остаётся в деревне.',['r']],
-  ['p5','','i-strip','Чересполосица','Переделы дробят надел на узкие полосы в разных концах поля.',['p6','p7']],
-  ['p7','','i-scale','Уравнительность','Удобрять полосу, которая при переделе уйдёт соседу, невыгодно.',['p6']],
-  ['p6','','i-wheat','Трёхполье, бедная почва','Все сеют одно и то же, треть земли под паром, урожай низкий.',['r']]]],
- ['Итог',[['r','res','i-fire','Аграрное перенаселение','Земли мало, урожай низкий (34–43 пуда с десятины против 42–54 у помещиков), рабочих рук больше, чем нужно хозяйству.',['c1','c2','c3','c4']]]],
+  ['p4','','i-man','Лишние руки','Уйти из деревни насовсем трудно, и работников в хозяйстве больше, чем нужно.',['r'],120,173],
+  ['p2','','i-shr','Малоземелье','Людей больше, а надел тот же: душевой надел в центре упал с 4,8 до 2,6 десятины за 40 лет.',['p5','r'],450,173],
+  ['p3','','i-empty','Нет денег на хозяйство','Средства уходят на платежи; на скот, инвентарь и удобрения их не остаётся.',['p6'],790,173],
+  ['p5','','i-strip','Переделы и чересполосица','Община переделяет землю по едокам: надел дробится на узкие полосы в разных концах поля. Удобрять полосу, которая при следующем переделе уйдёт соседу, невыгодно.',['p6'],290,293],
+  ['p6','','i-wheat','Трёхполье и бедная почва','Все сеют одно и то же в одно время, треть земли под паром, почва истощается, урожай низкий.',['r'],640,293]]],
+ ['Итог',[
+  ['r','res','i-mir','Аграрное перенаселение','Земли мало, урожай низкий (34–43 пуда с десятины против 42–54 у помещиков), рабочих рук больше, чем нужно хозяйству.',['c1','c2','c3','c4'],450,410]]],
  ['Последствия',[
-  ['c1','','i-hand','Аренда и отработки','Крестьяне арендуют отрезки и помещичью пашню, часто за отработки.',[]],
-  ['c2','','i-road','Отход и переселение','Заработки в городах, переселение в Сибирь.',[]],
-  ['c3','','i-empty','Недоимки и голод','Рост недоимок, голод 1891–1892 гг.',[]],
-  ['c4','','i-fire','Волнения','Восстание 1902 г. в Полтавской и Харьковской губерниях, выступления 1905–1907 гг.',[]]]]];
+  ['c1','con','i-hand','Аренда и отработки','Крестьяне арендуют отрезки и помещичью пашню, часто расплачиваясь работой.',[],120,530],
+  ['c2','con','i-road','Отход и переселение','Заработки в городах, переселение в Сибирь.',[],340,530],
+  ['c3','con','i-coin','Недоимки и голод','Рост недоимок по платежам, голод 1891–1892 гг.',[],560,530],
+  ['c4','con','i-fire','Волнения','Восстание 1902 г. в Полтавской и Харьковской губерниях, выступления 1905–1907 гг.',[],790,530]]]];
 const CN={};CZ.forEach(t=>t[1].forEach(n=>CN[n[0]]=n));
+const NW=170,NH=48,RW=300,RH=56;
+const box=n=>{const w=n[0]==='r'?RW:NW,h=n[0]==='r'?RH:NH;return{x:n[6]-w/2,y:n[7]-h/2,w,h,cx:n[6],cy:n[7]}};
+function edgePath(a,b){const A=box(CN[a]),B=box(CN[b]);
+ if(Math.abs(A.cy-B.cy)<5){const l=A.cx<B.cx;return `M${l?A.x+A.w:A.x} ${A.cy} L${l?B.x-4:B.x+B.w+4} ${B.cy}`}
+ if(a==='p4'&&b==='r')return `M${A.cx} ${A.y+A.h} C${A.cx} ${B.cy} ${A.cx+60} ${B.cy} ${B.x-4} ${B.cy}`;
+ const sx=A.cx+(B.cx-A.cx)*0.12,ex=B.cx+(A.cx-B.cx)*(b==='r'?0.12:0.25);
+ return `M${sx} ${A.y+A.h} C${sx} ${(A.y+A.h+B.y)/2} ${ex} ${(A.y+A.h+B.y)/2} ${ex} ${B.y-4}`}
+let czSel=null;
 function cz(){
- $('#cause').innerHTML=CZ.map((t,i)=>`${i?'<div class="arr"><svg viewBox="0 0 40 22" width="40" height="22"><path d="M20 0 V16 M12 9 L20 18 L28 9" stroke="currentColor" stroke-width="3" fill="none"/></svg></div>':''}<div class="tl">${t[0]}</div><div class="tier t${i}">${t[1].map(n=>`<div class="nd ${n[1]}" data-id="${n[0]}" data-to="${n[5].join(' ')}" tabindex="0" role="button"><svg class="ni"><use href="#${n[2]}"/></svg><b>${n[3]}</b></div>`).join('')}</div>`).join('');
- $('#czd').innerHTML='<p class="src">Ни одно звено не выбрано.</p>'}
-function czHi(el){const c=$('#cause');c.querySelectorAll('.nd').forEach(n=>n.classList.remove('hi','src0','in'));
- if(!el){c.classList.remove('act');$('#czd').innerHTML='<p class="src">Ни одно звено не выбрано.</p>';return}
- c.classList.add('act');el.classList.add('src0');const id=el.dataset.id,to=el.dataset.to.split(' ').filter(Boolean),from=[];
- c.querySelectorAll('.nd').forEach(n=>{if(to.includes(n.dataset.id))n.classList.add('hi');if(n.dataset.to.split(' ').includes(id)){n.classList.add('hi','in');from.push(n.dataset.id)}});
- const n=CN[id];$('#czd').innerHTML=`<div class="czc"><svg class="ni"><use href="#${n[2]}"/></svg><div><b>${n[3]}</b><p>${n[4]}</p>${from.length?`<p class="cl"><span>причины:</span> ${from.map(x=>CN[x][3]).join(', ')}</p>`:''}${to.length?`<p class="cl"><span>ведёт к:</span> ${to.map(x=>CN[x][3]).join(', ')}</p>`:''}</div></div>`}
-$('#cause').addEventListener('click',e=>{const n=e.target.closest('.nd');if(n)czHi(n.classList.contains('src0')?null:n)});
-$('#cause').addEventListener('keydown',e=>{const n=e.target.closest('.nd');if(n&&(e.key==='Enter'||e.key===' ')){e.preventDefault();n.click()}});
+ const E=[];CZ.forEach(t=>t[1].forEach(n=>n[5].forEach(b=>E.push([n[0],b]))));
+ let g=`<defs><marker id="czar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>`;
+ g+=[['Решения власти и рост населения',20],['Процессы в деревне',143],['Итог',378],['Последствия',500]].map(([t,y])=>`<text x="8" y="${y}" font-size="12" font-style="italic" fill="currentColor" opacity=".6">${t}</text>`).join('');
+ const on=czSel?new Set([czSel,...CN[czSel][5],...E.filter(e=>e[1]===czSel).map(e=>e[0])]):null;
+ E.forEach(([a,b])=>{const hi=on&&(a===czSel||b===czSel);g+=`<path d="${edgePath(a,b)}" fill="none" stroke="${hi?'#a5281b':'#5b4a33'}" stroke-width="${hi?3.2:1.6}" opacity="${on&&!hi?.15:.9}" marker-end="url(#czar)"/>`});
+ CZ.forEach(t=>t[1].forEach(n=>{const B=box(n),cls=n[1],dim=on&&!on.has(n[0]),sel=czSel===n[0];
+  const fill=cls==='res'?'#2b2116':cls==='con'?'#efe0bd':'#f4ead0',ink=cls==='res'?'#f4ead0':'#2b2116',stroke=sel?'#b7862c':cls==='gov'?'#a5281b':'#2b2116';
+  const words=n[3].split(' ');let l1=n[3],l2='';if(n[3].length>16&&words.length>1){let k=1;while(k<words.length&&words.slice(0,k+1).join(' ').length<=15)k++;l1=words.slice(0,k).join(' ');l2=words.slice(k).join(' ')}
+  const tx=B.x+(n[0]==='r'?62:42),fs=n[0]==='r'?19:14;
+  g+=`<g class="czn" data-id="${n[0]}" tabindex="0" role="button" aria-label="${n[3]}" opacity="${dim?.3:1}" style="cursor:pointer">
+   <rect x="${B.x}" y="${B.y}" width="${B.w}" height="${B.h}" rx="3" fill="${fill}" stroke="${stroke}" stroke-width="${sel?4:cls==='gov'?2.4:1.3}"/>
+   <use href="#${n[2]}" x="${B.x+8}" y="${B.cy-(n[0]==='r'?18:13)}" width="${n[0]==='r'?44:28}" height="${n[0]==='r'?36:26}" fill="${cls==='gov'?'#a5281b':cls==='res'?'#e9b19f':'#2b2116'}" color="${cls==='gov'?'#a5281b':'#2b2116'}"/>
+   ${l2?`<text x="${tx}" y="${B.cy-3}" font-size="${fs}" font-weight="700" fill="${ink}">${l1}</text><text x="${tx}" y="${B.cy+14}" font-size="${fs}" font-weight="700" fill="${ink}">${l2}</text>`:`<text x="${tx}" y="${B.cy+5}" font-size="${fs}" font-weight="700" fill="${ink}">${l1}</text>`}</g>`}));
+ const s=$('#cause');s.innerHTML=g;s.style.color='var(--ink)';
+ if(!czSel){$('#czd').innerHTML='<p class="src">Нажмите на любое звено схемы: появится пояснение, его причины и последствия.</p>';return}
+ const n=CN[czSel],from=E.filter(e=>e[1]===czSel).map(e=>CN[e[0]][3]),to=n[5].map(x=>CN[x][3]);
+ $('#czd').innerHTML=`<div class="czc"><svg class="ni" color="#a5281b"><use href="#${n[2]}"/></svg><div><b>${n[3]}</b><p>${n[4]}</p>${from.length?`<p class="cl"><span>Причины:</span></p><ul class="czl">${from.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}${to.length?`<p class="cl"><span>Ведёт к:</span></p><ul class="czl">${to.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}</div></div>`}
+function czHi(id){czSel=czSel===id?null:id;cz()}
+$('#cause').addEventListener('click',e=>{const n=e.target.closest('.czn');if(n)czHi(n.dataset.id)});
+$('#cause').addEventListener('keydown',e=>{const n=e.target.closest('.czn');if(n&&(e.key==='Enter'||e.key===' ')){e.preventDefault();czHi(n.dataset.id);const k=$('#cause').querySelector(`.czn[data-id="${n.dataset.id}"]`);k&&k.focus()}});
 
 /* малые графики */
 (function(){
