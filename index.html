@@ -190,7 +190,7 @@ table.rights{border-collapse:collapse;min-width:680px;width:100%;background:var(
 .tile:has(input:checked){border-color:#2b2116;background:#f9e9b8;outline:3px solid #a5281b;outline-offset:-3px}
 .tile:has(input[type=checkbox]:checked)::after{content:"✓";margin-left:auto;font-weight:700;color:#a5281b}
 .tile:has(input:focus-visible){box-shadow:0 0 0 2px #a5281b}
-.tile .tic{width:22px;height:22px;margin:0}.tx0{font-weight:700;font-size:17px;min-width:22px;text-align:center;flex:0 0 auto;margin-right:2px}
+.tile .tic{width:22px;height:22px;margin:0}.tx0{font-weight:700;font-size:17px;width:22px;text-align:center}
 .hsw{display:inline-block;width:14px;height:14px;border:1px solid #2b2116;vertical-align:-2px;margin-right:4px}
 .pp2{display:flex;align-items:center;gap:10px;margin:0 0 8px;font-size:22px}
 .pchip{display:inline-flex;flex-direction:column;align-items:center;background:var(--ink);color:var(--paper);padding:3px 10px;font-weight:400;font-size:15px;line-height:1.1;vertical-align:middle}.pchip small{font-size:11px;opacity:.8}
@@ -199,18 +199,6 @@ table.rights{border-collapse:collapse;min-width:680px;width:100%;background:var(
 .qs{font-size:14.5px!important;color:var(--ink2);margin:4px 0 6px!important}
 .prog{position:sticky;top:46px;z-index:20;display:flex;align-items:center;gap:10px;background:var(--page);padding:6px 0 8px;font-size:13.5px;color:var(--ink2)}
 .progb{flex:1;height:10px;border:1px solid var(--ink);background:var(--paper)}.progb i{display:block;height:100%;width:0;background:#3f6b2a;transition:width .3s}
-.scene{background:var(--ink);color:var(--paper);padding:10px 14px;margin-bottom:10px}
-.sc-h{font-size:17px;margin-bottom:6px}.sc-h b{color:#fff}.sc-h span{opacity:.8;font-size:14px}.scene .hsw{border-color:#f4ead0}
-.sc-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:6px}.sc-g div{background:rgba(244,234,208,.08);border:1px solid rgba(244,234,208,.25);padding:6px 8px}
-.sc-g span{display:block;font-size:12px;opacity:.75}.sc-g b{font-size:16px;font-weight:700}
-.cond{background:var(--medal);color:#2b2116;border-left:4px solid #a5281b;padding:8px 12px;font-size:15px;margin-bottom:8px}.cond ul{margin:4px 0 0;padding-left:20px}.cond li{margin:2px 0}
-.calc2{display:grid;gap:6px;margin:8px 0}
-.nrow{display:grid;grid-template-columns:1fr 170px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px dotted var(--rule)}
-.nrow label{font-size:15.5px}.nrow small{display:block;font-size:12.5px;color:var(--ink2);font-style:italic}
-.nin{display:flex;align-items:center;gap:6px}.nin input{width:100%;background:var(--medal);color:#2b2116;border:1px solid var(--ink);padding:9px;font-size:17px;border-radius:0}.nin em{font-style:normal;font-size:13px;color:var(--ink2);min-width:38px}
-@media (max-width:520px){.nrow{grid-template-columns:1fr}}
-.bud{display:block;width:100%;max-width:680px;height:auto;background:var(--paper);border:1px solid var(--rule);margin:6px 0 10px}
-.bud text{font-family:var(--serif)}
 /* задания */
 .task{background:var(--paper);border:1px solid var(--ink);padding:16px;margin-bottom:16px}
 .task h3{margin:0 0 4px;font-size:21px;font-weight:700}
@@ -346,7 +334,7 @@ footer{border-top:1px solid var(--rule);margin-top:20px;padding:14px 0 40px;font
 
 <section id="s-task">
  <h2 class="sec">Практическая работа</h2>
- <p class="lead">Около 40 минут. Три расчётные задачи и разминка. Исходные данные берите со схем страницы — по ссылкам в задачах. Ответа на схемах нет: его нужно получить расчётом. У каждого студента свои числа. Дробные числа пишите через запятую, округляйте до сотых. Автоматически проверяется 30 баллов, вывод оценивает преподаватель.</p>
+ <p class="lead">Все ответы — на схемах этой страницы. В каждом задании есть ссылка на нужную схему. Ответы выбираются нажатием на карточки. У каждого студента свой вариант. Автоматически проверяется 30 баллов, вывод оценивает преподаватель.</p>
  <div class="task" id="start">
   <h3>Кто выполняет работу</h3>
   <p class="hint">Вариант зависит от фамилии и группы, поэтому вводите их так же, как в журнале.</p>
@@ -359,21 +347,32 @@ footer{border-top:1px solid var(--rule);margin-top:20px;padding:14px 0 40px;font
   <p class="hint saved">Ответы сохраняются на этом телефоне автоматически: если страница обновится или закроется, откройте её снова — работа продолжится с того же места.</p>
   <div class="prog"><div class="progb"><i id="progf"></i></div><span id="progt"></span></div>
 
-  <div class="task" id="tk0"><h3>Разминка. Верно или неверно <span class="pts">3 балла</span></h3>
-   <p class="hint">Решите, верно ли утверждение, и укажите схему, на которой это видно. Балл — если верны оба ответа.</p>
-   <div id="t0"></div></div>
-
-  <div class="task" id="tk1"><h3>Задача 1. Хватит ли хлеба? Бюджет двора <span class="pts">11 баллов</span></h3>
+  <div class="task" id="tk1"><h3>Задание 1. Сравните два периода <span class="pts">6 баллов</span></h3>
+   <p class="hint">График и схема <a href="#s-ties">«Кто держит крестьянина»</a>. Нажмите на нужный столбик и посмотрите на цепи.</p>
    <div id="t1"></div></div>
 
-  <div class="task" id="tk2"><h3>Задача 2. Круговая порука на сходе <span class="pts">8 баллов</span></h3>
+  <div class="task" id="tk2"><h3>Задание 2. Почему изменилась клетка <span class="pts">6 баллов</span></h3>
+   <p class="hint">Таблица <a href="#s-ties">«Можно или нельзя»</a> и схема <a href="#s-path">«Путь крестьянина»</a>. В таблице значок в клетке сменился. Какой акт это сделал?</p>
    <div id="t2"></div></div>
 
-  <div class="task" id="tk3"><h3>Задача 3. За что платил крестьянин? Расчёт выкупа <span class="pts">8 баллов</span></h3>
+  <div class="task" id="tk3"><h3>Задание 3. Что изменил закон <span class="pts">5 баллов</span></h3>
+   <p class="hint">Схема <a href="#s-path">«Путь крестьянина»</a>. Нажимайте на кружки с годами. Для каждого события укажите, какая лента изменилась и в какую сторону. Балл ставится, если верны оба ответа.</p>
    <div id="t3"></div></div>
 
-  <div class="task" id="tk4"><h3>Вывод</h3>
-   <p class="hint">5–7 предложений. Опираясь на свои расчёты в задачах 1–3, ответьте: почему после 1861 г. крестьянин оставался зависимым, хотя стал лично свободным? Назовите не меньше трёх чисел из своих расчётов. Объясните, кому была выгодна круговая порука и почему выкуп называли «грабительским».</p>
+  <div class="task" id="tk4"><h3>Задание 4. Эксперимент со сходом <span class="pts">6 баллов</span></h3>
+   <p class="hint">Модель <a href="#s-mir">«Земля внутри общины»</a>. Выберите свой год и по очереди переключайте способы раздела. Смотрите на квадрат «на одного едока» у своего двора и на плашки «Выигрывают / Проигрывают».</p>
+   <div class="var" id="t4v"></div><div id="t4"></div></div>
+
+  <div class="task" id="tk5"><h3>Задание 5. Звено цепочки <span class="pts">4 балла</span></h3>
+   <p class="hint">Схема <a href="#s-mir">«Откуда взялось аграрное перенаселение»</a>. Нажмите на своё звено: стрелки и пояснение покажут, откуда оно взялось и к чему ведёт.</p>
+   <div id="t5"></div></div>
+
+  <div class="task" id="tk6"><h3>Задание 6. Верно или неверно <span class="pts">3 балла</span></h3>
+   <p class="hint">Решите, верно ли утверждение, и укажите схему, на которой это видно. Балл ставится, если верны оба ответа.</p>
+   <div id="t6"></div></div>
+
+  <div class="task" id="tk7"><h3>Задание 7. Вывод</h3>
+   <p class="hint">4–6 предложений. Был ли крестьянин после 1861 г. свободным человеком? Сравните два периода из задания 1: от кого крестьянин зависел сильнее всего и почему? Приведите не меньше двух фактов со схем страницы (закон, право из таблицы, цифру из модели общины). Объясните, кому была выгодна круговая порука. Согласны ли вы с оценкой зависимости на графике — где бы вы её изменили?</p>
    <label class="fld"><span>Ваш вывод</span><textarea id="concl" placeholder="Начните с главной мысли…"></textarea></label>
    <div class="cnt" id="cnt">0 слов</div></div>
 
@@ -641,11 +640,17 @@ const secs=['s-ties','s-path','s-mir','s-task'];
 const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){$('#nav').querySelectorAll('a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}})},{rootMargin:'-45% 0px -50% 0px'});
 secs.forEach(s=>io.observe(document.getElementById(s)));
 
-/* ---------- задания (версия 3: расчётные) ---------- */
+/* ---------- задания (версия 2) ---------- */
 const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
-const VER='v3',KEY='v63-';
+const VER='v2',KEY='v62-';
 let who=null,V=null;
 function pick(r,arr,n){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a.slice(0,n)}
+const LANE3=['Статус','Земля','Община','несколько лент'],DIR=['жёстче','легче','по-разному'];
+function evAns(j){const a=EV[j].v,b=EV[j-1].v;const ch=[0,1,2].filter(i=>a[i]!==b[i]);
+ const lane=ch.length===1?ch[0]:3;const s=ch.map(i=>Math.sign(a[i]-b[i]));const dir=s.every(x=>x>0)?0:s.every(x=>x<0)?1:2;return[lane,dir]}
+const RI=['i-ring','i-house','i-rod','i-road','i-mir','i-tag','i-chain','i-compass'];
+const ACT=[['Манифест и Положения 19 февраля 1861 г.','1861','i-book'],['Закон об обязательном выкупе 1881 г.','1881','i-coin'],['Закон 14 декабря 1893 г.','1893','i-chain'],['Закон 12 марта 1903 г.','1903','i-mir'],['Манифест 11 августа 1904 г.','1904','i-rod'],['Указы 5 октября и 9 ноября 1906 г.','1906','i-compass']];
+const TR2=[[0,1,0],[1,1,0],[6,1,0],[7,1,0],[4,1,0],[4,3,2],[6,4,3],[2,4,4],[3,5,5],[4,5,5],[5,5,5],[7,5,5]];
 const EVID=['«Кто держит крестьянина»','«Можно или нельзя»','«Путь крестьянина»','«Земля внутри общины»','«Причины перенаселения» и графики'];
 const ST6=[
  ['Сразу после 1861 г. крестьянин стал собственником своего надела.',false,[2]],
@@ -660,97 +665,73 @@ const ST6=[
  ['Круговая порука отменена в 1903 г.',true,[1,2]],
  ['К 1900 г. пашни на одного едока в общине стало больше, чем в 1861 г.',false,[3]],
  ['Сильнее всего начальство давило на крестьянина при земских начальниках, в 1889–1902 гг.',true,[0]]];
-/* губернии: название, цена десятины 1854–1859 гг. (руб.), изменение надела после 1861 г. (%) — по П. А. Зайончковскому */
-const G3=[['Владимирская',11.05,-15.7],['Смоленская',10.41,-16.0],['Тверская',12.84,-5.2],['Ярославская',15.04,-7.1],['Херсонская',14.69,-13.8]];
-const SEED=9,NORM=20,PRICE=0.6,YLD2={1861:34,1880:34,1900:39},YDEC={1861:'1881–1890',1880:'1881–1890',1900:'1891–1900'};
-const MK4=Object.keys(MODES);
+const MK=['n','p','y'],MT=['✕','~','✓'];
+const fic=(f,cls='tic')=>`<svg class="${cls}" style="fill:${f[1]};color:${f[1]}"><use href="#${f[2]}"/></svg>`;
 const tile=(type,name,id,val,ic,lab)=>`<label class="tile"><input type="${type}" name="${name}" id="${id}" value="${val}">${ic}<span>${lab}</span></label>`;
-const r1=x=>Math.round(x*10)/10,r0=x=>Math.round(x),r2=x=>Math.round(x*100)/100;
-/* то, что студент видит в модели общины (округлённые числа) */
-function seen(y,m){const U=HH.map(h=>units(h,y,m)),SU=U.reduce((a,b)=>a+b,0);
- return{land:U.map(u=>r1(u/SU*LAND)),pay:U.map(u=>r0(PAY*u/SU)),eat:HH.map(h=>h[3][y][1]),work:HH.map(h=>h[3][y][2])}}
-function budget(k,y,m){const s=seen(y,m),L=s.land[k],E=s.eat[k],P=s.pay[k],Y=YLD2[y];
- const S=L*2/3,C=S*Y,R=C-S*SEED,F=E*NORM,PP=P/PRICE,B=R-F-PP;return{L,E,P,Y,S,C,R,F,PP,B,feed:Math.max(0,Math.floor((R-PP)/NORM)),verdict:R-PP>=F?0:R>=F?1:2}}
+function peAll(k,y){return Object.keys(MODES).map(m=>{const U=HH.map(h=>units(h,y,m)),SU=U.reduce((a,b)=>a+b,0);return U[k]/SU*LAND/HH[k][3][y][1]})}
+function shAll(y,m){const U=HH.map(h=>units(h,y,m)),SU=U.reduce((a,b)=>a+b,0);return U.map(u=>u/SU*LAND)}
+const sumP=p=>FORCE.reduce((a,f)=>a+f[3][p],0);
 function mkVar(){const r=rng(hash(who.fio.toLowerCase()+'|'+who.grp.toLowerCase()));
- const st=pick(r,ST6.map((_,i)=>i),3);
- /* задача 1 */ const k=Math.floor(r()*HH.length),y=r()<.5?1880:1900,m=MK4[Math.floor(r()*4)];
- /* задача 2 */ const y2=[1861,1880,1900][Math.floor(r()*3)],m2=MK4[Math.floor(r()*4)];const bx=pick(r,[0,1,2,3,4],3);
- /* задача 3 */ const g=Math.floor(r()*G3.length),ob=[8,8.5,9,9.5,10][Math.floor(r()*5)],n0=[3.5,3.75,4,4.25,4.5][Math.floor(r()*5)];
- V={st,k,y,m,y2,m2,b:bx[0],x1:bx[1],x2:bx[2],g,ob,n0}}
-function numIn(id,lab,unit,hint){return `<div class="nrow"><label for="${id}">${lab}${hint?`<small>${hint}</small>`:''}</label><span class="nin"><input id="${id}" inputmode="decimal" autocomplete="off"><em>${unit}</em></span></div>`}
-const hhTag=k=>`<i class="hsw" style="background:${HH[k][1]}"></i><b>${HH[k][0]}</b>`;
+ /* 1 */ const A=Math.floor(r()*5),B=A+1+Math.floor(r()*(5-A));
+ /* 2 */ const acts=pick(r,[0,2,3,4,5],3),used=[];const t2=acts.map(a=>{let c=TR2.filter(t=>t[2]===a&&!used.includes(t[0]));if(!c.length)c=TR2.filter(t=>t[2]===a);const x=c[Math.floor(r()*c.length)];used.push(x[0]);return x});
+ /* 3 */ const ee=pick(r,[1,2,3,4,5,6,7],5).sort((a,b)=>a-b);
+ /* 4 */ let k,y,tries=0;const MK4=Object.keys(MODES);
+ const R2=x=>Math.round(x*100),R1=x=>Math.round(x*10);
+ do{k=Math.floor(r()*HH.length);y=r()<.5?1880:1900;const pe=peAll(k,y).map(R2),mx=Math.max(...pe),mn=Math.min(...pe);
+  if(pe.filter(v=>v===mx).length===1&&pe.filter(v=>v===mn).length===1)break}while(++tries<80);
+ const pe=peAll(k,y).map(R2),a4=[pe.indexOf(Math.max(...pe)),pe.indexOf(Math.min(...pe))];
+ const sR=shAll(y,'rev').map(R1),sE=shAll(y,'e').map(R1),win=HH.map((_,i)=>i).filter(i=>sE[i]>sR[i]);
+ /* 5 */ const N=pick(r,['p2','p3','p4','p5','p6','r'],1)[0];
+ const E=[];CZ.forEach(t=>t[1].forEach(n=>n[5].forEach(b=>E.push([n[0],b]))));
+ const causes=E.filter(e=>e[1]===N).map(e=>e[0]),cons=CN[N][5].slice();
+ const pool=Object.keys(CN).filter(x=>x!==N);
+ const opt=(good)=>pick(r,good.concat(pick(r,pool.filter(x=>!good.includes(x)),Math.max(2,6-good.length))),99);
+ /* 6 */ const st=pick(r,ST6.map((_,i)=>i),3);
+ V={A,B,t2,ee,k,y,a4,win,N,causes,cons,o5a:opt(causes),o5b:opt(cons),st}}
+function sel(id,opts){return `<select id="${id}" class="sl"><option value="">—</option>${opts.map((o,i)=>`<option value="${i}">${o}</option>`).join('')}</select>`}
 function startWork(){
  mkVar();const v=V;
  $('#start').hidden=true;$('#work').hidden=false;$('#whoName').textContent=`${who.fio}, ${who.grp}`;$('#whoVar').textContent=`Вариант ${hash(who.fio+who.grp)%900+100}`;
- /* 0 */
- $('#t0').innerHTML=v.st.map((s,n)=>`<div class="q"><p><span class="n">${n+1}.</span>«${ST6[s][0]}»</p><div class="tiles t2c">${tile('radio','a0v_'+n,`a0v_${n}_1`,1,'<span class="tx0">✓</span>','верно')}${tile('radio','a0v_'+n,`a0v_${n}_0`,0,'<span class="tx0">✕</span>','неверно')}</div>
-  <p class="qs">Где это видно?</p><div class="tiles">${EVID.map((x,i)=>tile('radio','a0e_'+n,`a0e_${n}_${i}`,i,'',x)).join('')}</div></div>`).join('');
  /* 1 */
- $('#t1').innerHTML=`<div class="scene"><div class="sc-h">Ваш двор: ${hhTag(v.k)}${HH[v.k][4]?` <span>(${HH[v.k][4]})</span>`:''}</div>
-  <div class="sc-g"><div><span>Год</span><b>${v.y}</b></div><div><span>Сход делит землю</span><b>${MODES[v.m][0]}</b></div><div><span>Урожайность</span><b>за ${YDEC[v.y]} гг.</b></div></div></div>
-  <div class="cond"><b>Условия задачи</b> (условные нормы для расчёта):
-   <ul><li>засевают два поля из трёх, третье — под паром: засеянная площадь = пашня × 2/3;</li><li>на семена оставляют <b>${SEED} пудов</b> с каждой засеянной десятины;</li><li>чтобы прокормить одного едока, нужно <b>${NORM} пудов</b> хлеба в год;</li><li>платежи вносят деньгами; 1 пуд хлеба продают за <b>${String(PRICE).replace('.',',')} руб.</b></li></ul></div>
-  <p class="src">Где взять данные: пашню двора, число едоков и платёж — в модели <a href="#s-mir">«Земля внутри общины»</a> (выставьте свой год и способ раздела); урожайность крестьянской земли — на графике <a href="#s-mir">«Урожай, пудов с десятины»</a> под схемой причин.</p>
-  <div class="calc2">
-   ${numIn('b1','1) Засеянная площадь двора','дес.','пашня × 2/3')}
-   ${numIn('b2','2) Собранный урожай','пудов','засеянная площадь × урожайность')}
-   ${numIn('b3','3) Остаток после семян','пудов',`урожай − засеянная площадь × ${SEED}`)}
-   ${numIn('b4','4) Нужно хлеба на еду всем едокам','пудов',`едоки × ${NORM}`)}
-   ${numIn('b5','5) Сколько хлеба продать, чтобы внести платежи','пудов',`платёж ÷ ${String(PRICE).replace('.',',')}`)}
-   ${numIn('b6','6) Итог года: излишек (+) или нехватка (−)','пудов','остаток − еда − платежи')}
-   ${numIn('b7','7) Скольких едоков прокормит хлеб после семян и платежей','чел.','(остаток − платежи) ÷ норма, целое число')}
-  </div>
-  <svg class="bud" id="bud" viewBox="0 0 600 120" role="img" aria-label="Ваш бюджет двора"></svg>
-  <div class="q"><p><span class="n">8.</span>Какой вывод верен для вашего двора в ${v.y} г.?</p><div class="tiles">${['хлеба хватает и на еду, и на платежи, остаётся излишек','на еду хватает, но платежи съедают часть нужного хлеба','хлеба не хватает даже на еду'].map((x,i)=>tile('radio','b8','b8_'+i,i,'',x)).join('')}</div></div>
-  <div class="q"><p><span class="n">9.</span>Повторите расчёт итога года (шаг 6) для того же двора и того же способа раздела, но в <b>1861 г.</b> Урожайность возьмите ${YLD2[1861]} пуда.</p><div class="calc2">${numIn('b9','Итог 1861 г.','пудов','пашня, едоки и платёж — из модели за 1861 г.')}${numIn('b10',`На сколько пудов итог ${v.y} г. отличается от итога 1861 г.`,'пудов',`итог ${v.y} − итог 1861; со знаком «−», если стало хуже`)}</div></div>`;
+ const ph=p=>`<b class="pchip">${PER[p]}<small>${PSUB[p]}</small></b>`;
+ $('#t1').innerHTML=`<div class="pp2">${ph(v.A)}<span>→</span>${ph(v.B)}</div>
+  <div class="q"><p><span class="n">1.</span>Какая сила держала крестьянина крепче всего в период ${ph(v.A)}? Если таких несколько, отметьте все.</p><div class="tiles">${FORCE.map((f,i)=>tile('checkbox','a1a','a1a_'+i,i,fic(f),f[0])).join('')}</div></div>
+  <div class="q"><p><span class="n">2.</span>Какие связи ослабли от периода ${ph(v.A)} к периоду ${ph(v.B)}?</p><div class="tiles">${FORCE.map((f,i)=>tile('checkbox','a1b','a1b_'+i,i,fic(f),f[0])).join('')}${tile('checkbox','a1b','a1b_n','n','<span class="tx0">∅</span>','ни одна')}</div></div>
+  <div class="q"><p><span class="n">3.</span>Общая сила зависимости в периоде ${ph(v.B)} по сравнению с ${ph(v.A)}…</p><div class="tiles t3c">${[['меньше','▼'],['больше','▲'],['такая же','=']].map((x,i)=>tile('radio','a1c','a1c_'+i,i,`<span class="tx0">${x[1]}</span>`,x[0])).join('')}</div></div>`;
  /* 2 */
- $('#t2').innerHTML=`<div class="scene"><div class="sc-h">Сельское общество, ${v.y2} г., сход делит землю и платежи ${MODES[v.m2][0]}</div>
-  <div class="sc-g"><div><span>Не заплатил</span><b>${hhTag(v.b)}</b></div><div><span>Ваши дворы</span><b>${hhTag(v.x1)} и ${hhTag(v.x2)}</b></div></div></div>
-  <div class="cond"><b>Условие.</b> Двор ${HH[v.b][0]} разорился и не внёс годовой платёж. По круговой поруке сход раскладывает его долг на остальные четыре двора <b>пропорционально их пашне</b>: доля двора = долг × пашня двора ÷ пашня всех четырёх дворов.</div>
-  <p class="src">Данные — в модели <a href="#s-mir">«Земля внутри общины»</a>: выставьте ${v.y2} г. и способ «${MODES[v.m2][1]}».</p>
-  <div class="calc2">
-   ${numIn('c1',`1) Долг двора ${HH[v.b][0]}`,'руб.','его годовой платёж')}
-   ${numIn('c2','2) Пашня четырёх остальных дворов вместе','дес.','72 − пашня разорившегося двора')}
-   ${numIn('c3',`3) Доплата двора ${HH[v.x1][0]}`,'руб.','')}
-   ${numIn('c4',`4) Доплата двора ${HH[v.x2][0]}`,'руб.','')}
-   ${numIn('c5',`5) На сколько процентов вырос платёж двора ${HH[v.x1][0]}`,'%','доплата ÷ свой платёж × 100')}
-  </div>
-  <div class="q"><p><span class="n">6.</span>С какого года дворы ${HH[v.x1][0]} и ${HH[v.x2][0]} перестали бы отвечать за чужой долг?</p><div class="tiles">${[['1861','Положения 19 февраля'],['1883','обязательный выкуп'],['1893','закон 14 декабря'],['1903','закон 12 марта'],['1906','указы 1906 г.']].map((x,i)=>tile('radio','c6','c6_'+i,i,`<span class="tx0">${x[0]}</span>`,x[1])).join('')}</div></div>`;
+ $('#t2').innerHTML=v.t2.map(([row,p],n)=>{const a=RIGHTS[row][1][p-1],b=RIGHTS[row][1][p];
+  return `<div class="q"><p><span class="n">${n+1}.</span><svg class="tic"><use href="#${RI[row]}"/></svg><b>${RIGHTS[row][0]}</b></p>
+  <div class="chg"><span>${PER[p-1]}</span><i class="mk2 ${MK[a]}">${MT[a]}</i><em>→</em><span>${PER[p]}</span><i class="mk2 ${MK[b]}">${MT[b]}</i></div>
+  <p class="qs">Какой акт изменил эту клетку?</p><div class="tiles">${ACT.map((x,i)=>tile('radio','a2_'+n,`a2_${n}_${i}`,i,`<svg class="tic"><use href="#${x[2]}"/></svg>`,x[0])).join('')}</div></div>`}).join('');
  /* 3 */
- const G=G3[v.g];
- $('#t3').innerHTML=`<div class="scene"><div class="sc-h">${G[0]} губерния, помещичье имение, 1861 г.</div>
-  <div class="sc-g"><div><span>Надел до реформы</span><b>${String(v.n0).replace('.',',')} дес. на душу</b></div><div><span>Оброк по уставной грамоте</span><b>${String(v.ob).replace('.',',')} руб. с души в год</b></div><div><span>Изменение надела в губернии</span><b>${G[2]>0?'+':''}${String(G[2]).replace('.',',')}%</b></div><div><span>Цена десятины на рынке, 1854–1859 гг.</span><b>${String(G[1]).replace('.',',')} руб.</b></div></div></div>
-  <div class="cond"><b>Как считали выкуп.</b> Выкупную сумму получали капитализацией оброка из 6%: оброк ÷ 0,06. Помещик получал такой капитал, который в банке под 6% давал бы прежний оброк. Казна выдавала помещику ссуду — 80% выкупной суммы. Крестьянин возвращал ссуду 49 лет, ежегодно внося 6% от неё. Цифры по губернии — по П. А. Зайончковскому.</div>
-  <div class="calc2">
-   ${numIn('d1','1) Надел на душу после реформы','дес.',`надел до реформы × (100 ${G[2]<0?'−':'+'} ${String(Math.abs(G[2])).replace('.',',')}) ÷ 100`)}
-   ${numIn('d2','2) Выкупная сумма за надел души','руб.','оброк ÷ 0,06')}
-   ${numIn('d3','3) Казённая ссуда помещику','руб.','80% выкупной суммы')}
-   ${numIn('d4','4) Ежегодный выкупной платёж','руб.','6% от ссуды')}
-   ${numIn('d5','5) Сколько крестьянин заплатит казне за 49 лет','руб.','')}
-   ${numIn('d6','6) Рыночная стоимость надела души','руб.','надел после реформы × цена десятины')}
-   ${numIn('d7','7) Во сколько раз выкупная сумма больше рыночной стоимости','раз','')}
-  </div>
-  <div class="q"><p><span class="n">8.</span>Почему выкупная сумма оказалась выше рыночной цены земли?</p><div class="tiles">${['выкуп считали из оброка: крестьянин платил не только за землю, но и за доход, который помещик терял вместе с властью над его трудом','за годы реформы земля в губернии подорожала во много раз','казна добавляла к выкупу налог на освобождение','чиновники ошиблись при составлении уставных грамот'].map((x,i)=>tile('radio','d8','d8_'+i,i,'',x)).join('')}</div></div>`;
- restore();prog();drawBud()}
-const num=s=>{const t=String(s||'').replace(/\s/g,'').replace(',','.').replace('−','-');return t===''?NaN:parseFloat(t)};
-function drawBud(){if(!V)return;const g=id=>num($('#'+id).value);const C=g('b2'),R=g('b3'),F=g('b4'),P=g('b5');const s=$('#bud');
- if([C,R,F,P].some(isNaN)){s.innerHTML=`<text x="300" y="64" text-anchor="middle" font-size="14" fill="currentColor" opacity=".6">Заполните шаги 2–5 — здесь появится график вашего бюджета</text>`;s.style.color='var(--ink)';return}
- const seed=C-R,tot=Math.max(C,seed+F+P),k=460/tot;let x=70,o='';
- o+=`<text x="4" y="34" font-size="13" fill="currentColor">Урожай</text><rect x="70" y="20" width="${C*k}" height="22" fill="#b7862c" stroke="#2b2116"/><text x="${74+C*k}" y="36" font-size="12" fill="currentColor">${fmt(C,0)}</text>`;
- o+=`<text x="4" y="82" font-size="13" fill="currentColor">Расход</text>`;
- [[seed,'#8c7a55','семена'],[F,'#3d5a80','еда'],[P,'#a5281b','платежи']].forEach(([v2,c,l])=>{if(v2<=0)return;o+=`<rect x="${x}" y="68" width="${v2*k}" height="22" fill="${c}" stroke="#2b2116"/>`;if(v2*k>44)o+=`<text x="${x+4}" y="83" font-size="11.5" fill="#fff">${l}</text>`;x+=v2*k});
- const d=C-(seed+F+P);o+=`<text x="70" y="112" font-size="13" font-weight="700" fill="${d<0?'#a5281b':'#3f6b2a'}">${d<0?'Нехватка':'Излишек'}: ${fmt(Math.abs(d),0)} пудов</text>`;
- s.innerHTML=o;s.style.color='var(--ink)'}
+ $('#t3').innerHTML=`<div class="lkey">${LN.map(l=>`<span><svg class="tic" style="fill:${l[1]};color:${l[1]}"><use href="#${l[2]}"/></svg>${l[0]}</span>`).join('')}<span>▲ жёстче</span><span>▼ легче</span></div>`+v.ee.map((j,n)=>`<div class="q q3"><p><span class="n">${n+1}.</span><b>${EV[j].t}</b> — ${EV[j].n}</p><div class="two"><label>Что изменилось ${sel(`a3l_${n}`,LANE3)}</label><label>Зависимость стала ${sel(`a3d_${n}`,DIR)}</label></div></div>`).join('');
+ /* 4 */
+ const h=HH[v.k];
+ $('#t4v').innerHTML=`Ваш двор: <i class="hsw" style="background:${h[1]}"></i><b>${h[0]}</b>${h[4]?` (${h[4]})`:''}, год <b>${v.y}</b>.`;
+ const mt=(name,id)=>Object.entries(MODES).map(([m,x],i)=>tile('radio',name,`${id}_${i}`,i,`<svg class="tic"><use href="#${x[2]}"/></svg>`,x[0])).join('');
+ $('#t4').innerHTML=`<div class="q"><p><span class="n">1.</span>При каком способе раздела ваш двор получает <b>больше всего</b> пашни на одного едока?</p><div class="tiles">${mt('a4a','a4a')}</div></div>
+  <div class="q"><p><span class="n">2.</span>При каком способе — <b>меньше всего</b>?</p><div class="tiles">${mt('a4b','a4b')}</div></div>
+  <div class="q"><p><span class="n">3.</span>В ${v.y} г. сход переходит от раздела по ревизским душам к разделу по едокам. Какие дворы получат <b>больше земли</b>, чем раньше? Отметьте все.</p><div class="tiles">${HH.map((x,i)=>tile('checkbox','a4c','a4c_'+i,i,`<i class="hsw" style="background:${x[1]}"></i>`,x[0])).join('')}</div></div>`;
+ /* 5 */
+ const nt=(name,ids)=>ids.map(id=>tile('checkbox',name,`${name}_${id}`,id,`<svg class="tic"><use href="#${CN[id][2]}"/></svg>`,CN[id][3])).join('');
+ $('#t5').innerHTML=`<div class="var">Ваше звено: <svg class="tic"><use href="#${CN[v.N][2]}"/></svg><b>${CN[v.N][3]}</b></div>
+  <div class="q"><p><span class="n">1.</span>Что <b>ведёт к</b> этому звену? Отметьте все прямые причины.</p><div class="tiles">${nt('a5a',v.o5a)}</div></div>
+  <div class="q"><p><span class="n">2.</span>К чему это звено <b>ведёт</b>? Отметьте все прямые последствия.</p><div class="tiles">${nt('a5b',v.o5b)}</div></div>`;
+ /* 6 */
+ $('#t6').innerHTML=v.st.map((s,n)=>`<div class="q"><p><span class="n">${n+1}.</span>«${ST6[s][0]}»</p><div class="tiles t2c">${tile('radio','a6v_'+n,`a6v_${n}_1`,1,'<span class="tx0">✓</span>','верно')}${tile('radio','a6v_'+n,`a6v_${n}_0`,0,'<span class="tx0">✕</span>','неверно')}</div>
+  <p class="qs">Где это видно?</p><div class="tiles">${EVID.map((x,i)=>tile('radio','a6e_'+n,`a6e_${n}_${i}`,i,'',x)).join('')}</div></div>`).join('');
+ restore();prog()}
 function save(){const s={};document.querySelectorAll('#work input,#work textarea,#work select').forEach(e=>{if(e.type==='radio'){if(e.checked)s[e.name]=e.value}else if(e.type==='checkbox')s[e.id]=e.checked?'1':'';else s[e.id]=e.value});store.set(KEY+hash(who.fio+who.grp),JSON.stringify(s))}
 function restore(){let s;try{s=JSON.parse(store.get(KEY+hash(who.fio+who.grp))||'{}')}catch(e){s={}}
  for(const[k,v]of Object.entries(s)){const r=document.querySelector(`#work input[type=radio][name="${k}"][value="${v}"]`);if(r){r.checked=true;continue}const e=document.getElementById(k);if(!e)continue;if(e.type==='checkbox')e.checked=v==='1';else e.value=v}cnt()}
 function cnt(){const n=($('#concl').value.trim().match(/\S+/g)||[]).length;$('#cnt').textContent=n+' слов'}
-const rad=n=>{const e=document.querySelector(`#work input[name="${n}"]:checked`);return e?e.value:null};
-const NUMS=['b1','b2','b3','b4','b5','b6','b7','b9','b10','c1','c2','c3','c4','c5','d1','d2','d3','d4','d5','d6','d7'],RADS=['b8','c6','d8'];
-function units3(){if(!V)return[0,1];const u=[];V.st.forEach((_,n)=>u.push(rad('a0v_'+n)!=null&&rad('a0e_'+n)!=null));
- NUMS.forEach(id=>u.push(!isNaN(num($('#'+id).value))));RADS.forEach(n=>u.push(rad(n)!=null));u.push(($('#concl').value.trim().match(/\S+/g)||[]).length>=25);return[u.filter(Boolean).length,u.length]}
-function prog(){const[a,b]=units3();$('#progf').style.width=(a/b*100)+'%';$('#progt').textContent=`Выполнено ${a} из ${b}`}
-$('#work').addEventListener('input',e=>{save();if(e.target.id==='concl')cnt();prog();drawBud()});
+const anyChk=n=>!!document.querySelector(`#work input[name="${n}"]:checked`);
+function units2(){if(!V)return[0,1];const u=[anyChk('a1a'),anyChk('a1b'),anyChk('a1c')];
+ V.t2.forEach((_,n)=>u.push(anyChk('a2_'+n)));V.ee.forEach((_,n)=>u.push($(`#a3l_${n}`).value!==''&&$(`#a3d_${n}`).value!==''));
+ u.push(anyChk('a4a'),anyChk('a4b'),anyChk('a4c'),anyChk('a5a'),anyChk('a5b'));V.st.forEach((_,n)=>u.push(anyChk('a6v_'+n)&&anyChk('a6e_'+n)));
+ u.push(($('#concl').value.trim().match(/\S+/g)||[]).length>=25);return[u.filter(Boolean).length,u.length]}
+function prog(){const[a,b]=units2();$('#progf').style.width=(a/b*100)+'%';$('#progt').textContent=`Выполнено ${a} из ${b}`}
+$('#work').addEventListener('input',e=>{save();if(e.target.id==='concl')cnt();prog()});
 $('#work').addEventListener('change',()=>{save();prog()});
 $('#go').onclick=()=>{const fio=$('#fio').value.trim().replace(/\s+/g,' '),grp=$('#grp').value.trim().toUpperCase().replace(/\s+/g,'');
  if(fio.split(' ').length<2){$('#gowarn').textContent='Введите фамилию и имя полностью.';return}
@@ -759,53 +740,41 @@ $('#go').onclick=()=>{const fio=$('#fio').value.trim().replace(/\s+/g,' '),grp=$
 function lockSent(html){$('#result').hidden=false;$('#result').innerHTML=html;const b=$('#send');b.disabled=true;b.textContent='Отправлено';document.querySelectorAll('#work input,#work textarea,#work select').forEach(e=>e.disabled=true)}
 try{const w=JSON.parse(store.get('v61-who')||'null');if(w&&w.fio&&w.grp){$('#fio').value=w.fio;$('#grp').value=w.grp;who=w;startWork();const sent=store.get(KEY+'sent-'+hash(w.fio+w.grp));if(sent)lockSent(sent)}}catch(e){}
 $('#reset').onclick=()=>{store.set('v61-who','');location.reload()};
-/* допуск: относительный rel или абсолютный ab */
-const ok=(x,t,rel=0.015,ab=0.06)=>!isNaN(x)&&Math.abs(x-t)<=Math.max(ab,Math.abs(t)*rel);
-function expected(){const v=V,b=budget(v.k,v.y,v.m),b61=budget(v.k,1861,v.m);
- const s=seen(v.y2,v.m2),debt=s.pay[v.b],rest=LAND-s.land[v.b],e1=debt*s.land[v.x1]/rest,e2=debt*s.land[v.x2]/rest;
- const G=G3[v.g],n1=v.n0*(1+G[2]/100),VS=v.ob/0.06,L=VS*0.8,AP=L*0.06;
- return{b,b61,c:[debt,rest,e1,e2,e1/s.pay[v.x1]*100],d:[n1,VS,L,AP,AP*49,n1*G[1],VS/(n1*G[1])]}}
+const chkSet=n=>[...document.querySelectorAll(`#work input[name="${n}"]:checked`)].map(e=>e.value);
+const rad=n=>{const e=document.querySelector(`#work input[name="${n}"]:checked`);return e?e.value:null};
+const same=(a,b)=>a.length===b.length&&a.every(x=>b.includes(x));
+function setScore(got,good,max){const wr=got.filter(x=>!good.includes(x)).length,ms=good.filter(x=>!got.includes(x)).length;return Math.max(0,max-wr-ms)}
 function grade(){
- const miss=[],wrong=[],det=[],sc=[0,0,0,0],v=V,X=expected(),g=id=>{const e=document.getElementById(id);return e?num(e.value):NaN};
- /* 0 */ v.st.forEach((s,n)=>{const a=rad('a0v_'+n),e=rad('a0e_'+n);if(a==null||e==null)miss.push('разминка');if(a!=null&&e!=null&&(+a===1)===ST6[s][1]&&ST6[s][2].includes(+e))sc[0]++;else wrong.push('Р.'+(n+1))});
- /* 1 — шаг засчитывается, если верен сам по себе или верно посчитан из собственных предыдущих чисел студента */
- const B=X.b,b=[0,1,2,3,4,5,6,7].map(i=>g('b'+i));
- const own=[null,null,b[1]*B.Y,b[2]-b[1]*SEED,null,null,b[3]-b[4]-b[5],(b[3]-b[5])/NORM];
- const t1=[[1,B.S,.015,.02],[2,B.C,.015,1],[3,B.R,.02,1.5],[4,B.F,0,.5],[5,B.PP,.015,1],[6,B.B,.03,3]];
- t1.forEach(([i,t,rel,ab])=>{const x=b[i];if(isNaN(x))miss.push('1');if(ok(x,t,rel,ab)||(own[i]!=null&&!isNaN(own[i])&&ok(x,own[i],.02,1.5)))sc[1]++;else wrong.push('1.'+i)});
- const f7=b[7];if(isNaN(f7))miss.push('1');if(!isNaN(f7)&&(Math.abs(f7-B.feed)<=1||(!isNaN(own[7])&&Math.abs(f7-Math.max(0,Math.floor(own[7])))<=1)))sc[1]++;else wrong.push('1.7');
- const v8=rad('b8');if(v8==null)miss.push('1');if(v8!=null&&+v8===B.verdict)sc[1]++;else wrong.push('1.8');
- const x9=g('b9');if(isNaN(x9))miss.push('1');if(ok(x9,X.b61.B,.03,3))sc[1]+=2;else wrong.push('1.9');
- const x10=g('b10');if(isNaN(x10))miss.push('1');if(ok(x10,B.B-X.b61.B,.04,4)||ok(x10,b[6]-x9,.03,2))sc[1]++;else wrong.push('1.10');
- det.push(`З1 (${HH[v.k][0]}, ${v.y}, ${MODES[v.m][1]}; верно ${[B.S,B.C,B.R,B.F,B.PP,B.B].map(x=>fmt(x,1)).join('/')}; 1861: ${fmt(X.b61.B,1)}): ${['b1','b2','b3','b4','b5','b6','b7','b9'].map(id=>$('#'+id).value||'?').join('/')}`);
- /* 2 */ const c=[g('c1'),g('c2'),g('c3'),g('c4'),g('c5')];c.forEach(x=>{if(isNaN(x))miss.push('2')});
- if(ok(c[0],X.c[0],0,.5))sc[2]++;else wrong.push('2.1');
- if(ok(c[1],X.c[1],.005,.15))sc[2]++;else wrong.push('2.2');
- const s2=seen(v.y2,v.m2),own2=[c[0]*s2.land[v.x1]/c[1],c[0]*s2.land[v.x2]/c[1],c[2]/s2.pay[v.x1]*100];
- if(ok(c[2],X.c[2],.03,.15)||ok(c[2],own2[0],.03,.15))sc[2]+=2;else wrong.push('2.3');
- if(ok(c[3],X.c[3],.03,.15)||ok(c[3],own2[1],.03,.15))sc[2]+=2;else wrong.push('2.4');
- if(ok(c[4],X.c[4],.04,1)||ok(c[4],own2[2],.04,1))sc[2]++;else wrong.push('2.5');
- const c6=rad('c6');if(c6==null)miss.push('2');if(c6==='3')sc[2]++;else wrong.push('2.6');
- det.push(`З2 (${v.y2}, ${MODES[v.m2][1]}, банкрот ${HH[v.b][0]}; верно ${X.c.map(x=>fmt(x,2)).join('/')}): ${c.map((x,i)=>$('#c'+(i+1)).value||'?').join('/')}`);
- /* 3 */ const d=[1,2,3,4,5,6,7].map(i=>g('d'+i));d.forEach(x=>{if(isNaN(x))miss.push('3')});
- const tol3=[[.01,.02],[.005,.05],[.005,.05],[.005,.05],[.01,.5],[.015,.1],[.03,.06]];
- const own3=[null,null,d[1]*0.8,d[2]*0.06,d[3]*49,d[0]*G3[v.g][1],d[1]/d[5]];
- d.forEach((x,i)=>{if(ok(x,X.d[i],tol3[i][0],tol3[i][1])||(own3[i]!=null&&!isNaN(own3[i])&&ok(x,own3[i],tol3[i][0]+.005,tol3[i][1])))sc[3]++;else wrong.push('3.'+(i+1))});
- const d8=rad('d8');if(d8==null)miss.push('3');if(d8==='0')sc[3]++;else wrong.push('3.8');
- det.push(`З3 (${G3[v.g][0]}, оброк ${v.ob}, надел ${v.n0}; верно ${X.d.map(x=>fmt(x,2)).join('/')}): ${d.map((x,i)=>$('#d'+(i+1)).value||'?').join('/')}`);
+ const miss=[],wrong=[],det=[],sc=[0,0,0,0,0,0],v=V;
+ /* 1 */ const pa=FORCE.map(f=>f[3][v.A]),pb=FORCE.map(f=>f[3][v.B]),mx=Math.max(...pa);
+ const g1a=FORCE.map((_,i)=>String(i)).filter(i=>pa[i]===mx),g1b0=FORCE.map((_,i)=>String(i)).filter(i=>pb[i]<pa[i]),g1b=g1b0.length?g1b0:['n'];
+ const g1c=String(sumP(v.B)<sumP(v.A)?0:sumP(v.B)>sumP(v.A)?1:2);
+ const a1a=chkSet('a1a'),a1b=chkSet('a1b'),a1c=rad('a1c');if(!a1a.length||!a1b.length||a1c==null)miss.push('1');
+ const s1=[same(a1a,g1a)?2:0,same(a1b,g1b)?2:0,a1c===g1c?2:0];sc[0]=s1.reduce((a,b)=>a+b);s1.forEach((x,i)=>{if(!x)wrong.push('1.'+(i+1))});
+ det.push(`З1 (${PER[v.A]}→${PER[v.B]}): ${a1a.map(i=>FORCE[i][0]).join('+')||'?'} / ${a1b.map(i=>i==='n'?'ни одна':FORCE[i][0]).join('+')||'?'} / ${['меньше','больше','такая же'][a1c]||'?'}`);
+ /* 2 */ v.t2.forEach(([row,p,act],n)=>{const a=rad('a2_'+n);if(a==null)miss.push('2');if(a!=null&&+a===act)sc[1]+=2;else wrong.push('2.'+(n+1))});
+ det.push('З2: '+v.t2.map((t,n)=>{const a=rad('a2_'+n);return a==null?'?':ACT[a][1]}).join(', '));
+ /* 3 */ v.ee.forEach((j,n)=>{const l=$(`#a3l_${n}`).value,d=$(`#a3d_${n}`).value;if(l===''||d==='')miss.push('3');const[al,ad]=evAns(j);if(+l===al&&+d===ad&&l!==''&&d!=='')sc[2]++;else wrong.push('3.'+(n+1))});
+ /* 4 */ const a4a=rad('a4a'),a4b=rad('a4b'),a4c=chkSet('a4c');if(a4a==null||a4b==null||!a4c.length)miss.push('4');
+ const s4=[a4a!=null&&+a4a===v.a4[0]?2:0,a4b!=null&&+a4b===v.a4[1]?2:0,setScore(a4c,v.win.map(String),2)];sc[3]=s4.reduce((a,b)=>a+b);s4.forEach((x,i)=>{if(x<2)wrong.push('4.'+(i+1))});
+ const MK4=Object.keys(MODES);det.push(`З4 (${HH[v.k][0]}, ${v.y}): ${a4a!=null?MODES[MK4[a4a]][1]:'?'} / ${a4b!=null?MODES[MK4[a4b]][1]:'?'} / ${a4c.map(i=>HH[i][0]).join('+')||'?'}`);
+ /* 5 */ const a5a=chkSet('a5a'),a5b=chkSet('a5b');if(!a5a.length||!a5b.length)miss.push('5');
+ const s5=[setScore(a5a,v.causes,2),setScore(a5b,v.cons,2)];sc[4]=s5[0]+s5[1];s5.forEach((x,i)=>{if(x<2)wrong.push('5.'+(i+1))});
+ det.push(`З5 (${CN[v.N][3]}): ${a5a.map(i=>CN[i][3]).join('+')||'?'} / ${a5b.map(i=>CN[i][3]).join('+')||'?'}`);
+ /* 6 */ v.st.forEach((s,n)=>{const a=rad('a6v_'+n),e=rad('a6e_'+n);if(a==null||e==null)miss.push('6');if(a!=null&&e!=null&&(+a===1)===ST6[s][1]&&ST6[s][2].includes(+e))sc[5]++;else wrong.push('6.'+(n+1))});
  return{miss:[...new Set(miss)],wrong,sc,det}}
-const NAMES=[['Разминка',3],['Бюджет двора',11],['Круговая порука',8],['Расчёт выкупа',8]];
+const NAMES=[['Сравните два периода',6],['Почему изменилась клетка',6],['Что изменил закон',5],['Эксперимент со сходом',6],['Звено цепочки',4],['Верно или неверно',3]];
 $('#send').onclick=async()=>{
- const gr=grade();const concl=$('#concl').value.trim();
- if(concl.split(/\s+/).length<25)gr.miss.push('вывод (не меньше 25 слов)');
- if(gr.miss.length){$('#sendwarn').textContent='Не заполнено: '+gr.miss.join(', ');return}
- $('#sendwarn').textContent='';const tot=gr.sc.reduce((a,b)=>a+b,0);
- const data={version:VER,fio:who.fio,grp:who.grp,variant:$('#whoVar').textContent,total:tot,s1:gr.sc[0],s2:gr.sc[1],s3:gr.sc[2],s4:gr.sc[3],concl,wrong:gr.wrong.join('; '),detail:gr.det.join(' | ')};
- const b=$('#send');b.disabled=true;b.textContent='Отправляю…';let sent=false;
- if(SCRIPT_URL&&!SCRIPT_URL.startsWith('__')){try{await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)});sent=true}catch(e){sent=false}}
+ const g=grade();const concl=$('#concl').value.trim();
+ if(concl.split(/\s+/).length<25)g.miss.push('7 (не меньше 25 слов)');
+ if(g.miss.length){$('#sendwarn').textContent='Не заполнены задания: '+g.miss.join(', ');return}
+ $('#sendwarn').textContent='';const tot=g.sc.reduce((a,b)=>a+b,0);
+ const data={version:VER,fio:who.fio,grp:who.grp,variant:$('#whoVar').textContent,total:tot,s1:g.sc[0],s2:g.sc[1],s3:g.sc[2],s4:g.sc[3],s5:g.sc[4],s6:g.sc[5],concl,wrong:g.wrong.join('; '),detail:g.det.join(' | ')};
+ const b=$('#send');b.disabled=true;b.textContent='Отправляю…';let ok=false;
+ if(SCRIPT_URL&&!SCRIPT_URL.startsWith('__')){try{await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)});ok=true}catch(e){ok=false}}
  $('#result').hidden=false;
- $('#result').innerHTML=`<div class="res"><h3>${sent?'Работа отправлена':'Не удалось отправить'}</h3><p><b>${who.fio}</b>, ${who.grp}. Автоматически проверено: <b>${tot} из 30</b>.</p><div class="scg">${NAMES.map((x,i)=>`<div><span>${x[0]}</span><b>${gr.sc[i]} / ${x[1]}</b></div>`).join('')}</div>${gr.wrong.length?`<p>Ошибки в шагах: ${gr.wrong.join(', ')}.</p>`:''}<p>Вывод оценит преподаватель.</p><p>Код проверки: <b>${hash(who.fio+who.grp+tot)%9000+1000}</b>. ${sent?'':'Покажите этот экран преподавателю или нажмите «Отправить» ещё раз.'}</p></div>`;
- if(sent){store.set(KEY+'sent-'+hash(who.fio+who.grp),$('#result').innerHTML);lockSent($('#result').innerHTML)}else{b.disabled=false;b.textContent='Отправить ещё раз'}};
+ $('#result').innerHTML=`<div class="res"><h3>${ok?'Работа отправлена':'Не удалось отправить'}</h3><p><b>${who.fio}</b>, ${who.grp}. Автоматически проверено: <b>${tot} из 30</b>.</p><div class="scg">${NAMES.map((x,i)=>`<div><span>${x[0]}</span><b>${g.sc[i]} / ${x[1]}</b></div>`).join('')}</div><p>Вывод оценит преподаватель.</p><p>Код проверки: <b>${hash(who.fio+who.grp+tot)%9000+1000}</b>. ${ok?'':'Покажите этот экран преподавателю или нажмите «Отправить» ещё раз.'}</p></div>`;
+ if(ok){store.set(KEY+'sent-'+hash(who.fio+who.grp),$('#result').innerHTML);lockSent($('#result').innerHTML)}else{b.disabled=false;b.textContent='Отправить ещё раз'}};
 
 ties();path();mir();cz();
 let rzT;window.addEventListener('resize',()=>{clearTimeout(rzT);rzT=setTimeout(pbar,150)});
